@@ -10,7 +10,7 @@ export const parseMigrationFilename = (file) => {
   const id = items[0];
   const name = items.slice(1).join(MIGRATION_SEPARATOR);
   if (!/^\d+$/.test(id) || !name) {
-    throw new Error(`Migration file ${file} must be {id}-{name}`);
+    return null;
   }
   return { id: Number(id), name, file };
 };
@@ -18,17 +18,10 @@ export const parseMigrationFilename = (file) => {
 export class TimestampMigrationSource extends FsMigrations {
   async getMigrations(loadExtensions) {
     const migrations = await super.getMigrations(loadExtensions);
-    return migrations.filter((migration) => {
-      try {
-        parseMigrationFilename(migration.file);
-        return true;
-      } catch {
-        return false;
-      }
-    });
+    return migrations.filter((migration) => parseMigrationFilename(migration.file));
   }
 
   getMigrationName(migration) {
-    return parseMigrationFilename(migration.file).name;
+    return parseMigrationFilename(migration.file)?.name ?? migration.file;
   }
 }
