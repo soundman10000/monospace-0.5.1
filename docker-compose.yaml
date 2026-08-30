@@ -92,7 +92,7 @@ services:
       - monospace
 
   # ---------------------------------------------------------------------------
-  # Monospace — official image (0 Critical / 0 High)
+  # Monospace
   # ---------------------------------------------------------------------------
   monospace:
     build:
@@ -151,10 +151,68 @@ services:
     networks:
       - monospace
 
+  # ---------------------------------------------------------------------------
+  # Directus — create the database, then start the CMS
+  # ---------------------------------------------------------------------------
+  directus-init:
+    image: postgres:17
+    restart: "no"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGHOST: postgres
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: monospace
+      DIRECTUS_DB: directus
+    volumes:
+      - ./directus/ensure-database.sh:/ensure-database.sh:ro
+    entrypoint: ["/bin/sh", "/ensure-database.sh"]
+    networks:
+      - monospace
+
+  directus:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.directus
+      args:
+        DIRECTUS_VERSION: "11"
+    image: directus:11
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      directus-init:
+        condition: service_completed_successfully
+    ports:
+      - "8055:8055"
+    volumes:
+      - ./directus/migrations:/directus/migrations
+      - directus_uploads:/directus/uploads
+      - directus_extensions:/directus/extensions
+    environment:
+      MIGRATIONS_PATH: "/directus/migrations"
+      SECRET: "local-directus-dev-secret-do-not-use"
+      DB_CLIENT: "pg"
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      DB_DATABASE: "directus"
+      DB_USER: "postgres"
+      DB_PASSWORD: "monospace"
+      ADMIN_EMAIL: "admin@benefitsgo.tech"
+      ADMIN_PASSWORD: "Empyrean1"
+      PUBLIC_URL: "http://localhost:8055"
+      WEBSOCKETS_ENABLED: "true"
+    networks:
+      - monospace
+
 volumes:
   postgres_data:
   rabbitmq_data:
   uploads_data:
+  directus_uploads:
+  directus_extensions:
 
 networks:
   monospace:
