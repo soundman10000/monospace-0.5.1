@@ -71,6 +71,18 @@ Default URL: `postgres://postgres:monospace@localhost:5434/benefits`
 
 `ensure-database.js` creates the `benefits` database if it is missing. Docker Compose runs `knex migrate:latest` on every Monospace container start.
 
+## Hydrate
+
+```powershell
+npm run hydrate -- MEDICAL
+npm run hydrate -- MEDICAL/GOLD
+npm run hydrate -- MEDICAL/GOLD -g DEMO -n 2
+npm run hydrate -- MEDICAL/GOLD --dry-run
+npm run hydrate -- MEDICAL/GOLD --force
+```
+
+`start_date` is always now. Range tables cover `1900-01-01` through `9999-12-31` with adjacent periods (`from_date` of each row equals the previous `to_date`). A benefit-only target also creates BASIC, STANDARD, and PREMIUM plans.
+
 ## Version table
 
 Knex owns `public.knex_migrations` and `public.knex_migrations_lock`.
