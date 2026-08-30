@@ -72,8 +72,7 @@ services:
       - ./keys:/keys
 
   # ---------------------------------------------------------------------------
-  # Benefits catalog — Knex one-shot. Re-runs whenever this container is created
-  # (compose down/up, --force-recreate). The app image stays CVE-clean.
+  # Benefits catalog.
   # ---------------------------------------------------------------------------
   benefits-migrate:
     build:
