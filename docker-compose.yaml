@@ -66,10 +66,10 @@ services:
         else
           echo "Keys already exist, skipping generation."
         fi
-        chown 65532:65532 /keys/jwt_private.pem /keys/jwt_public.pem /keys/kms_master.key
-        chmod 600 /keys/jwt_private.pem /keys/jwt_public.pem /keys/kms_master.key
+        chown 65532:65532 /keys/jwt_private.pem /keys/jwt_public.pem /keys/kms_master.key || true
+        chmod 600 /keys/jwt_private.pem /keys/jwt_public.pem /keys/kms_master.key || true
     volumes:
-      - keys_data:/keys
+      - ./keys:/keys
 
   # ---------------------------------------------------------------------------
   # Monospace — the application (built from docker/Dockerfile)
@@ -93,7 +93,7 @@ services:
     ports:
       - "8100:8100"
     volumes:
-      - keys_data:/keys:ro
+      - ./keys:/keys:ro
       - uploads_data:/uploads
       - ./benefits-migrations/migrations:/opt/benefits-migrations/migrations:ro
     environment:
@@ -137,7 +137,6 @@ services:
 volumes:
   postgres_data:
   rabbitmq_data:
-  keys_data:
   uploads_data:
 
 networks:
