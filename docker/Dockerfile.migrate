@@ -4,8 +4,8 @@ RUN apk upgrade --no-cache \
   && addgroup -g 65532 -S nonroot \
   && adduser -S -D -H -u 65532 -G nonroot nonroot
 
-WORKDIR /opt/benefits-migrations
-COPY benefits-migrations/package.json benefits-migrations/package-lock.json ./
+WORKDIR /opt/benefits-app
+COPY benefits-app/package.json benefits-app/package-lock.json ./
 RUN npm ci --omit=dev \
   && npm cache clean --force \
   && rm -rf /usr/local/lib/node_modules/npm \
@@ -15,12 +15,11 @@ RUN npm ci --omit=dev \
             /usr/local/bin/corepack \
             /root/.npm
 
-COPY benefits-migrations/knexfile.js benefits-migrations/ensure-database.js ./
-COPY benefits-migrations/migrations ./migrations
+COPY benefits-app/migrations ./migrations
 COPY docker/entrypoint-migrate.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh \
-  && chown -R 65532:65532 /opt/benefits-migrations
+  && chown -R 65532:65532 /opt/benefits-app
 
 USER 65532
 ENTRYPOINT ["/entrypoint.sh"]

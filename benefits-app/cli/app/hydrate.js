@@ -1,5 +1,5 @@
 import knexFactory from "knex";
-import knexConfig from "../../knexfile.js";
+import knexConfig from "../../migrations/knexfile.js";
 import { upsertBenefit } from "../factories/benefit.js";
 import { removeBenefitDetails, upsertBenefitDetails } from "../factories/benefit-detail.js";
 import { removeBenefitFeatures, upsertBenefitFeatures } from "../factories/benefit-feature.js";

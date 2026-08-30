@@ -1,12 +1,12 @@
 #!/bin/sh
 set -eu
 
-cd /opt/benefits-migrations
+cd /opt/benefits-app/migrations
 
 echo "Running benefits catalog migrations..."
 
 n=0
-until node ./ensure-database.js && node ./node_modules/knex/bin/cli.js migrate:latest; do
+until node ./ensure-database.js && node ../node_modules/knex/bin/cli.js migrate:latest; do
   n=$((n + 1))
   if [ "$n" -ge 15 ]; then
     echo "Benefits migrations failed after ${n} attempts" >&2

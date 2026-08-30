@@ -88,7 +88,7 @@ services:
       DATABASE_URL: "postgres://postgres:monospace@postgres:5432/benefits"
       ADMIN_DATABASE_URL: "postgres://postgres:monospace@postgres:5432/postgres"
     volumes:
-      - ./benefits-migrations/migrations:/opt/benefits-migrations/migrations:ro
+      - ./benefits-app/migrations:/opt/benefits-app/migrations:ro
     networks:
       - monospace
 
