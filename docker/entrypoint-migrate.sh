@@ -1,14 +1,12 @@
 #!/bin/sh
 set -eu
 
+cd /opt/benefits-migrations
+
 echo "Running benefits catalog migrations..."
 
 n=0
-until (
-  cd /opt/benefits-migrations
-  node ./ensure-database.js
-  ./node_modules/.bin/knex migrate:latest
-); do
+until node ./ensure-database.js && node ./node_modules/knex/bin/cli.js migrate:latest; do
   n=$((n + 1))
   if [ "$n" -ge 15 ]; then
     echo "Benefits migrations failed after ${n} attempts" >&2
@@ -19,5 +17,3 @@ until (
 done
 
 echo "Benefits migrations complete."
-cd /monospace
-exec "$@"

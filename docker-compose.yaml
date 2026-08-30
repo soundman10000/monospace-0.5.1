@@ -72,8 +72,28 @@ services:
       - ./keys:/keys
 
   # ---------------------------------------------------------------------------
-  # Monospace — the application (built from docker/Dockerfile)
-  # Entrypoint runs Knex benefits migrations then the app.
+  # Benefits catalog — Knex one-shot. Re-runs whenever this container is created
+  # (compose down/up, --force-recreate). The app image stays CVE-clean.
+  # ---------------------------------------------------------------------------
+  benefits-migrate:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.migrate
+    image: monospace-migrate:v0.5.1
+    restart: "no"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgres://postgres:monospace@postgres:5432/benefits"
+      ADMIN_DATABASE_URL: "postgres://postgres:monospace@postgres:5432/postgres"
+    volumes:
+      - ./benefits-migrations/migrations:/opt/benefits-migrations/migrations:ro
+    networks:
+      - monospace
+
+  # ---------------------------------------------------------------------------
+  # Monospace — official image (0 Critical / 0 High)
   # ---------------------------------------------------------------------------
   monospace:
     build:
@@ -90,16 +110,14 @@ services:
         condition: service_healthy
       keygen:
         condition: service_completed_successfully
+      benefits-migrate:
+        condition: service_completed_successfully
     ports:
       - "8100:8100"
     volumes:
       - ./keys:/keys:ro
       - uploads_data:/uploads
-      - ./benefits-migrations/migrations:/opt/benefits-migrations/migrations:ro
     environment:
-      # Benefits catalog migrations (applied on every container start)
-      DATABASE_URL: "postgres://postgres:monospace@postgres:5432/benefits"
-      ADMIN_DATABASE_URL: "postgres://postgres:monospace@postgres:5432/postgres"
       # Server
       MONOSPACE_HOST: "0.0.0.0"
       MONOSPACE_PORT: "8100"
