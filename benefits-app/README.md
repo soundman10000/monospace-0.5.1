@@ -87,7 +87,7 @@ npm run hydrate -- MEDICAL/GOLD --force
 
 Knex owns `benefits.knex_migrations` and `benefits.knex_migrations_lock`.
 
-New files should be named `{id}-{description}.js`. Knex stores `id` as the timestamp prefix (bigint) and `name` as everything after the first `-`.
+New files should be named `{timestamp}-{description}.js`. Knex records the full filename in `benefits.knex_migrations.name`.
 
 ## Migration files
 
