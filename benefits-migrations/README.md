@@ -5,7 +5,7 @@ Ordered SQL migrations for a single benefits catalog model. Source of truth was:
 - Empyrean FluentMigrator baseline + instance migrations
 - SQL Express `.\sqlexpress` catalog `devco_local` (`dbo` and `Benefits`)
 
-The runner keeps a `schema_migrations` version table and applies files in filename order.
+Knex applies files in `migrations/` and records them in `knex_migrations`.
 
 ## Model
 
@@ -61,45 +61,37 @@ npm run migrate
 Commands:
 
 ```powershell
-node migrate.js up          # apply all pending
-node migrate.js up 1        # apply next one
-node migrate.js down        # revert last one
-node migrate.js down 3      # revert last three
-node migrate.js status
-node migrate.js redo        # down 1 then up 1
+npm run migrate            # apply all pending
+npm run migrate:down       # revert the last batch
+npm run migrate:status     # list applied and pending
+npx knex migrate:make name # scaffold a new migration
 ```
 
 Default URL: `postgres://postgres:monospace@localhost:5434/benefits`
 
-The runner creates the `benefits` database if it is missing.
+`ensure-database.js` creates the `benefits` database if it is missing. Docker Compose runs `knex migrate:latest` on every Monospace container start.
 
 ## Version table
 
-```sql
-public.schema_migrations (
-  version varchar(32) primary key,
-  name text not null,
-  applied_on timestamptz not null default now()
-)
-```
+Knex owns `public.knex_migrations` and `public.knex_migrations_lock`.
 
-`version` is the timestamp prefix on each file, matching Empyrean migration numbering (`YYYYMMDDHHMM`).
+New files should be named `{YYYYMMDDHHMMSS}_{description}.js` and export `up` / `down`.
 
-## SQL files
+## Migration files
 
 | File | Creates |
 |---|---|
-| `202608301200_create_benefits_schema.sql` | `benefits` schema |
-| `202608301201_create_control_group.sql` | `control_group` |
-| `202608301202_create_benefit.sql` | `benefit` |
-| `202608301203_create_benefit_detail.sql` | `benefit_detail` |
-| `202608301204_create_plan.sql` | `plan` |
-| `202608301205_create_plan_detail.sql` | `plan_detail` |
-| `202608301206_create_feature_type.sql` | `feature_type` + seed rows |
-| `202608301207_create_benefit_feature.sql` | `benefit_feature` |
-| `202608301208_create_plan_feature_value.sql` | `plan_feature_value` |
-| `202608301209_create_plan_document.sql` | `plan_document` |
-| `202608301210_create_plan_document_detail.sql` | `plan_document_detail` |
-| `202608301211_create_plan_image.sql` | `plan_image` |
+| `202608301200_create_benefits_schema.js` | `benefits` schema |
+| `202608301201_create_control_group.js` | `control_group` |
+| `202608301202_create_benefit.js` | `benefit` |
+| `202608301203_create_benefit_detail.js` | `benefit_detail` |
+| `202608301204_create_plan.js` | `plan` |
+| `202608301205_create_plan_detail.js` | `plan_detail` |
+| `202608301206_create_feature_type.js` | `feature_type` + seed rows |
+| `202608301207_create_benefit_feature.js` | `benefit_feature` |
+| `202608301208_create_plan_feature_value.js` | `plan_feature_value` |
+| `202608301209_create_plan_document.js` | `plan_document` |
+| `202608301210_create_plan_document_detail.js` | `plan_document_detail` |
+| `202608301211_create_plan_image.js` | `plan_image` |
 
-Each file has `-- migrate:up` and `-- migrate:down` sections.
+Each file exports Knex `up` / `down` functions.

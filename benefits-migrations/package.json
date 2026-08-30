@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Ordered PostgreSQL migrations for the unified benefits catalog model",
+  "description": "Knex PostgreSQL migrations for the unified benefits catalog model",
   "scripts": {
-    "migrate": "node migrate.js up",
-    "migrate:up": "node migrate.js up",
-    "migrate:down": "node migrate.js down",
-    "migrate:status": "node migrate.js status",
-    "migrate:redo": "node migrate.js redo"
+    "migrate": "node ensure-database.js && knex migrate:latest",
+    "migrate:up": "node ensure-database.js && knex migrate:latest",
+    "migrate:down": "knex migrate:rollback",
+    "migrate:status": "knex migrate:list",
+    "migrate:make": "knex migrate:make"
   },
   "dependencies": {
+    "knex": "^3.3.0",
     "pg": "^8.16.3"
   }
 }
