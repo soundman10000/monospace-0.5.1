@@ -1,0 +1,17 @@
+{
+  "name": "benefits-migrations",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ordered PostgreSQL migrations for the unified benefits catalog model",
+  "scripts": {
+    "migrate": "node migrate.js up",
+    "migrate:up": "node migrate.js up",
+    "migrate:down": "node migrate.js down",
+    "migrate:status": "node migrate.js status",
+    "migrate:redo": "node migrate.js redo"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}
