@@ -151,6 +151,42 @@ services:
     networks:
       - monospace
 
+  # Create the workspace, attach benefits, introspect. Idempotent.
+  monospace-init:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.cli
+    image: monospace-cli:local
+    restart: "no"
+    depends_on:
+      monospace:
+        condition: service_started
+      benefits-migrate:
+        condition: service_completed_successfully
+    environment:
+      MONOSPACE_URL: "http://monospace:8100"
+      MONOSPACE_API_KEY: ${MONOSPACE_API_KEY:-}
+      MONOSPACE_BOOTSTRAP_EMAIL: ${MONOSPACE_BOOTSTRAP_EMAIL:-admin@benefitsgo.tech}
+      MONOSPACE_BOOTSTRAP_PASSWORD: ${MONOSPACE_BOOTSTRAP_PASSWORD:-Empyrean1}
+      MONOSPACE_BOOTSTRAP_NAME: ${MONOSPACE_BOOTSTRAP_NAME:-Admin}
+      MONOSPACE_WORKSPACE: ${MONOSPACE_WORKSPACE:-mono-empyrean}
+      MONOSPACE_WORKSPACE_NAME: ${MONOSPACE_WORKSPACE_NAME:-Mono Empyrean}
+      MONOSPACE_SOURCE_NAME: ${MONOSPACE_SOURCE_NAME:-empyrean-benefits}
+      BENEFITS_PGHOST: postgres
+      BENEFITS_PGPORT: "5432"
+      BENEFITS_PGUSER: ${BENEFITS_PGUSER:-postgres}
+      BENEFITS_PGPASSWORD: ${BENEFITS_PGPASSWORD:-monospace}
+      BENEFITS_PGDATABASE: ${BENEFITS_PGDATABASE:-benefits}
+      MONOSPACE_AI_PROVIDER: ${MONOSPACE_AI_PROVIDER:-openai}
+      MONOSPACE_AI_API_KEY: ${MONOSPACE_AI_API_KEY:-}
+      MONOSPACE_AI_CHAT_MODEL: ${MONOSPACE_AI_CHAT_MODEL:-gpt-5.4}
+      MONOSPACE_AI_FAST_MODEL: ${MONOSPACE_AI_FAST_MODEL:-o4-mini}
+      MONOSPACE_AI_REASONING: ${MONOSPACE_AI_REASONING:-true}
+      MONOSPACE_AI_REASONING_LEVEL: ${MONOSPACE_AI_REASONING_LEVEL:-medium}
+    command: ["setup"]
+    networks:
+      - monospace
+
   # ---------------------------------------------------------------------------
   # Directus — create the database, then start the CMS
   # ---------------------------------------------------------------------------
