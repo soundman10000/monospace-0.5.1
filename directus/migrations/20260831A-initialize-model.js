@@ -10,9 +10,9 @@ import { applySnapshotDiff } from "./utils/index.js";
 
 export default {
   async up(knex) {
-    await applySnapshotDiff(knex, '20260830A-add-model-benefit-up.yaml');
+    await applySnapshotDiff(knex, '20260831A-initialize-model-up.yaml');
   },
   async down(knex) {
-    await applySnapshotDiff(knex, '20260830A-add-model-benefit-down.yaml');
+    //no rollback
   }
 };
