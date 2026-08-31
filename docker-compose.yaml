@@ -189,10 +189,12 @@ services:
       - "8055:8055"
     volumes:
       - ./directus/migrations:/directus/migrations
+      - ./directus/certs:/directus/certs:ro
       - directus_uploads:/directus/uploads
       - directus_extensions:/directus/extensions
     environment:
       MIGRATIONS_PATH: "/directus/migrations"
+      NODE_EXTRA_CA_CERTS: "/directus/certs/netskope-ca.pem"
       SECRET: "local-directus-dev-secret-do-not-use"
       DB_CLIENT: "pg"
       DB_HOST: "postgres"
