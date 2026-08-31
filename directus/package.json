@@ -1,14 +1,20 @@
 {
   "name": "directus-local",
   "private": true,
+  "type": "module",
   "scripts": {
     "dpc": "node ./node_modules/@ebsi-epd/directus-provision-cli/dist/build/main.js --uri http://localhost:8055 --user admin@benefitsgo.tech --password Empyrean1",
     "export": "npm run dpc -- export --path ./provisions",
+    "import": "npm run dpc -- import --path ./provisions",
     "merge": "npm run dpc -- merge --path ./provisions",
+    "hydrate": "node cli/index.js",
     "snapshot": "docker compose exec -T directus node cli.js schema snapshot /directus/migrations/schema.yaml",
     "migration-gen": "npm run dpc -- migration-gen --stateFile ./migrations/schema.yaml --path ./migrations"
   },
   "dependencies": {
-    "@ebsi-epd/directus-provision-cli": "file:../../empyrean/service/directus/cli"
+    "@ebsi-epd/directus-provision-cli": "file:../../empyrean/service/directus/cli",
+    "dotenv": "^16.6.1",
+    "pg": "^8.16.3",
+    "yargs": "^18.0.0"
   }
 }
