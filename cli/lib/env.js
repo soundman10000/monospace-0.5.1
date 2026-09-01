@@ -33,28 +33,3 @@ export const defaults = {
   aiReasoning: process.env.MONOSPACE_AI_REASONING === "false" ? false : openaiModels.chatReasoningEnabled,
   aiReasoningLevel: firstEnv("MONOSPACE_AI_REASONING_LEVEL") || openaiModels.chatReasoningLevel,
 };
-
-export const toClientInput = (argv) => ({
-  url: argv.url || defaults.url,
-  apiKey: argv.apiKey || defaults.apiKey,
-  email: argv.email || defaults.email,
-  password: argv.password || defaults.password,
-  fullName: argv.fullName || defaults.fullName,
-  workspace: argv.workspace,
-  workspaceName: argv.workspaceName || argv.workspace,
-  source: argv.source,
-  host: argv.host,
-  port: argv.port,
-  user: argv.user,
-  dbPassword: argv.dbPassword,
-  dbname: argv.dbname,
-  orgName: argv.name,
-  orgColor: argv.color,
-  orgLogo: argv.logo,
-  aiProvider: argv.aiProvider || defaults.aiProvider,
-  aiApiKey: argv.aiApiKey || defaults.aiApiKey,
-  aiChatModel: argv.aiChatModel || defaults.aiChatModel,
-  aiFastModel: argv.aiFastModel || defaults.aiFastModel,
-  aiReasoning: argv.aiReasoning ?? defaults.aiReasoning,
-  aiReasoningLevel: argv.aiReasoningLevel || defaults.aiReasoningLevel,
-});

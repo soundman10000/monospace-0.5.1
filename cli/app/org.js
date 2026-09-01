@@ -1,6 +1,5 @@
 import { access } from "node:fs/promises";
 import { resolve } from "node:path";
-import { createClient } from "../client/index.js";
 
 const HEX_COLOR = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
 
@@ -16,18 +15,17 @@ export const normalizeColor = (value) => {
   return hex.toLowerCase();
 };
 
-export const configureOrg = async (input) => {
-  if (!input.orgName && !input.orgColor && !input.orgLogo) {
+export const configureOrg = async (client, { name, color, logo }) => {
+  if (!name && !color && !logo) {
     throw new Error("Set --name, --color, or --logo");
   }
 
-  const client = createClient(input);
   const patch = {};
 
-  if (input.orgName) patch.name = input.orgName;
-  if (input.orgColor) patch.color = normalizeColor(input.orgColor);
-  if (input.orgLogo) {
-    const logoPath = resolve(input.orgLogo);
+  if (name) patch.name = name;
+  if (color) patch.color = normalizeColor(color);
+  if (logo) {
+    const logoPath = resolve(logo);
     await access(logoPath);
     patch.logoId = await client.uploadSystemAsset(logoPath);
   }
@@ -36,7 +34,6 @@ export const configureOrg = async (input) => {
   const settings = await client.getOrgSettings();
 
   return {
-    url: client.base,
     name: settings.name,
     color: settings.color,
     logoId: settings.logoId || patch.logoId || null,

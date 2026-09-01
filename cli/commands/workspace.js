@@ -1,14 +1,14 @@
 import { configureAi } from "../app/ai.js";
 import { ensureWorkspace } from "../app/workspace.js";
 import { createClient } from "../client/index.js";
-import { toClientInput } from "../lib/env.js";
-import { addAiOptions } from "./ai.js";
+import { addAiOptions, aiFromArgv } from "./ai.js";
 import {
   addBaseOptions,
   addFullNameOption,
   addWorkspaceNameOption,
   addWorkspaceOption,
   applyOptionSets,
+  authFromArgv,
   printAuth,
   withCommandErrorHandling,
 } from "./common.js";
@@ -22,16 +22,7 @@ const builder = (cmd) =>
     applyOptionSets(cmd, addBaseOptions, addFullNameOption, addWorkspaceOption, addWorkspaceNameOption),
   );
 
-const printResult = (result) => {
-  printAuth(result.client);
-  console.log(`url         ${result.url}`);
-  console.log(`user        ${result.email}`);
-  console.log(`workspace   ${result.workspace}${result.workspaceCreated ? "  created" : ""}`);
-  console.log(`display     ${result.displayName}`);
-  printAi(result.ai);
-};
-
-export const printAi = (ai) => {
+const printAi = (ai) => {
   if (ai?.skipped) {
     console.log("ai          skipped (no MONOSPACE_AI_API_KEY; shared across workspaces)");
     return;
@@ -41,18 +32,29 @@ export const printAi = (ai) => {
   }
 };
 
+const printResult = (result) => {
+  printAuth(result.client);
+  console.log(`url         ${result.url}`);
+  console.log(`user        ${result.email}`);
+  console.log(`workspace   ${result.workspace}${result.workspaceCreated ? "  created" : ""}`);
+  console.log(`display     ${result.displayName}`);
+  printAi(result.ai);
+};
+
 const handler = withCommandErrorHandling(async (argv) => {
-  const input = toClientInput(argv);
-  const client = createClient(input);
-  const { workspace, created } = await ensureWorkspace(client, input);
-  const ai = await configureAi(client, input);
+  const client = createClient(authFromArgv(argv));
+  const { workspace, created } = await ensureWorkspace(client, {
+    apiName: argv.workspace,
+    displayName: argv.workspaceName || argv.workspace,
+  });
+  const ai = await configureAi(client, argv.workspace, aiFromArgv(argv));
 
   printResult({
     client,
     url: client.base,
-    email: client.user?.email || input.email,
-    workspace: workspace?.apiName || input.workspace,
-    displayName: workspace?.displayName || input.workspaceName,
+    email: client.user?.email || argv.email,
+    workspace: workspace?.apiName || argv.workspace,
+    displayName: workspace?.displayName || argv.workspaceName || argv.workspace,
     workspaceCreated: created,
     ai,
   });

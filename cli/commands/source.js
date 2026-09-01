@@ -1,13 +1,13 @@
 import { attachSource } from "../app/source.js";
 import { findWorkspace } from "../app/workspace.js";
 import { createClient } from "../client/index.js";
-import { toClientInput } from "../lib/env.js";
 import {
   addBaseOptions,
   addSourceDatabaseOptions,
   addSourceOption,
   addWorkspaceOption,
   applyOptionSets,
+  authFromArgv,
   printAuth,
   withCommandErrorHandling,
 } from "./common.js";
@@ -28,15 +28,22 @@ const printResult = (result) => {
 };
 
 const handler = withCommandErrorHandling(async (argv) => {
-  const input = toClientInput(argv);
-  const client = createClient(input);
-  const workspace = await findWorkspace(client, input);
-  const { source, created, changes } = await attachSource(client, input);
+  const client = createClient(authFromArgv(argv));
+  const workspace = await findWorkspace(client, argv.workspace);
+  const { source, created, changes } = await attachSource(client, {
+    workspace: argv.workspace,
+    apiName: argv.source,
+    host: argv.host,
+    port: argv.port,
+    user: argv.user,
+    password: argv.dbPassword,
+    dbname: argv.dbname,
+  });
 
   printResult({
     client,
     url: client.base,
-    workspace: workspace?.apiName || input.workspace,
+    workspace: workspace?.apiName || argv.workspace,
     source: source.apiName,
     sourceId: source.id,
     sourceCreated: created,

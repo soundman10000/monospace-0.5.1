@@ -84,6 +84,14 @@ export const applyOptionSets = (cmd, ...optionSets) =>
 
 export const addBaseOptions = (cmd) => addOptions(cmd, ["url", "api-key", "email", "password"]);
 
+export const authFromArgv = (argv) => ({
+  url: argv.url,
+  apiKey: argv.apiKey,
+  email: argv.email,
+  password: argv.password,
+  fullName: argv.fullName || defaults.fullName,
+});
+
 export const addFullNameOption = (cmd) => addOptions(cmd, ["full-name"]);
 
 export const addWorkspaceOption = (cmd) => addOptions(cmd, ["workspace"]);

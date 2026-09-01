@@ -1,6 +1,6 @@
 import { configureOrg } from "../app/org.js";
-import { toClientInput } from "../lib/env.js";
-import { addBaseOptions, applyOptionSets, withCommandErrorHandling } from "./common.js";
+import { createClient } from "../client/index.js";
+import { addBaseOptions, applyOptionSets, authFromArgv, withCommandErrorHandling } from "./common.js";
 
 const COMMAND_NAME = "org";
 const COMMAND_DESCRIPTION = "Set the organization name, brand color, and logo";
@@ -34,8 +34,17 @@ const printResult = (result) => {
 };
 
 const handler = withCommandErrorHandling(async (argv) => {
-  const result = await configureOrg(toClientInput(argv));
-  printResult(result);
+  const client = createClient(authFromArgv(argv));
+  const settings = await configureOrg(client, {
+    name: argv.name,
+    color: argv.color,
+    logo: argv.logo,
+  });
+
+  printResult({
+    url: client.base,
+    ...settings,
+  });
 });
 
 export const registerOrgCommand = (yargs) =>

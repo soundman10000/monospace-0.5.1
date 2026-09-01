@@ -1,33 +1,31 @@
-import { createClient } from "../client/index.js";
-
 const firstByApiName = (items, apiName) => items.find((item) => item?.apiName === apiName);
 
-export const ensureSource = async (client, input) => {
-  const existing = firstByApiName(await client.listSources(input.workspace), input.source);
+export const findSource = async (client, workspace, apiName) => {
+  const source = firstByApiName(await client.listSources(workspace), apiName);
+  if (!source?.id) {
+    throw new Error(`Data source ${apiName} not found in ${workspace}`);
+  }
+  return source;
+};
+
+export const ensureSource = async (client, { workspace, apiName, host, port, user, password, dbname }) => {
+  const existing = firstByApiName(await client.listSources(workspace), apiName);
   if (existing) return { source: existing, created: false };
 
-  const created = await client.createSource(input.workspace, {
-    apiName: input.source,
-    host: input.host,
-    port: input.port,
-    user: input.user,
-    password: input.dbPassword,
-    dbname: input.dbname,
+  const created = await client.createSource(workspace, {
+    apiName,
+    host,
+    port,
+    user,
+    password,
+    dbname,
   });
 
   const source =
-    firstByApiName(await client.listSources(input.workspace), input.source) ||
-    { ...created, apiName: input.source };
+    firstByApiName(await client.listSources(workspace), apiName) ||
+    { ...created, apiName };
 
   return { source, created: true };
-};
-
-export const findSource = async (client, input) => {
-  const source = firstByApiName(await client.listSources(input.workspace), input.source);
-  if (!source?.id) {
-    throw new Error(`Data source ${input.source} not found in ${input.workspace}`);
-  }
-  return source;
 };
 
 export const attachSource = async (client, input) => {
@@ -35,17 +33,4 @@ export const attachSource = async (client, input) => {
   if (!source?.id) throw new Error("Data source id missing after create/list");
   const changes = await client.introspectSource(input.workspace, source.id);
   return { source, created, changes };
-};
-
-export const introspect = async (input) => {
-  const client = createClient(input);
-  const source = await findSource(client, input);
-  const changes = await client.introspectSource(input.workspace, source.id);
-  return {
-    url: client.base,
-    workspace: input.workspace,
-    source: source.apiName,
-    sourceId: source.id,
-    changes,
-  };
 };
