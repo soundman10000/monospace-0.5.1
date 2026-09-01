@@ -8,6 +8,7 @@ RUN npm ci --omit=dev
 COPY cli/ .
 COPY assets/images /cli/assets/images
 COPY docker/strategies /strategies
+COPY schema /schema
 COPY docker/scripts/cli-entrypoint.sh /entrypoint.sh
 RUN chmod +x index.js /entrypoint.sh \
     && ln -sf /cli/index.js /usr/local/bin/monospace-cli

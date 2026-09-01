@@ -32,7 +32,7 @@ monospace-cli source \
   --dbname "${MONOSPACE_SOURCE_DATABASE}" \
   --strategy /strategies/benefits.yml
 
-exec monospace-cli source \
+monospace-cli source \
   --workspace "${MONOSPACE_WORKSPACE}" \
   --source "${MONOSPACE_DIRECTUS_SOURCE_NAME}" \
   --host "${MONOSPACE_DIRECTUS_SOURCE_HOST}" \
@@ -41,3 +41,7 @@ exec monospace-cli source \
   --db-password "${MONOSPACE_SOURCE_PASSWORD}" \
   --dbname "${MONOSPACE_DIRECTUS_SOURCE_DATABASE}" \
   --strategy /strategies/directus.yml
+
+exec monospace-cli schema \
+  --workspace "${MONOSPACE_WORKSPACE}" \
+  --file /schema/migrate.json

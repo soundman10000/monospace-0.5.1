@@ -8,6 +8,7 @@
   "scripts": {
     "workspace": "node index.js workspace",
     "source": "node index.js source",
+    "schema": "node index.js schema",
     "org": "node index.js org",
     "introspect": "node index.js introspect",
     "ai": "node index.js ai"

@@ -5,6 +5,9 @@ import { trimSlash, unwrap } from "./helpers.js";
 import { createSession, waitForApi } from "./session.js";
 import { getOrgSettings, updateOrgSettings } from "./settings.js";
 import { createCollectionMeta, listCollections, updateCollectionMeta } from "./collections.js";
+import { listPrimitiveFields, listRelationFields } from "./fields.js";
+import { createRelationFieldMeta, updateRelationFieldMeta } from "./relations.js";
+import { migrateSchema } from "./schema.js";
 import { createSource, introspectSource, listSources } from "./sources.js";
 import { createWorkspace, listWorkspaces, updateWorkspace } from "./workspaces.js";
 
@@ -61,6 +64,11 @@ export const createClient = (input) => {
     listCollections: withSession(listCollections),
     createCollectionMeta: withSession(createCollectionMeta),
     updateCollectionMeta: withSession(updateCollectionMeta),
+    listPrimitiveFields: withSession(listPrimitiveFields),
+    listRelationFields: withSession(listRelationFields),
+    createRelationFieldMeta: withSession(createRelationFieldMeta),
+    updateRelationFieldMeta: withSession(updateRelationFieldMeta),
+    migrateSchema: withSession(migrateSchema),
     getAiSettings: withSession(getAiSettings),
     updateAiSettings: withSession(updateAiSettings),
     getOrgSettings: withSession(getOrgSettings),

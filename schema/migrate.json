@@ -1,0 +1,32 @@
+{
+  "operations": [
+    {
+      "kind": "createRelationFieldPair",
+      "data": {
+        "kind": "single",
+        "data": {
+          "relationName": "modelBenefit_benefit_code",
+          "onDelete": "noAction",
+          "onUpdate": "noAction",
+          "firstField": {
+            "apiName": "benefit",
+            "collectionId": "model_benefit",
+            "fieldIds": ["code"],
+            "isList": false,
+            "isConstrained": false,
+            "meta": {
+              "displayName": "Benefit"
+            }
+          },
+          "secondField": {
+            "apiName": "model_benefit",
+            "collectionId": "benefit",
+            "fieldIds": ["code"],
+            "isList": true,
+            "isConstrained": false
+          }
+        }
+      }
+    }
+  ]
+}
