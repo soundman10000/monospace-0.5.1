@@ -1,0 +1,4085 @@
+collections:
+  - collection: block_document
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: block_document
+            color: null
+            display_template: '{{code}}'
+            group: blocks
+            hidden: false
+            icon: description
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: null
+            sort_field: null
+            translations:
+              - language: en-US
+                plural: Documents
+                singular: Document
+                translation: Document
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: block_document
+  - collection: block_markdown
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: block_markdown
+            color: null
+            display_template: '{{code}}'
+            group: blocks
+            hidden: false
+            icon: markdown
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 2
+            sort_field: null
+            translations:
+              - language: en-US
+                plural: Markdown
+                singular: Markdown
+                translation: Markdown
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: block_markdown
+  - collection: block_title
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: block_title
+            color: null
+            display_template: '{{code}}'
+            group: blocks
+            hidden: false
+            icon: title
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 1
+            sort_field: null
+            translations:
+              - language: en-US
+                plural: Titles
+                singular: Title
+                translation: Title
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: block_title
+  - collection: blocks
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: blocks
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: blocks
+            color: '#E35169'
+            display_template: null
+            group: null
+            hidden: false
+            icon: play_shapes
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 4
+            sort_field: null
+            translations: null
+            unarchive_value: null
+            versioning: false
+  - collection: layout_grid_container
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: layout_grid_container
+            color: null
+            display_template: '{{code}}'
+            group: layouts
+            hidden: false
+            icon: grid_on
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 1
+            sort_field: null
+            translations:
+              - language: en-US
+                plural: Grid Containers
+                singular: Grid Container
+                translation: Grid Container
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: layout_grid_container
+  - collection: layout_grid_container_blocks
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container_blocks
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: layout_grid_container_blocks
+            color: null
+            display_template: null
+            group: layout_grid_container
+            hidden: true
+            icon: import_export
+            item_duplication_fields: null
+            note: Junction for layout_grid_container M2A blocks
+            preview_url: null
+            singleton: false
+            sort: 1
+            sort_field: sort
+            translations: null
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: layout_grid_container_blocks
+  - collection: layouts
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layouts
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: layouts
+            color: null
+            display_template: null
+            group: null
+            hidden: false
+            icon: responsive_layout
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 3
+            sort_field: null
+            translations: null
+            unarchive_value: null
+            versioning: false
+  - collection: model_benefit
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: model_benefit
+            color: null
+            display_template: '{{code}}'
+            group: models
+            hidden: false
+            icon: medical_services
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 1
+            sort_field: sort
+            translations: null
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: model_benefit
+  - collection: model_plan
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: model_plan
+            color: null
+            display_template: '{{code}}'
+            group: model_benefit
+            hidden: false
+            icon: assignment
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: null
+            sort_field: sort
+            translations: null
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: model_plan
+  - collection: models
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: models
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: models
+            color: '#4A990A'
+            display_template: null
+            group: null
+            hidden: false
+            icon: database
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 1
+            sort_field: null
+            translations: null
+            unarchive_value: null
+            versioning: false
+  - collection: page_plan_info
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: page_plan_info
+            color: null
+            display_template: '{{code}}'
+            group: pages
+            hidden: false
+            icon: cases
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 1
+            sort_field: null
+            translations: null
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: page_plan_info
+  - collection: pages
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: pages
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: pages
+            color: '#FFA439'
+            display_template: null
+            group: null
+            hidden: false
+            icon: file_copy
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 2
+            sort_field: null
+            translations: null
+            unarchive_value: null
+            versioning: false
+fields:
+  - collection: block_document
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: id
+          type: uuid
+          meta:
+            collection: block_document
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: block_document
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_document
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: user_created
+          type: uuid
+          meta:
+            collection: block_document
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: block_document
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: block_document
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: date_created
+          type: timestamp
+          meta:
+            collection: block_document
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: block_document
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_document
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: user_updated
+          type: uuid
+          meta:
+            collection: block_document
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: block_document
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: block_document
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: block_document
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: block_document
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_document
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: code
+          type: string
+          meta:
+            collection: block_document
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 6
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: block_document
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_document
+    field: description
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: description
+          type: text
+          meta:
+            collection: block_document
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: description
+            group: null
+            hidden: false
+            interface: input-rich-text-md
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 7
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: description
+            table: block_document
+            data_type: text
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_document
+    field: document
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: document
+          type: uuid
+          meta:
+            collection: block_document
+            conditions: null
+            display: file
+            display_options: null
+            field: document
+            group: null
+            hidden: false
+            interface: file
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 8
+            special:
+              - file
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: document
+            table: block_document
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_files
+            foreign_key_column: id
+  - collection: block_markdown
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: id
+          type: uuid
+          meta:
+            collection: block_markdown
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: block_markdown
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_markdown
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: user_created
+          type: uuid
+          meta:
+            collection: block_markdown
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: block_markdown
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: block_markdown
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: date_created
+          type: timestamp
+          meta:
+            collection: block_markdown
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: block_markdown
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_markdown
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: user_updated
+          type: uuid
+          meta:
+            collection: block_markdown
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: block_markdown
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: block_markdown
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: block_markdown
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: block_markdown
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_markdown
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: code
+          type: string
+          meta:
+            collection: block_markdown
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 6
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: block_markdown
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_markdown
+    field: text
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: text
+          type: text
+          meta:
+            collection: block_markdown
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: text
+            group: null
+            hidden: false
+            interface: input-rich-text-md
+            note: null
+            options:
+              softLength: 500
+            readonly: false
+            required: false
+            searchable: true
+            sort: 7
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: text
+            table: block_markdown
+            data_type: text
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_title
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: id
+          type: uuid
+          meta:
+            collection: block_title
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: block_title
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_title
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: user_created
+          type: uuid
+          meta:
+            collection: block_title
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: block_title
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: block_title
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: date_created
+          type: timestamp
+          meta:
+            collection: block_title
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: block_title
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_title
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: user_updated
+          type: uuid
+          meta:
+            collection: block_title
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: block_title
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: block_title
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: block_title
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: block_title
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_title
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: code
+          type: string
+          meta:
+            collection: block_title
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 6
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: block_title
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_title
+    field: style
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: style
+          type: string
+          meta:
+            collection: block_title
+            conditions: null
+            display: labels
+            display_options:
+              choices:
+                - icon: format_h1
+                  text: H1
+                  value: h1
+                - icon: format_h2
+                  text: H2
+                  value: h2
+                - icon: format_h3
+                  text: H3
+                  value: h3
+                - icon: format_h4
+                  text: H4
+                  value: h4
+                - icon: format_h5
+                  text: H5
+                  value: h5
+            field: style
+            group: null
+            hidden: false
+            interface: select-dropdown
+            note: null
+            options:
+              choices:
+                - icon: format_h1
+                  text: H1
+                  value: h1
+                - icon: format_h2
+                  text: H2
+                  value: h2
+                - icon: format_h3
+                  text: H3
+                  value: h2
+                - icon: format_h4
+                  text: H4
+                  value: h4
+                - icon: format_h5
+                  text: H5
+                  value: h5
+            readonly: false
+            required: true
+            searchable: true
+            sort: 7
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: style
+            table: block_title
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: block_title
+    field: text
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: text
+          type: string
+          meta:
+            collection: block_title
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: text
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              iconLeft: title
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 8
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: text
+            table: block_title
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: id
+          type: uuid
+          meta:
+            collection: layout_grid_container
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: layout_grid_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: user_created
+          type: uuid
+          meta:
+            collection: layout_grid_container
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: layout_grid_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: layout_grid_container
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: date_created
+          type: timestamp
+          meta:
+            collection: layout_grid_container
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: layout_grid_container
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: user_updated
+          type: uuid
+          meta:
+            collection: layout_grid_container
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: layout_grid_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: layout_grid_container
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: layout_grid_container
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: layout_grid_container
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: code
+          type: string
+          meta:
+            collection: layout_grid_container
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 6
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: layout_grid_container
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container
+    field: layout
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: layout
+          type: string
+          meta:
+            collection: layout_grid_container
+            conditions: null
+            display: labels
+            display_options:
+              choices:
+                - icon: crop_square
+                  text: 1x1
+                  value: 1x1
+                - icon: splitscreen
+                  text: 1x2
+                  value: 1x2
+                - icon: vertical_split
+                  text: 2x1
+                  value: 2x1
+                - icon: grid_view
+                  text: 2x2
+                  value: 2x2
+                - icon: view_module
+                  text: 2x3
+                  value: 2x3
+            field: layout
+            group: null
+            hidden: false
+            interface: select-dropdown
+            note: null
+            options:
+              choices:
+                - icon: crop_square
+                  text: 1x1
+                  value: 1x1
+                - icon: splitscreen
+                  text: 1x2
+                  value: 1x2
+                - icon: vertical_split
+                  text: 2x1
+                  value: 2x1
+                - icon: grid_view
+                  text: 2x2
+                  value: 2x2
+                - icon: view_module
+                  text: 2x3
+                  value: 2x3
+            readonly: false
+            required: true
+            searchable: true
+            sort: 7
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: layout
+            table: layout_grid_container
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container
+    field: blocks
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: blocks
+          type: alias
+          meta:
+            collection: layout_grid_container
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{collection}}'
+            field: blocks
+            group: null
+            hidden: false
+            interface: list-m2a
+            note: >-
+              Mapped in order (left to right, top to bottom). Extra blocks past
+              the layout size are not rendered.
+            options:
+              enableCreate: true
+              enableSelect: true
+            readonly: false
+            required: false
+            searchable: true
+            sort: 8
+            special:
+              - m2a
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+  - collection: layout_grid_container_blocks
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container_blocks
+          field: id
+          type: uuid
+          meta:
+            collection: layout_grid_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: layout_grid_container_blocks
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container_blocks
+    field: layout_grid_container_id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container_blocks
+          field: layout_grid_container_id
+          type: uuid
+          meta:
+            collection: layout_grid_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: layout_grid_container_id
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: layout_grid_container_id
+            table: layout_grid_container_blocks
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: layout_grid_container
+            foreign_key_column: id
+  - collection: layout_grid_container_blocks
+    field: item
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container_blocks
+          field: item
+          type: string
+          meta:
+            collection: layout_grid_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: item
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 3
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: item
+            table: layout_grid_container_blocks
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container_blocks
+    field: collection
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container_blocks
+          field: collection
+          type: string
+          meta:
+            collection: layout_grid_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: collection
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 4
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: collection
+            table: layout_grid_container_blocks
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_grid_container_blocks
+    field: sort
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container_blocks
+          field: sort
+          type: integer
+          meta:
+            collection: layout_grid_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: sort
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 5
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: sort
+            table: layout_grid_container_blocks
+            data_type: integer
+            default_value: null
+            max_length: null
+            numeric_precision: 32
+            numeric_scale: 0
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: id
+          type: uuid
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: model_benefit
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: sort
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: sort
+          type: integer
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: null
+            display_options: null
+            field: sort
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 2
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: sort
+            table: model_benefit
+            data_type: integer
+            default_value: null
+            max_length: null
+            numeric_precision: 32
+            numeric_scale: 0
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: user_created
+          type: uuid
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: model_benefit
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: model_benefit
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: date_created
+          type: timestamp
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: model_benefit
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: user_updated
+          type: uuid
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: model_benefit
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: model_benefit
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 6
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: model_benefit
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: code
+          type: string
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 7
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: model_benefit
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: name
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: name
+          type: string
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: name
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 8
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: name
+            table: model_benefit
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: description
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: description
+          type: text
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: description
+            group: null
+            hidden: false
+            interface: input-rich-text-md
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 9
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: description
+            table: model_benefit
+            data_type: text
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: plans
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: plans
+          type: alias
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{code}} — {{name}}'
+            field: plans
+            group: null
+            hidden: false
+            interface: list-o2m
+            note: null
+            options:
+              enableCreate: true
+              enableSelect: true
+              template: '{{code}} — {{name}}'
+            readonly: false
+            required: false
+            searchable: true
+            sort: 10
+            special:
+              - o2m
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+  - collection: model_plan
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: id
+          type: uuid
+          meta:
+            collection: model_plan
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: model_plan
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_plan
+    field: sort
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: sort
+          type: integer
+          meta:
+            collection: model_plan
+            conditions: null
+            display: null
+            display_options: null
+            field: sort
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 2
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: sort
+            table: model_plan
+            data_type: integer
+            default_value: null
+            max_length: null
+            numeric_precision: 32
+            numeric_scale: 0
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_plan
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: user_created
+          type: uuid
+          meta:
+            collection: model_plan
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: model_plan
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: model_plan
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: date_created
+          type: timestamp
+          meta:
+            collection: model_plan
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: model_plan
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_plan
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: user_updated
+          type: uuid
+          meta:
+            collection: model_plan
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: model_plan
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: model_plan
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: model_plan
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 6
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: model_plan
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_plan
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: code
+          type: string
+          meta:
+            collection: model_plan
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 7
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: model_plan
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_plan
+    field: name
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: name
+          type: string
+          meta:
+            collection: model_plan
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: name
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 8
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: name
+            table: model_plan
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_plan
+    field: description
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: description
+          type: text
+          meta:
+            collection: model_plan
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: description
+            group: null
+            hidden: false
+            interface: input-rich-text-md
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 9
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: description
+            table: model_plan
+            data_type: text
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_plan
+    field: benefit
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: benefit
+          type: uuid
+          meta:
+            collection: model_plan
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{code}} — {{name}}'
+            field: benefit
+            group: null
+            hidden: false
+            interface: select-dropdown-m2o
+            note: >-
+              Set from the parent benefit. A plan can belong to only one
+              benefit.
+            options:
+              template: '{{code}} — {{name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 10
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: benefit
+            table: model_plan
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: model_benefit
+            foreign_key_column: id
+  - collection: model_plan
+    field: coverage_pages
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: coverage_pages
+          type: alias
+          meta:
+            collection: model_plan
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{code}}'
+            field: coverage_pages
+            group: null
+            hidden: false
+            interface: list-o2m
+            note: null
+            options:
+              enableCreate: true
+              enableSelect: true
+              template: '{{code}}'
+            readonly: false
+            required: false
+            searchable: true
+            sort: 11
+            special:
+              - o2m
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+  - collection: page_plan_info
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: id
+          type: uuid
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: page_plan_info
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: page_plan_info
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: user_created
+          type: uuid
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: page_plan_info
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: page_plan_info
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: date_created
+          type: timestamp
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: page_plan_info
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: page_plan_info
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: user_updated
+          type: uuid
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: page_plan_info
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: page_plan_info
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: page_plan_info
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: page_plan_info
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: code
+          type: string
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 6
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: page_plan_info
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: page_plan_info
+    field: description
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: description
+          type: uuid
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{code}}'
+            field: description
+            group: null
+            hidden: false
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{code}}'
+            readonly: false
+            required: false
+            searchable: true
+            sort: 8
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: description
+            table: page_plan_info
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: block_markdown
+            foreign_key_column: id
+  - collection: page_plan_info
+    field: layout
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: layout
+          type: uuid
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{code}} — {{layout}}'
+            field: layout
+            group: null
+            hidden: false
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{code}} — {{layout}}'
+            readonly: false
+            required: false
+            searchable: true
+            sort: 9
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: layout
+            table: page_plan_info
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: layout_grid_container
+            foreign_key_column: id
+  - collection: page_plan_info
+    field: title
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: title
+          type: uuid
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{text}}'
+            field: title
+            group: null
+            hidden: false
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{text}}'
+            readonly: false
+            required: false
+            searchable: true
+            sort: 7
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: title
+            table: page_plan_info
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: block_title
+            foreign_key_column: id
+  - collection: page_plan_info
+    field: plan
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: plan
+          type: uuid
+          meta:
+            collection: page_plan_info
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{code}} — {{name}}'
+            field: plan
+            group: null
+            hidden: false
+            interface: select-dropdown-m2o
+            note: >-
+              Set from the parent plan. A coverage page can belong to only one
+              plan.
+            options:
+              template: '{{code}} — {{name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: null
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: plan
+            table: page_plan_info
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: model_plan
+            foreign_key_column: id
+relations:
+  - collection: block_document
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: block_document
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: block_document
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: block_document_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: block_document
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: block_document
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: block_document
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: block_document_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: block_document
+    field: document
+    related_collection: directus_files
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_document
+          field: document
+          related_collection: directus_files
+          meta:
+            junction_field: null
+            many_collection: block_document
+            many_field: document
+            one_allowed_collections: null
+            one_collection: directus_files
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: block_document
+            column: document
+            foreign_key_table: directus_files
+            foreign_key_column: id
+            constraint_name: block_document_document_foreign
+            on_update: NO ACTION
+            on_delete: SET NULL
+  - collection: block_markdown
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: block_markdown
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: block_markdown
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: block_markdown_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: block_markdown
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_markdown
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: block_markdown
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: block_markdown
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: block_markdown_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: block_title
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: block_title
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: block_title
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: block_title_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: block_title
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: block_title
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: block_title
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: block_title
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: block_title_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: layout_grid_container
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: layout_grid_container
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: layout_grid_container
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: layout_grid_container_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: layout_grid_container
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: layout_grid_container
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: layout_grid_container
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: layout_grid_container_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: layout_grid_container_blocks
+    field: item
+    related_collection: null
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container_blocks
+          field: item
+          related_collection: null
+          meta:
+            junction_field: layout_grid_container_id
+            many_collection: layout_grid_container_blocks
+            many_field: item
+            one_allowed_collections:
+              - block_title
+              - block_markdown
+              - block_document
+              - layout_grid_container
+            one_collection: null
+            one_collection_field: collection
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+  - collection: layout_grid_container_blocks
+    field: layout_grid_container_id
+    related_collection: layout_grid_container
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_grid_container_blocks
+          field: layout_grid_container_id
+          related_collection: layout_grid_container
+          meta:
+            junction_field: item
+            many_collection: layout_grid_container_blocks
+            many_field: layout_grid_container_id
+            one_allowed_collections: null
+            one_collection: layout_grid_container
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: blocks
+            sort_field: sort
+          schema:
+            table: layout_grid_container_blocks
+            column: layout_grid_container_id
+            foreign_key_table: layout_grid_container
+            foreign_key_column: id
+            constraint_name: layout_grid_container_blocks_layout_grid_co__5b82089_foreign
+            on_update: NO ACTION
+            on_delete: CASCADE
+  - collection: model_benefit
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: model_benefit
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: model_benefit
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: model_benefit_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: model_benefit
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: model_benefit
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: model_benefit
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: model_benefit_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: model_plan
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: model_plan
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: model_plan
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: model_plan_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: model_plan
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: model_plan
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: model_plan
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: model_plan_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: model_plan
+    field: benefit
+    related_collection: model_benefit
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: benefit
+          related_collection: model_benefit
+          meta:
+            junction_field: null
+            many_collection: model_plan
+            many_field: benefit
+            one_allowed_collections: null
+            one_collection: model_benefit
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: plans
+            sort_field: sort
+          schema:
+            table: model_plan
+            column: benefit
+            foreign_key_table: model_benefit
+            foreign_key_column: id
+            constraint_name: model_plan_benefit_foreign
+            on_update: NO ACTION
+            on_delete: SET NULL
+  - collection: page_plan_info
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: page_plan_info
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: page_plan_info
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: page_plan_info_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: page_plan_info
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: page_plan_info
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: page_plan_info
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: page_plan_info_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: page_plan_info
+    field: title
+    related_collection: block_title
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: title
+          related_collection: block_title
+          meta:
+            junction_field: null
+            many_collection: page_plan_info
+            many_field: title
+            one_allowed_collections: null
+            one_collection: block_title
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: page_plan_info
+            column: title
+            foreign_key_table: block_title
+            foreign_key_column: id
+            constraint_name: page_plan_info_title_foreign
+            on_update: NO ACTION
+            on_delete: SET NULL
+  - collection: page_plan_info
+    field: description
+    related_collection: block_markdown
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: description
+          related_collection: block_markdown
+          meta:
+            junction_field: null
+            many_collection: page_plan_info
+            many_field: description
+            one_allowed_collections: null
+            one_collection: block_markdown
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: page_plan_info
+            column: description
+            foreign_key_table: block_markdown
+            foreign_key_column: id
+            constraint_name: page_plan_info_description_foreign
+            on_update: NO ACTION
+            on_delete: SET NULL
+  - collection: page_plan_info
+    field: layout
+    related_collection: layout_grid_container
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: layout
+          related_collection: layout_grid_container
+          meta:
+            junction_field: null
+            many_collection: page_plan_info
+            many_field: layout
+            one_allowed_collections: null
+            one_collection: layout_grid_container
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: page_plan_info
+            column: layout
+            foreign_key_table: layout_grid_container
+            foreign_key_column: id
+            constraint_name: page_plan_info_layout_foreign
+            on_update: NO ACTION
+            on_delete: SET NULL
+  - collection: page_plan_info
+    field: plan
+    related_collection: model_plan
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: page_plan_info
+          field: plan
+          related_collection: model_plan
+          meta:
+            junction_field: null
+            many_collection: page_plan_info
+            many_field: plan
+            one_allowed_collections: null
+            one_collection: model_plan
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: coverage_pages
+            sort_field: null
+          schema:
+            table: page_plan_info
+            column: plan
+            foreign_key_table: model_plan
+            foreign_key_column: id
+            constraint_name: page_plan_info_plan_foreign
+            on_update: NO ACTION
+            on_delete: SET NULL

@@ -14,10 +14,7 @@ export async function up(knex) {
       constraint pk_plan primary key (id),
       constraint fk_plan_benefit_id
         foreign key (benefit_id)
-        references benefits.benefit (id),
-      constraint fk_plan_control_group_id
-        foreign key (control_group_id)
-        references benefits.control_group (id)
+        references benefits.benefit (id)
     );
 
     create unique index uk_plan_benefit_id_code

@@ -1,0 +1,7 @@
+FROM alpine:3.24
+
+RUN apk add --no-cache openssl
+COPY docker/scripts/keygen.sh /keygen.sh
+RUN chmod +x /keygen.sh
+
+ENTRYPOINT ["/keygen.sh"]

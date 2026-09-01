@@ -13,10 +13,7 @@ export async function up(knex) {
       constraint pk_plan_image primary key (id),
       constraint fk_plan_image_plan_id
         foreign key (plan_id)
-        references benefits.plan (id),
-      constraint fk_plan_image_control_group_id
-        foreign key (control_group_id)
-        references benefits.control_group (id)
+        references benefits.plan (id)
     );
 
     create unique index uk_plan_image_plan_id_code

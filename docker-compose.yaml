@@ -49,25 +49,11 @@ services:
   # Key generator — ephemeral init container that writes JWT + KMS keys once
   # ---------------------------------------------------------------------------
   keygen:
-    image: alpine:3.21
-    command:
-      - sh
-      - -c
-      - |
-        set -e
-        mkdir -p /keys
-        # Only generate if keys don't already exist
-        if ! [ -f /keys/jwt_private.pem ] || ! [ -f /keys/jwt_public.pem ] || ! [ -f /keys/kms_master.key ]; then
-          apk add --no-cache openssl > /dev/null
-          openssl genpkey -algorithm ED25519 -out /keys/jwt_private.pem
-          openssl pkey -in /keys/jwt_private.pem -pubout -out /keys/jwt_public.pem
-          openssl rand -base64 32 | tr -d '\n' > /keys/kms_master.key
-          echo "Keys generated."
-        else
-          echo "Keys already exist, skipping generation."
-        fi
-        chown 65532:65532 /keys/jwt_private.pem /keys/jwt_public.pem /keys/kms_master.key || true
-        chmod 600 /keys/jwt_private.pem /keys/jwt_public.pem /keys/kms_master.key || true
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.keygen
+    image: monospace-keygen:local
+    restart: "no"
     volumes:
       - ./keys:/keys
 
@@ -92,7 +78,7 @@ services:
       - monospace
 
   # ---------------------------------------------------------------------------
-  # Monospace — official image (0 Critical / 0 High)
+  # Monospace
   # ---------------------------------------------------------------------------
   monospace:
     build:
@@ -151,10 +137,114 @@ services:
     networks:
       - monospace
 
+  # Default entrypoint: workspace, org branding, benefits source, Directus source.
+  # Extra workspaces/sources:
+  #   docker compose run --rm --no-deps monospace-init workspace --workspace acme --workspace-name Acme
+  #   docker compose run --rm --no-deps monospace-init source --workspace acme --source acme-db --dbname acme
+  # AI settings are per workspace; the provider key in env is shared and applied on create.
+  # Monospace API keys are org-level (user-scoped), not per workspace.
+  monospace-init:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.cli
+    image: monospace-cli:local
+    restart: "no"
+    env_file:
+      - init.env
+    depends_on:
+      monospace:
+        condition: service_started
+      benefits-migrate:
+        condition: service_completed_successfully
+      directus:
+        condition: service_healthy
+    environment:
+      MONOSPACE_URL: "http://monospace:8100"
+      MONOSPACE_API_KEY: ${MONOSPACE_API_KEY:-}
+      MONOSPACE_BOOTSTRAP_EMAIL: ${MONOSPACE_BOOTSTRAP_EMAIL:-admin@benefitsgo.tech}
+      MONOSPACE_BOOTSTRAP_PASSWORD: ${MONOSPACE_BOOTSTRAP_PASSWORD:-Empyrean1}
+      MONOSPACE_BOOTSTRAP_NAME: ${MONOSPACE_BOOTSTRAP_NAME:-Admin}
+      MONOSPACE_AI_PROVIDER: ${MONOSPACE_AI_PROVIDER:-openai}
+      MONOSPACE_AI_API_KEY: ${MONOSPACE_AI_API_KEY:-}
+      MONOSPACE_AI_CHAT_MODEL: ${MONOSPACE_AI_CHAT_MODEL:-gpt-5.4}
+      MONOSPACE_AI_FAST_MODEL: ${MONOSPACE_AI_FAST_MODEL:-o4-mini}
+      MONOSPACE_AI_REASONING: ${MONOSPACE_AI_REASONING:-true}
+      MONOSPACE_AI_REASONING_LEVEL: ${MONOSPACE_AI_REASONING_LEVEL:-medium}
+      MONOSPACE_SOURCE_PASSWORD: ${MONOSPACE_SOURCE_PASSWORD:-monospace}
+    networks:
+      - monospace
+
+  # ---------------------------------------------------------------------------
+  # Directus — create the database, then start the CMS
+  # ---------------------------------------------------------------------------
+  directus-init:
+    image: postgres:17
+    restart: "no"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGHOST: postgres
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: monospace
+      DIRECTUS_DB: directus
+    volumes:
+      - ./directus/ensure-database.sh:/ensure-database.sh:ro
+    entrypoint: ["/bin/sh", "/ensure-database.sh"]
+    networks:
+      - monospace
+
+  directus:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.directus
+      args:
+        DIRECTUS_VERSION: "11"
+    image: directus:11
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      directus-init:
+        condition: service_completed_successfully
+    ports:
+      - "8055:8055"
+    volumes:
+      - ./directus/migrations:/directus/migrations
+      - ./directus/certs:/directus/certs:ro
+      - directus_uploads:/directus/uploads
+      - directus_extensions:/directus/extensions
+    environment:
+      MIGRATIONS_PATH: "/directus/migrations"
+      NODE_EXTRA_CA_CERTS: "/directus/certs/netskope-ca.pem"
+      SECRET: "local-directus-dev-secret-do-not-use"
+      DIRECTUS_AI_XAI_API_KEY: ${DIRECTUS_AI_XAI_API_KEY:-}
+      DB_CLIENT: "pg"
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      DB_DATABASE: "directus"
+      DB_USER: "postgres"
+      DB_PASSWORD: "monospace"
+      ADMIN_EMAIL: "admin@benefitsgo.tech"
+      ADMIN_PASSWORD: "Empyrean1"
+      PUBLIC_URL: "http://localhost:8055"
+      WEBSOCKETS_ENABLED: "true"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://127.0.0.1:8055/server/ping || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    networks:
+      - monospace
+
 volumes:
   postgres_data:
   rabbitmq_data:
   uploads_data:
+  directus_uploads:
+  directus_extensions:
 
 networks:
   monospace:

@@ -1,0 +1,20 @@
+ARG DIRECTUS_VERSION=11
+FROM directus/directus:${DIRECTUS_VERSION}
+
+USER root
+RUN corepack enable
+WORKDIR /directus
+USER node
+RUN pnpm add js-yaml
+
+USER root
+COPY directus/migrations /directus/migrations
+COPY directus/start.sh /directus/start.sh
+RUN chmod +x /directus/start.sh \
+  && chown -R node:node /directus/migrations /directus/start.sh
+
+ENV MIGRATIONS_PATH=/directus/migrations
+
+USER node
+EXPOSE 8055
+CMD ["/bin/sh", "/directus/start.sh"]

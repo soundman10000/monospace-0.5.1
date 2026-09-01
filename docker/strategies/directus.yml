@@ -1,0 +1,59 @@
+collections:
+  directus_access:
+    isHidden: true
+  directus_activity:
+    isHidden: true
+  directus_collections:
+    isHidden: true
+  directus_comments:
+    isHidden: true
+  directus_dashboards:
+    isHidden: true
+  directus_deployment_projects:
+    isHidden: true
+  directus_deployment_runs:
+    isHidden: true
+  directus_deployments:
+    isHidden: true
+  directus_extensions:
+    isHidden: true
+  directus_fields:
+    isHidden: true
+  directus_files:
+    isHidden: true
+  directus_flows:
+    isHidden: true
+  directus_folders:
+    isHidden: true
+  directus_migrations:
+    isHidden: true
+  directus_notifications:
+    isHidden: true
+  directus_operations:
+    isHidden: true
+  directus_panels:
+    isHidden: true
+  directus_permissions:
+    isHidden: true
+  directus_policies:
+    isHidden: true
+  directus_presets:
+    isHidden: true
+  directus_relations:
+    isHidden: true
+  directus_revisions:
+    isHidden: true
+  directus_roles:
+    isHidden: true
+  directus_sessions:
+    isHidden: true
+  directus_settings:
+    isHidden: true
+  directus_shares:
+    isHidden: true
+  directus_translations:
+    isHidden: true
+  directus_users:
+    isHidden: true
+  directus_versions:
+    isHidden: true

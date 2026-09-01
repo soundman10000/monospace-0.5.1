@@ -3,3 +3,4 @@ keys/*
 .env
 **/.env
 **/node_modules
+directus/provisions/

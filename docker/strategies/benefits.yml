@@ -1,0 +1,5 @@
+collections:
+  knex_migrations:
+    isHidden: true
+  knex_migrations_lock:
+    isHidden: true
