@@ -1,11 +1,18 @@
 #!/usr/bin/env node
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { registerSetupCommand } from "./commands/setup.js";
-import { registerIntrospectCommand } from "./commands/introspect.js";
 import { registerAiCommand } from "./commands/ai.js";
+import { registerIntrospectCommand } from "./commands/introspect.js";
+import { registerSourceCommand } from "./commands/source.js";
+import { registerWorkspaceCommand } from "./commands/workspace.js";
 
-registerAiCommand(registerIntrospectCommand(registerSetupCommand(yargs(hideBin(process.argv)))))
+[
+  registerWorkspaceCommand,
+  registerSourceCommand,
+  registerIntrospectCommand,
+  registerAiCommand,
+]
+  .reduce((cli, register) => register(cli), yargs(hideBin(process.argv)).scriptName("monospace-cli"))
   .strict()
   .demandCommand(1)
   .help()

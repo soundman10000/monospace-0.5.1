@@ -15,8 +15,8 @@ export const addAiOptions = (cmd) =>
     })
     .option("ai-api-key", {
       type: "string",
-      default: defaults.aiApiKey,
-      describe: "Provider API key (stored encrypted in workspace AI settings)",
+      default: "",
+      describe: "Provider API key (MONOSPACE_AI_API_KEY; shared across workspaces)",
     })
     .option("ai-chat-model", {
       type: "string",

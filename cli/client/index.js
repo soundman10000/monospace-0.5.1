@@ -1,4 +1,4 @@
-import { updateAiSettings } from "./ai.js";
+import { getAiSettings, updateAiSettings } from "./ai.js";
 import { resolveApiKey } from "./auth.js";
 import { trimSlash, unwrap } from "./helpers.js";
 import { createSession, waitForApi } from "./session.js";
@@ -12,6 +12,7 @@ export const createClient = (input) => {
   const state = {
     base: trimSlash(input.url),
     user: null,
+    auth: { minted: false, named: false, token: null },
   };
   let sessionPromise;
 
@@ -19,9 +20,14 @@ export const createClient = (input) => {
     sessionPromise ??= (async () => {
       try {
         await waitForApi(input.url);
-        const apiKey = await resolveApiKey(input.url, input);
-        const created = createSession(input.url, apiKey);
+        const resolved = await resolveApiKey(input.url, input);
+        const created = createSession(input.url, resolved.token);
         state.user = await readCurrentUser(created);
+        state.auth = {
+          minted: Boolean(resolved.minted),
+          named: Boolean(resolved.named),
+          token: resolved.minted ? resolved.token : null,
+        };
         return created;
       } catch (error) {
         sessionPromise = undefined;
@@ -40,11 +46,15 @@ export const createClient = (input) => {
     get user() {
       return state.user;
     },
+    get auth() {
+      return state.auth;
+    },
     listWorkspaces: withSession(listWorkspaces),
     createWorkspace: withSession(createWorkspace),
     listSources: withSession(listSources),
     createSource: withSession(createSource),
     introspectSource: withSession(introspectSource),
+    getAiSettings: withSession(getAiSettings),
     updateAiSettings: withSession(updateAiSettings),
   };
 };

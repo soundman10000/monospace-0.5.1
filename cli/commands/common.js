@@ -29,43 +29,42 @@ const OPTION_DEFINITIONS = {
   },
   workspace: {
     type: "string",
-    default: defaults.workspace,
+    demandOption: true,
     describe: "Workspace API name",
   },
   "workspace-name": {
     type: "string",
-    default: defaults.workspaceName,
-    describe: "Workspace display name",
+    describe: "Workspace display name (defaults to --workspace)",
   },
   source: {
     type: "string",
-    default: defaults.source,
+    demandOption: true,
     describe: "Data source API name",
   },
   host: {
     type: "string",
-    default: defaults.host,
-    describe: "Benefits Postgres host as seen by Monospace",
+    demandOption: true,
+    describe: "Postgres host as seen by Monospace",
   },
   port: {
     type: "number",
-    default: defaults.port,
-    describe: "Benefits Postgres port as seen by Monospace",
+    demandOption: true,
+    describe: "Postgres port as seen by Monospace",
   },
   user: {
     type: "string",
-    default: defaults.user,
-    describe: "Benefits Postgres user",
+    demandOption: true,
+    describe: "Postgres user",
   },
   "db-password": {
     type: "string",
-    default: defaults.dbPassword,
-    describe: "Benefits Postgres password",
+    demandOption: true,
+    describe: "Postgres password",
   },
   dbname: {
     type: "string",
-    default: defaults.dbname,
-    describe: "Benefits Postgres database",
+    demandOption: true,
+    describe: "Postgres database",
   },
 };
 
@@ -93,8 +92,28 @@ export const addWorkspaceNameOption = (cmd) => addOptions(cmd, ["workspace-name"
 
 export const addSourceOption = (cmd) => addOptions(cmd, ["source"]);
 
-export const addBenefitsDatabaseOptions = (cmd) =>
+export const addSourceDatabaseOptions = (cmd) =>
   addOptions(cmd, ["host", "port", "user", "db-password", "dbname"]);
+
+export const printAi = (ai) => {
+  if (ai?.skipped) {
+    console.log("ai          skipped (no MONOSPACE_AI_API_KEY; shared across workspaces)");
+    return;
+  }
+  if (ai) {
+    console.log(`ai          ${ai.provider}  chat=${ai.chatModel}  fast=${ai.fastModel}`);
+  }
+};
+
+export const printAuth = (client) => {
+  if (client.auth?.minted && client.auth.token) {
+    console.log(`api-key     ${client.auth.token}  created  org-level (not per workspace); save as MONOSPACE_API_KEY`);
+    return;
+  }
+  if (client.auth?.named) {
+    console.log("api-key     org-level, user-scoped (same key for every workspace)");
+  }
+};
 
 export const withCommandErrorHandling = (run) => async (argv) => {
   try {

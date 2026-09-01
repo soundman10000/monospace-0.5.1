@@ -6,7 +6,8 @@
     "monospace-cli": "./index.js"
   },
   "scripts": {
-    "setup": "node index.js setup",
+    "workspace": "node index.js workspace",
+    "source": "node index.js source",
     "introspect": "node index.js introspect",
     "ai": "node index.js ai"
   },

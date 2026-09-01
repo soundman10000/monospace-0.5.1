@@ -3,7 +3,7 @@ import { introspect } from "../app/source.js";
 import { addBaseOptions, addSourceOption, addWorkspaceOption, applyOptionSets, withCommandErrorHandling } from "./common.js";
 
 const COMMAND_NAME = "introspect";
-const COMMAND_DESCRIPTION = "Re-introspect the benefits data source into the workspace";
+const COMMAND_DESCRIPTION = "Re-introspect a data source into the workspace";
 
 const builder = (cmd) => applyOptionSets(cmd, addBaseOptions, addWorkspaceOption, addSourceOption);
 

@@ -86,11 +86,14 @@ const mintApiKey = async (url, accessToken) => {
 };
 
 export const resolveApiKey = async (url, input) => {
-  if (input.apiKey) return input.apiKey;
-  
+  if (input.apiKey) return { token: input.apiKey, minted: false, named: true };
+
   await bootstrapAdmin(url, input);
-  
+
   const accessToken = await loginJson(url, input);
-  
-  return (await mintApiKey(url, accessToken)) || accessToken;
+  const minted = await mintApiKey(url, accessToken);
+
+  if (minted) return { token: minted, minted: true, named: true };
+
+  return { token: accessToken, minted: false, named: false };
 };
