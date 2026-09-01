@@ -22,7 +22,7 @@ monospace-cli org \
   --color "#0077b7" \
   --logo /cli/assets/images/empLogo.png
 
-exec monospace-cli source \
+monospace-cli source \
   --workspace "${MONOSPACE_WORKSPACE}" \
   --source "${MONOSPACE_SOURCE_NAME}" \
   --host "${MONOSPACE_SOURCE_HOST}" \
@@ -30,3 +30,13 @@ exec monospace-cli source \
   --user "${MONOSPACE_SOURCE_USER}" \
   --db-password "${MONOSPACE_SOURCE_PASSWORD}" \
   --dbname "${MONOSPACE_SOURCE_DATABASE}"
+
+exec monospace-cli source \
+  --workspace "${MONOSPACE_WORKSPACE}" \
+  --source "${MONOSPACE_DIRECTUS_SOURCE_NAME}" \
+  --host "${MONOSPACE_DIRECTUS_SOURCE_HOST}" \
+  --port "${MONOSPACE_DIRECTUS_SOURCE_PORT}" \
+  --user "${MONOSPACE_DIRECTUS_SOURCE_USER}" \
+  --db-password "${MONOSPACE_SOURCE_PASSWORD}" \
+  --dbname "${MONOSPACE_DIRECTUS_SOURCE_DATABASE}" \
+  --strategy /cli/strategies/directus.yml

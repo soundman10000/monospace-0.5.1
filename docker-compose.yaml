@@ -137,7 +137,7 @@ services:
     networks:
       - monospace
 
-  # Default entrypoint runs `workspace` then `source` as two CLI commands.
+  # Default entrypoint: workspace, org branding, benefits source, Directus source.
   # Extra workspaces/sources:
   #   docker compose run --rm --no-deps monospace-init workspace --workspace acme --workspace-name Acme
   #   docker compose run --rm --no-deps monospace-init source --workspace acme --source acme-db --dbname acme
@@ -154,6 +154,8 @@ services:
         condition: service_started
       benefits-migrate:
         condition: service_completed_successfully
+      directus:
+        condition: service_healthy
     environment:
       MONOSPACE_URL: "http://monospace:8100"
       MONOSPACE_API_KEY: ${MONOSPACE_API_KEY:-}
@@ -226,6 +228,12 @@ services:
       ADMIN_PASSWORD: "Empyrean1"
       PUBLIC_URL: "http://localhost:8055"
       WEBSOCKETS_ENABLED: "true"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://127.0.0.1:8055/server/ping || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
     networks:
       - monospace
 

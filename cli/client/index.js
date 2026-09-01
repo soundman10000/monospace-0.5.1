@@ -4,6 +4,7 @@ import { resolveApiKey } from "./auth.js";
 import { trimSlash, unwrap } from "./helpers.js";
 import { createSession, waitForApi } from "./session.js";
 import { getOrgSettings, updateOrgSettings } from "./settings.js";
+import { createCollectionMeta, listCollections, updateCollectionMeta } from "./collections.js";
 import { createSource, introspectSource, listSources } from "./sources.js";
 import { createWorkspace, listWorkspaces, updateWorkspace } from "./workspaces.js";
 
@@ -57,6 +58,9 @@ export const createClient = (input) => {
     listSources: withSession(listSources),
     createSource: withSession(createSource),
     introspectSource: withSession(introspectSource),
+    listCollections: withSession(listCollections),
+    createCollectionMeta: withSession(createCollectionMeta),
+    updateCollectionMeta: withSession(updateCollectionMeta),
     getAiSettings: withSession(getAiSettings),
     updateAiSettings: withSession(updateAiSettings),
     getOrgSettings: withSession(getOrgSettings),
