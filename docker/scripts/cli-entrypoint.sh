@@ -14,6 +14,11 @@ monospace-cli workspace \
   --workspace "${MONOSPACE_WORKSPACE}" \
   --workspace-name "${MONOSPACE_WORKSPACE_NAME}"
 
+monospace-cli org \
+  --name "Empyrean Benefit Solutions" \
+  --color "#0077b7" \
+  --logo /cli/assets/images/empLogo.png
+
 exec monospace-cli source \
   --workspace "${MONOSPACE_WORKSPACE}" \
   --source "${MONOSPACE_SOURCE_NAME}" \

@@ -6,6 +6,7 @@ WORKDIR /cli
 COPY cli/package.json cli/package-lock.json ./
 RUN npm ci --omit=dev
 COPY cli/ .
+COPY assets/images/empLogo.png /cli/assets/images/empLogo.png
 COPY docker/scripts/cli-entrypoint.sh /entrypoint.sh
 RUN chmod +x index.js /entrypoint.sh \
     && ln -sf /cli/index.js /usr/local/bin/monospace-cli
