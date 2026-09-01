@@ -3752,8 +3752,8 @@ relations:
             one_allowed_collections:
               - block_title
               - block_markdown
-              - layout_grid_container_blocks
               - block_document
+              - layout_grid_container
             one_collection: null
             one_collection_field: collection
             one_deselect_action: nullify
