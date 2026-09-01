@@ -2,13 +2,13 @@ FROM node:24-alpine
 
 RUN apk upgrade --no-cache libcrypto3 libssl3
 
-WORKDIR /app
+WORKDIR /web
 
-COPY app/package.json app/package-lock.json app/nuxt.config.ts app/tsconfig.json ./
-COPY app/app ./app
+COPY web/package.json web/package-lock.json web/nuxt.config.ts web/tsconfig.json ./
+COPY web/app ./app
 RUN npm ci
 
-COPY app/ .
+COPY web/ .
 
 ENV HOST=0.0.0.0
 ENV PORT=3000
