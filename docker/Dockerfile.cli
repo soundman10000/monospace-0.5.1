@@ -4,7 +4,18 @@ WORKDIR /cli
 COPY cli/package.json cli/package-lock.json ./
 RUN npm ci --omit=dev
 COPY cli/ .
+COPY docker/cli-entrypoint.sh /entrypoint.sh
+RUN chmod +x index.js /entrypoint.sh \
+    && ln -sf /cli/index.js /usr/local/bin/monospace-cli
+
+ENV MONOSPACE_WORKSPACE=mono-empyrean \
+    MONOSPACE_WORKSPACE_NAME="Mono Empyrean" \
+    MONOSPACE_SOURCE_NAME=empyrean-benefits \
+    MONOSPACE_SOURCE_HOST=postgres \
+    MONOSPACE_SOURCE_PORT=5432 \
+    MONOSPACE_SOURCE_USER=postgres \
+    MONOSPACE_SOURCE_PASSWORD=monospace \
+    MONOSPACE_SOURCE_DATABASE=benefits
 
 USER node
-ENTRYPOINT ["node", "index.js"]
-CMD ["setup"]
+ENTRYPOINT ["/entrypoint.sh"]

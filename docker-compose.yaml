@@ -49,25 +49,11 @@ services:
   # Key generator — ephemeral init container that writes JWT + KMS keys once
   # ---------------------------------------------------------------------------
   keygen:
-    image: alpine:3.21
-    command:
-      - sh
-      - -c
-      - |
-        set -e
-        mkdir -p /keys
-        # Only generate if keys don't already exist
-        if ! [ -f /keys/jwt_private.pem ] || ! [ -f /keys/jwt_public.pem ] || ! [ -f /keys/kms_master.key ]; then
-          apk add --no-cache openssl > /dev/null
-          openssl genpkey -algorithm ED25519 -out /keys/jwt_private.pem
-          openssl pkey -in /keys/jwt_private.pem -pubout -out /keys/jwt_public.pem
-          openssl rand -base64 32 | tr -d '\n' > /keys/kms_master.key
-          echo "Keys generated."
-        else
-          echo "Keys already exist, skipping generation."
-        fi
-        chown 65532:65532 /keys/jwt_private.pem /keys/jwt_public.pem /keys/kms_master.key || true
-        chmod 600 /keys/jwt_private.pem /keys/jwt_public.pem /keys/kms_master.key || true
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.keygen
+    image: monospace-keygen:local
+    restart: "no"
     volumes:
       - ./keys:/keys
 
@@ -151,7 +137,12 @@ services:
     networks:
       - monospace
 
-  # Create the workspace, attach benefits, introspect. Idempotent.
+  # Default entrypoint runs `workspace` then `source` as two CLI commands.
+  # Extra workspaces/sources:
+  #   docker compose run --rm --no-deps monospace-init workspace --workspace acme --workspace-name Acme
+  #   docker compose run --rm --no-deps monospace-init source --workspace acme --source acme-db --dbname acme
+  # AI settings are per workspace; the provider key in env is shared and applied on create.
+  # Monospace API keys are org-level (user-scoped), not per workspace.
   monospace-init:
     build:
       context: .
@@ -169,21 +160,12 @@ services:
       MONOSPACE_BOOTSTRAP_EMAIL: ${MONOSPACE_BOOTSTRAP_EMAIL:-admin@benefitsgo.tech}
       MONOSPACE_BOOTSTRAP_PASSWORD: ${MONOSPACE_BOOTSTRAP_PASSWORD:-Empyrean1}
       MONOSPACE_BOOTSTRAP_NAME: ${MONOSPACE_BOOTSTRAP_NAME:-Admin}
-      MONOSPACE_WORKSPACE: ${MONOSPACE_WORKSPACE:-mono-empyrean}
-      MONOSPACE_WORKSPACE_NAME: ${MONOSPACE_WORKSPACE_NAME:-Mono Empyrean}
-      MONOSPACE_SOURCE_NAME: ${MONOSPACE_SOURCE_NAME:-empyrean-benefits}
-      BENEFITS_PGHOST: postgres
-      BENEFITS_PGPORT: "5432"
-      BENEFITS_PGUSER: ${BENEFITS_PGUSER:-postgres}
-      BENEFITS_PGPASSWORD: ${BENEFITS_PGPASSWORD:-monospace}
-      BENEFITS_PGDATABASE: ${BENEFITS_PGDATABASE:-benefits}
       MONOSPACE_AI_PROVIDER: ${MONOSPACE_AI_PROVIDER:-openai}
       MONOSPACE_AI_API_KEY: ${MONOSPACE_AI_API_KEY:-}
       MONOSPACE_AI_CHAT_MODEL: ${MONOSPACE_AI_CHAT_MODEL:-gpt-5.4}
       MONOSPACE_AI_FAST_MODEL: ${MONOSPACE_AI_FAST_MODEL:-o4-mini}
       MONOSPACE_AI_REASONING: ${MONOSPACE_AI_REASONING:-true}
       MONOSPACE_AI_REASONING_LEVEL: ${MONOSPACE_AI_REASONING_LEVEL:-medium}
-    command: ["setup"]
     networks:
       - monospace
 
