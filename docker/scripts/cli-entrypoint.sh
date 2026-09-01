@@ -29,7 +29,8 @@ monospace-cli source \
   --port "${MONOSPACE_SOURCE_PORT}" \
   --user "${MONOSPACE_SOURCE_USER}" \
   --db-password "${MONOSPACE_SOURCE_PASSWORD}" \
-  --dbname "${MONOSPACE_SOURCE_DATABASE}"
+  --dbname "${MONOSPACE_SOURCE_DATABASE}" \
+  --strategy /cli/strategies/benefits.yml
 
 exec monospace-cli source \
   --workspace "${MONOSPACE_WORKSPACE}" \
