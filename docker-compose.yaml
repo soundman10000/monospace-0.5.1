@@ -239,12 +239,47 @@ services:
     networks:
       - monospace
 
+  # ---------------------------------------------------------------------------
+  # App — Nuxt website (TypeScript + Tailwind)
+  # ---------------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.app
+    image: monospace-app:local
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/app
+      - app_node_modules:/app/node_modules
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "3000"
+      NUXT_TELEMETRY_DISABLED: "1"
+      CHOKIDAR_USEPOLLING: "true"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    networks:
+      - monospace
+
 volumes:
   postgres_data:
   rabbitmq_data:
   uploads_data:
   directus_uploads:
   directus_extensions:
+  app_node_modules:
 
 networks:
   monospace:

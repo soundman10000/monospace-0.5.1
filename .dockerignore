@@ -1,4 +1,9 @@
 .git
-**/.env
+**/.git
 **/node_modules
-**/.DS_Store
+**/.nuxt
+**/.output
+**/.data
+**/.nitro
+**/.cache
+**/dist
