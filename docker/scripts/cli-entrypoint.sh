@@ -5,6 +5,11 @@ if [ "$#" -gt 0 ]; then
   exec monospace-cli "$@"
 fi
 
+if [ -z "${MONOSPACE_SOURCE_PASSWORD}" ]; then
+  echo "MONOSPACE_SOURCE_PASSWORD is required" >&2
+  exit 1
+fi
+
 monospace-cli workspace \
   --workspace "${MONOSPACE_WORKSPACE}" \
   --workspace-name "${MONOSPACE_WORKSPACE_NAME}"
