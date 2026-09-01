@@ -95,16 +95,6 @@ export const addSourceOption = (cmd) => addOptions(cmd, ["source"]);
 export const addSourceDatabaseOptions = (cmd) =>
   addOptions(cmd, ["host", "port", "user", "db-password", "dbname"]);
 
-export const printAi = (ai) => {
-  if (ai?.skipped) {
-    console.log("ai          skipped (no MONOSPACE_AI_API_KEY; shared across workspaces)");
-    return;
-  }
-  if (ai) {
-    console.log(`ai          ${ai.provider}  chat=${ai.chatModel}  fast=${ai.fastModel}`);
-  }
-};
-
 export const printAuth = (client) => {
   if (client.auth?.minted && client.auth.token) {
     console.log(`api-key     ${client.auth.token}  created  org-level (not per workspace); save as MONOSPACE_API_KEY`);

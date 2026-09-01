@@ -9,7 +9,6 @@ import {
   addWorkspaceNameOption,
   addWorkspaceOption,
   applyOptionSets,
-  printAi,
   printAuth,
   withCommandErrorHandling,
 } from "./common.js";
@@ -30,6 +29,16 @@ const printResult = (result) => {
   console.log(`workspace   ${result.workspace}${result.workspaceCreated ? "  created" : ""}`);
   console.log(`display     ${result.displayName}`);
   printAi(result.ai);
+};
+
+export const printAi = (ai) => {
+  if (ai?.skipped) {
+    console.log("ai          skipped (no MONOSPACE_AI_API_KEY; shared across workspaces)");
+    return;
+  }
+  if (ai) {
+    console.log(`ai          ${ai.provider}  chat=${ai.chatModel}  fast=${ai.fastModel}`);
+  }
 };
 
 const handler = withCommandErrorHandling(async (argv) => {

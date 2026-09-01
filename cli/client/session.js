@@ -34,6 +34,7 @@ export const createSession = (url, apiKey) => {
   const base = trimSlash(url);
   return {
     base,
+    token: apiKey,
     api: bearerApi(base, apiKey),
   };
 };

@@ -3,12 +3,14 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { registerAiCommand } from "./commands/ai.js";
 import { registerIntrospectCommand } from "./commands/introspect.js";
+import { registerOrgCommand } from "./commands/org.js";
 import { registerSourceCommand } from "./commands/source.js";
 import { registerWorkspaceCommand } from "./commands/workspace.js";
 
 [
   registerWorkspaceCommand,
   registerSourceCommand,
+  registerOrgCommand,
   registerIntrospectCommand,
   registerAiCommand,
 ]

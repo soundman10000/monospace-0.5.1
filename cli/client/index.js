@@ -1,7 +1,9 @@
 import { getAiSettings, updateAiSettings } from "./ai.js";
+import { uploadSystemAsset } from "./assets.js";
 import { resolveApiKey } from "./auth.js";
 import { trimSlash, unwrap } from "./helpers.js";
 import { createSession, waitForApi } from "./session.js";
+import { getOrgSettings, updateOrgSettings } from "./settings.js";
 import { createSource, introspectSource, listSources } from "./sources.js";
 import { createWorkspace, listWorkspaces } from "./workspaces.js";
 
@@ -56,5 +58,8 @@ export const createClient = (input) => {
     introspectSource: withSession(introspectSource),
     getAiSettings: withSession(getAiSettings),
     updateAiSettings: withSession(updateAiSettings),
+    getOrgSettings: withSession(getOrgSettings),
+    updateOrgSettings: withSession(updateOrgSettings),
+    uploadSystemAsset: withSession(uploadSystemAsset),
   };
 };
