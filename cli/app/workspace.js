@@ -38,12 +38,10 @@ export const ensureWorkspace = async (client, { apiName, displayName, descriptio
   const created = await client.createWorkspace({
     apiName,
     displayName: displayName || apiName,
-    description,
-    primaryColor: patch.primaryColor,
   });
 
   const workspace =
-    patch.logoId ? await client.updateWorkspace(apiName, { logoId: patch.logoId }) : created;
+    Object.keys(patch).length > 0 ? await client.updateWorkspace(apiName, patch) : created;
 
   return { workspace: { ...created, ...workspace }, created: true };
 };
