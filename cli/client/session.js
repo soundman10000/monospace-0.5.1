@@ -1,4 +1,3 @@
-import { createClient } from "@monospace/sdk";
 import { ofetch } from "ofetch";
 import { throwMapped } from "./errors.js";
 import { sleep, trimSlash } from "./helpers.js";
@@ -33,18 +32,8 @@ const bearerApi = (base, apiKey) =>
 
 export const createSession = (url, apiKey) => {
   const base = trimSlash(url);
-  const api = bearerApi(base, apiKey);
   return {
     base,
-    apiKey,
-    api,
-    workspaceClient: (workspace) =>
-      createClient({
-        url: base,
-        project: workspace,
-        apiKey,
-        unwrapEnvelope: true,
-        strictNull: false,
-      }),
+    api: bearerApi(base, apiKey),
   };
 };

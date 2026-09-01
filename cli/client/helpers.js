@@ -9,3 +9,8 @@ export const asList = (value) => {
 };
 
 export const unwrap = (value) => value?.data ?? value;
+
+export const asItem = (value) => {
+  const data = unwrap(value);
+  return Array.isArray(data) ? data[0] ?? null : data;
+};

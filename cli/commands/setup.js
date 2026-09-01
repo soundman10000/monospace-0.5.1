@@ -1,7 +1,7 @@
 import { configureAi } from "../app/ai.js";
-import { ensureSource, introspectSource } from "../app/source.js";
+import { ensureSource } from "../app/source.js";
 import { ensureWorkspace } from "../app/workspace.js";
-import { connect } from "../client/index.js";
+import { createClient } from "../client/index.js";
 import { toClientInput } from "../lib/env.js";
 import { addAiOptions } from "./ai.js";
 import {
@@ -47,12 +47,17 @@ const printResult = (result) => {
 
 const handler = withCommandErrorHandling(async (argv) => {
   const input = toClientInput(argv);
-  const client = await connect(input);
+  const client = createClient(input);
+  
   const { workspace, created: workspaceCreated } = await ensureWorkspace(client, input);
   const { source, created: sourceCreated } = await ensureSource(client, input);
+  
   if (!source?.id) throw new Error("Data source id missing after create/list");
-  const changes = await introspectSource(client, { workspace: input.workspace, sourceId: source.id });
+  
+  const changes = await client.introspectSource(input.workspace, source.id);
+  
   const ai = await configureAi(client, input);
+  
   printResult({
     url: client.base,
     email: client.user?.email || input.email,
