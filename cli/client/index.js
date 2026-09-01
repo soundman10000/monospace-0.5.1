@@ -5,7 +5,7 @@ import { trimSlash, unwrap } from "./helpers.js";
 import { createSession, waitForApi } from "./session.js";
 import { getOrgSettings, updateOrgSettings } from "./settings.js";
 import { createSource, introspectSource, listSources } from "./sources.js";
-import { createWorkspace, listWorkspaces } from "./workspaces.js";
+import { createWorkspace, listWorkspaces, updateWorkspace } from "./workspaces.js";
 
 const readCurrentUser = async (session) =>
   unwrap(await session.api("/system/users/me", { query: { fields: "id,email,fullName" } }));
@@ -53,6 +53,7 @@ export const createClient = (input) => {
     },
     listWorkspaces: withSession(listWorkspaces),
     createWorkspace: withSession(createWorkspace),
+    updateWorkspace: withSession(updateWorkspace),
     listSources: withSession(listSources),
     createSource: withSession(createSource),
     introspectSource: withSession(introspectSource),

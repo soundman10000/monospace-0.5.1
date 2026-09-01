@@ -6,14 +6,17 @@ WORKDIR /cli
 COPY cli/package.json cli/package-lock.json ./
 RUN npm ci --omit=dev
 COPY cli/ .
-COPY assets/images/empLogo.png /cli/assets/images/empLogo.png
+COPY assets/images/dans.png /cli/assets/images/dans.png
 COPY docker/scripts/cli-entrypoint.sh /entrypoint.sh
 RUN chmod +x index.js /entrypoint.sh \
     && ln -sf /cli/index.js /usr/local/bin/monospace-cli
 
-ENV MONOSPACE_WORKSPACE=mono-empyrean \
-    MONOSPACE_WORKSPACE_NAME="Mono Empyrean" \
-    MONOSPACE_SOURCE_NAME=empyrean-benefits \
+ENV MONOSPACE_WORKSPACE=dans-auto \
+    MONOSPACE_WORKSPACE_NAME="Dan's Auto Repair" \
+    MONOSPACE_WORKSPACE_DESCRIPTION="Dan’s Auto Repair is a locally owned shop built on straightforward diagnostics and repairs you can count on." \
+    MONOSPACE_WORKSPACE_COLOR="#1B3A4B" \
+    MONOSPACE_WORKSPACE_LOGO=/cli/assets/images/dans.png \
+    MONOSPACE_SOURCE_NAME=dans-auto \
     MONOSPACE_SOURCE_HOST=postgres \
     MONOSPACE_SOURCE_PORT=5432 \
     MONOSPACE_SOURCE_USER=postgres \

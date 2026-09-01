@@ -20,7 +20,19 @@ const COMMAND_DESCRIPTION =
 const builder = (cmd) =>
   addAiOptions(
     applyOptionSets(cmd, addBaseOptions, addFullNameOption, addWorkspaceOption, addWorkspaceNameOption),
-  );
+  )
+    .option("description", {
+      type: "string",
+      describe: "Workspace description",
+    })
+    .option("color", {
+      type: "string",
+      describe: "Workspace brand color as hex (for example #0077b7)",
+    })
+    .option("logo", {
+      type: "string",
+      describe: "Path to a workspace logo image (uploaded as a system asset)",
+    });
 
 const printAi = (ai) => {
   if (ai?.skipped) {
@@ -38,6 +50,9 @@ const printResult = (result) => {
   console.log(`user        ${result.email}`);
   console.log(`workspace   ${result.workspace}${result.workspaceCreated ? "  created" : ""}`);
   console.log(`display     ${result.displayName}`);
+  if (result.description) console.log(`description ${result.description}`);
+  if (result.color) console.log(`color       ${result.color}`);
+  if (result.logoId) console.log(`logo        ${result.logoId}`);
   printAi(result.ai);
 };
 
@@ -46,6 +61,9 @@ const handler = withCommandErrorHandling(async (argv) => {
   const { workspace, created } = await ensureWorkspace(client, {
     apiName: argv.workspace,
     displayName: argv.workspaceName || argv.workspace,
+    description: argv.description,
+    color: argv.color,
+    logo: argv.logo,
   });
   const ai = await configureAi(client, argv.workspace, aiFromArgv(argv));
 
@@ -55,6 +73,9 @@ const handler = withCommandErrorHandling(async (argv) => {
     email: client.user?.email || argv.email,
     workspace: workspace?.apiName || argv.workspace,
     displayName: workspace?.displayName || argv.workspaceName || argv.workspace,
+    description: workspace?.description,
+    color: workspace?.primaryColor,
+    logoId: workspace?.logoId,
     workspaceCreated: created,
     ai,
   });

@@ -12,7 +12,10 @@ fi
 
 monospace-cli workspace \
   --workspace "${MONOSPACE_WORKSPACE}" \
-  --workspace-name "${MONOSPACE_WORKSPACE_NAME}"
+  --workspace-name "${MONOSPACE_WORKSPACE_NAME}" \
+  --description "${MONOSPACE_WORKSPACE_DESCRIPTION}" \
+  --color "${MONOSPACE_WORKSPACE_COLOR}" \
+  --logo "${MONOSPACE_WORKSPACE_LOGO}"
 
 monospace-cli org \
   --name "Empyrean Benefit Solutions" \
