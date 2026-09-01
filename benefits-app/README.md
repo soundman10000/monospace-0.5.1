@@ -43,7 +43,8 @@ There is no separate `plan_feature` table in SQL Server. Plan features are `plan
 - No composite primary keys
 - Every FK is indexed
 - Unique constraints are unique indexes, not composite keys
-- Child tables keep `control_group_id` for tenant scoping
+- `control_group` is the aggregate root; only `benefit.control_group_id` is a foreign key
+- Descendant tables keep `control_group_id` for tenant scoping as a uuid column with an index, not a foreign key
 - Matrix / tier / vendor / script ids on details are stored as uuid columns without FKs until those catalogs are modeled
 
 ## Run

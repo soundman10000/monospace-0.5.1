@@ -16,9 +16,6 @@ export async function up(knex) {
       constraint fk_benefit_feature_benefit_id
         foreign key (benefit_id)
         references benefits.benefit (id),
-      constraint fk_benefit_feature_control_group_id
-        foreign key (control_group_id)
-        references benefits.control_group (id),
       constraint fk_benefit_feature_feature_type_id
         foreign key (feature_type_id)
         references benefits.feature_type (id)
