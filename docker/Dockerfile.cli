@@ -6,28 +6,11 @@ WORKDIR /cli
 COPY cli/package.json cli/package-lock.json ./
 RUN npm ci --omit=dev
 COPY cli/ .
-COPY assets/images/dans.png /cli/assets/images/dans.png
-COPY assets/images/empLogo.png /cli/assets/images/empLogo.png
+COPY assets/images /cli/assets/images
 COPY docker/strategies /strategies
 COPY docker/scripts/cli-entrypoint.sh /entrypoint.sh
 RUN chmod +x index.js /entrypoint.sh \
     && ln -sf /cli/index.js /usr/local/bin/monospace-cli
-
-ENV MONOSPACE_WORKSPACE=dans-auto \
-    MONOSPACE_WORKSPACE_NAME="Dan's Auto Repair" \
-    MONOSPACE_WORKSPACE_DESCRIPTION="Dan’s Auto Repair is a locally owned shop built on straightforward diagnostics and repairs you can count on." \
-    MONOSPACE_WORKSPACE_COLOR="#1B3A4B" \
-    MONOSPACE_WORKSPACE_LOGO=/cli/assets/images/dans.png \
-    MONOSPACE_SOURCE_NAME=dans-auto-benefits \
-    MONOSPACE_SOURCE_HOST=postgres \
-    MONOSPACE_SOURCE_PORT=5432 \
-    MONOSPACE_SOURCE_USER=postgres \
-    MONOSPACE_SOURCE_DATABASE=benefits \
-    MONOSPACE_DIRECTUS_SOURCE_NAME=dans-auto-directus \
-    MONOSPACE_DIRECTUS_SOURCE_HOST=postgres \
-    MONOSPACE_DIRECTUS_SOURCE_PORT=5432 \
-    MONOSPACE_DIRECTUS_SOURCE_USER=postgres \
-    MONOSPACE_DIRECTUS_SOURCE_DATABASE=directus
 
 USER node
 ENTRYPOINT ["/entrypoint.sh"]

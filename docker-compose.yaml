@@ -149,6 +149,8 @@ services:
       dockerfile: docker/Dockerfile.cli
     image: monospace-cli:local
     restart: "no"
+    env_file:
+      - init.env
     depends_on:
       monospace:
         condition: service_started
