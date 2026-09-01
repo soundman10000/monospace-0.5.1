@@ -30,7 +30,7 @@ monospace-cli source \
   --user "${MONOSPACE_SOURCE_USER}" \
   --db-password "${MONOSPACE_SOURCE_PASSWORD}" \
   --dbname "${MONOSPACE_SOURCE_DATABASE}" \
-  --strategy /cli/strategies/benefits.yml
+  --strategy /strategies/benefits.yml
 
 exec monospace-cli source \
   --workspace "${MONOSPACE_WORKSPACE}" \
@@ -40,4 +40,4 @@ exec monospace-cli source \
   --user "${MONOSPACE_DIRECTUS_SOURCE_USER}" \
   --db-password "${MONOSPACE_SOURCE_PASSWORD}" \
   --dbname "${MONOSPACE_DIRECTUS_SOURCE_DATABASE}" \
-  --strategy /cli/strategies/directus.yml
+  --strategy /strategies/directus.yml
