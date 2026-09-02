@@ -11,7 +11,7 @@ export const queryCatalog = async (connectionString, { benefitCode, planCode, co
         select b.id, b.code, b.name, b.description, b.display_order
         from ${SCHEMA}.benefit b
         join ${SCHEMA}.control_group g on g.id = b.control_group_id
-        where b.code = $1
+        where ($1::text is null or b.code = $1)
           and ($2::text is null or g.code = $2)
         order by b.display_order, b.code
       `,
@@ -20,7 +20,7 @@ export const queryCatalog = async (connectionString, { benefitCode, planCode, co
 
     if (benefits.rows.length === 0) {
       throw new Error(
-        `No benefit ${benefitCode} found in ${SCHEMA} (control group ${controlGroupCode ?? "any"})`
+        `No benefit ${benefitCode ?? "*"} found in ${SCHEMA} (control group ${controlGroupCode ?? "any"})`
       );
     }
 

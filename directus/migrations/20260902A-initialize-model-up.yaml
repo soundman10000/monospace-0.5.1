@@ -2510,13 +2510,103 @@ fields:
             readonly: false
             required: false
             searchable: true
-            sort: 10
+            sort: 12
             special:
               - o2m
             translations: null
             validation: null
             validation_message: null
             width: full
+  - collection: model_benefit
+    field: icon
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: icon
+          type: string
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: icon
+            display_options: null
+            field: icon
+            group: null
+            hidden: false
+            interface: select-icon
+            note: Material icon for this benefit
+            options: null
+            readonly: false
+            required: true
+            searchable: true
+            sort: 11
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: icon
+            table: model_benefit
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_benefit
+    field: color
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_benefit
+          field: color
+          type: string
+          meta:
+            collection: model_benefit
+            conditions: null
+            display: color
+            display_options: null
+            field: color
+            group: null
+            hidden: false
+            interface: select-color
+            note: Color for this benefit
+            options: null
+            readonly: false
+            required: true
+            searchable: true
+            sort: 10
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: color
+            table: model_benefit
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
   - collection: model_plan
     field: id
     diff:
@@ -2960,7 +3050,7 @@ fields:
             readonly: true
             required: false
             searchable: true
-            sort: 10
+            sort: 12
             special:
               - m2o
             translations: null
@@ -3010,13 +3100,103 @@ fields:
             readonly: false
             required: false
             searchable: true
-            sort: 11
+            sort: 13
             special:
               - o2m
             translations: null
             validation: null
             validation_message: null
             width: full
+  - collection: model_plan
+    field: icon
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: icon
+          type: string
+          meta:
+            collection: model_plan
+            conditions: null
+            display: icon
+            display_options: null
+            field: icon
+            group: null
+            hidden: false
+            interface: select-icon
+            note: Material icon for this plan
+            options: null
+            readonly: false
+            required: true
+            searchable: true
+            sort: 10
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: icon
+            table: model_plan
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: model_plan
+    field: color
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: model_plan
+          field: color
+          type: string
+          meta:
+            collection: model_plan
+            conditions: null
+            display: color
+            display_options: null
+            field: color
+            group: null
+            hidden: false
+            interface: select-color
+            note: Color for this plan
+            options: null
+            readonly: false
+            required: true
+            searchable: true
+            sort: 11
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: color
+            table: model_plan
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
   - collection: page_plan_info
     field: id
     diff:

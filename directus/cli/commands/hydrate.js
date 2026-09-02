@@ -20,17 +20,21 @@ const DEFAULT_FORCE = false;
 const DEFAULT_DRY_RUN = false;
 const DEFAULT_SKIP_IMPORT = false;
 const DEFAULT_MERGE = false;
-const DEFAULT_PREFIX_PLAN_CODES = false;
+const DEFAULT_PREFIX_PLAN_CODES = true;
 
 const TARGET_SEPARATOR = "/";
 const SCRIPT_NAME = "hydrate";
-const COMMAND_NAME = "$0 <target>";
+const COMMAND_NAME = "$0 [target]";
 const COMMAND_DESCRIPTION =
-  "Copy a benefit/plan from the benefits catalog into Directus model_benefit / model_plan";
-const TARGET_DESCRIPTION = "Benefit code, or Benefit/Plan (example: MEDICAL/GOLD)";
-const TARGET_ERROR = "target must be BENEFIT or BENEFIT/PLAN";
+  "Copy benefits/plans from the benefits catalog into Directus model_benefit / model_plan";
+const TARGET_DESCRIPTION =
+  "Optional benefit code, or Benefit/Plan (example: MEDICAL/GOLD). Omit to sync all benefits.";
+const TARGET_ERROR = "target must be empty, BENEFIT, or BENEFIT/PLAN";
 
 export const parseTarget = (target) => {
+  if (target == null || String(target).trim() === "") {
+    return { benefitCode: null, planCode: null };
+  }
   const parts = String(target)
     .split(TARGET_SEPARATOR)
     .map((part) => part.trim())
@@ -67,6 +71,7 @@ const builder = (cmd) =>
     .positional("target", {
       type: "string",
       describe: TARGET_DESCRIPTION,
+      default: null,
     })
     .option("control-group", {
       alias: "g",
@@ -103,7 +108,7 @@ const builder = (cmd) =>
     .option("prefix-plan-codes", {
       type: "boolean",
       default: DEFAULT_PREFIX_PLAN_CODES,
-      describe: "Prefix Directus plan codes with the benefit code (avoids global unique clashes)",
+      describe: "Prefix Directus plan codes with the benefit code (default on; avoids global unique clashes)",
     })
     .option("merge", {
       type: "boolean",
@@ -133,12 +138,13 @@ const handler = async (argv) => {
 };
 
 export const registerHydrateCommand = (yargs) =>
-  yargs.scriptName(SCRIPT_NAME).usage("$0 <target>").command(COMMAND_NAME, COMMAND_DESCRIPTION, builder, handler);
+  yargs.scriptName(SCRIPT_NAME).usage("$0 [target]").command(COMMAND_NAME, COMMAND_DESCRIPTION, builder, handler);
 
 const printResult = (result, input) => {
   console.log(`benefits        ${input.benefitsDatabaseUrl}`);
   console.log(`directus        ${input.directusUrl}`);
   console.log(`package         ${result.packagePath}`);
+  console.log(`scope           ${input.benefitCode ?? "*"}${input.planCode ? `/${input.planCode}` : ""}`);
   console.log(`model_benefit   ${result.benefits.length}`);
   console.log(`model_plan      ${result.plans.length}`);
   result.benefits.forEach((item) => {
