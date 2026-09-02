@@ -26,11 +26,11 @@ const afterLogin = () => {
     typeof redirect === 'string' &&
     redirect.startsWith('/') &&
     !redirect.startsWith('//') &&
-    redirect !== '/workspaces'
+    redirect !== '/clients'
   ) {
-    return { path: '/workspaces', query: { redirect } }
+    return { path: '/clients', query: { redirect } }
   }
-  return '/workspaces'
+  return '/clients'
 }
 
 const clearError = () => {

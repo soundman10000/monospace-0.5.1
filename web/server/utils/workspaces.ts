@@ -91,3 +91,9 @@ export const setSessionWorkspace = async (event: H3Event, card: WorkspaceCard) =
   await session.update({ workspace })
   event.context.workspace = workspace
 }
+
+export const clearSessionWorkspace = async (event: H3Event) => {
+  const session = await getAuthSession(event)
+  await session.update({ workspace: null })
+  event.context.workspace = null
+}

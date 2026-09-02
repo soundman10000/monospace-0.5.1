@@ -19,9 +19,9 @@ export default defineNuxtRouteMiddleware((to) => {
 
   if (auth.value.loggedIn && isPublic) {
     const redirect = safePath(to.query.redirect) ?? '/'
-    if (!auth.value.workspace && redirect !== '/workspaces') {
+    if (!auth.value.workspace && redirect !== '/clients') {
       return navigateTo({
-        path: '/workspaces',
+        path: '/clients',
         query: redirect === '/' ? undefined : { redirect },
       })
     }
@@ -30,8 +30,8 @@ export default defineNuxtRouteMiddleware((to) => {
 
   if (auth.value.loggedIn && needsWorkspace && !auth.value.workspace) {
     return navigateTo({
-      path: '/workspaces',
-      query: to.path === '/workspaces' ? undefined : { redirect: to.fullPath },
+      path: '/clients',
+      query: to.path === '/clients' ? undefined : { redirect: to.fullPath },
     })
   }
 })

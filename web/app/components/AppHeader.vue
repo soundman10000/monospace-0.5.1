@@ -4,6 +4,7 @@ const INSIGHT_NAME = 'Lumina Insights'
 
 const auth = useAuth()
 const { logout, pending } = useLogout()
+const changingClient = ref(false)
 
 const workspace = computed(() => auth.value.workspace)
 const user = computed(() => auth.value.user)
@@ -35,12 +36,27 @@ const initials = computed(() => {
     .map((part) => part[0]?.toUpperCase() ?? '')
     .join('')
 })
+
+const changeClient = async () => {
+  if (changingClient.value || !workspace.value) return
+  changingClient.value = true
+  try {
+    await apiFetch('/api/workspaces/clear', { method: 'POST' })
+    auth.value = {
+      ...auth.value,
+      workspace: null,
+    }
+    await navigateTo('/clients')
+  } finally {
+    changingClient.value = false
+  }
+}
 </script>
 
 <template>
   <header class="app-header">
     <NuxtLink
-      :to="workspace ? '/' : '/workspaces'"
+      :to="workspace ? '/' : '/clients'"
       class="app-header__brand"
     >
       <img
@@ -94,14 +110,16 @@ const initials = computed(() => {
               {{ user.email }}
             </p>
           </div>
-          <NuxtLink
+          <button
             v-if="workspace"
-            to="/workspaces"
+            type="button"
             class="app-header__menu-item"
             role="menuitem"
+            :disabled="changingClient"
+            @click="changeClient"
           >
-            Change workspace
-          </NuxtLink>
+            {{ changingClient ? 'Changing…' : 'Change client' }}
+          </button>
           <button
             type="button"
             class="app-header__menu-item"
@@ -121,7 +139,7 @@ const initials = computed(() => {
 @reference "../assets/css/main.css";
 
 .app-header {
-  @apply flex items-center justify-between gap-6 px-6 py-4 sm:px-8;
+  @apply flex shrink-0 items-center justify-between gap-6 border-b border-border-subtle bg-surface px-6 py-4 sm:px-8;
 }
 
 .app-header__brand {

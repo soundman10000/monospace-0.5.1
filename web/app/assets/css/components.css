@@ -1,6 +1,6 @@
 @layer components {
   .page {
-    @apply flex min-h-dvh flex-col bg-page;
+    @apply flex h-dvh min-h-dvh flex-col overflow-hidden bg-page;
   }
 
   .page-center {
