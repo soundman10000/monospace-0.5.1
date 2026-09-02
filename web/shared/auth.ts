@@ -2,6 +2,7 @@ export type AuthUser = {
   id: string
   email: string
   fullName: string | null
+  avatarUrl: string | null
 }
 
 export type AuthWorkspace = {
@@ -9,6 +10,7 @@ export type AuthWorkspace = {
   apiName: string
   displayName: string
   primaryColor: string
+  logoUrl: string | null
 }
 
 export type WorkspaceCard = AuthWorkspace & {

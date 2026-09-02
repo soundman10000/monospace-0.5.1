@@ -11,7 +11,6 @@ useHead({
 
 const auth = useAuth()
 const route = useRoute()
-const { logout, pending: signingOut } = useLogout()
 const selectingId = ref<string | null>(null)
 const selectError = ref('')
 
@@ -58,78 +57,62 @@ const choose = async (workspace: WorkspaceCard) => {
 </script>
 
 <template>
-  <div class="page">
-    <header class="page-header">
-      <p class="copy-muted">
-        {{ auth.user?.email }}
-      </p>
-      <button
-        type="button"
-        class="btn-quiet"
-        :disabled="signingOut"
-        @click="logout"
-      >
-        {{ signingOut ? 'Signing out…' : 'Sign out' }}
-      </button>
-    </header>
+  <main class="page-narrow">
+    <p class="eyebrow">
+      Workspaces
+    </p>
+    <h1 class="title title-page">
+      Choose a workspace
+    </h1>
 
-    <main class="page-narrow">
-      <p class="eyebrow">
-        Workspaces
-      </p>
-      <h1 class="title title-page">
-        Choose a workspace
-      </h1>
+    <p v-if="pending" class="workspace-status copy-muted">
+      Loading workspaces…
+    </p>
+    <p v-else-if="error" class="workspace-status status-error">
+      Could not load workspaces
+    </p>
+    <p v-else-if="!workspaces?.length" class="workspace-status copy-muted">
+      No workspaces are available for this account.
+    </p>
 
-      <p v-if="pending" class="workspace-status copy-muted">
-        Loading workspaces…
-      </p>
-      <p v-else-if="error" class="workspace-status status-error">
-        Could not load workspaces
-      </p>
-      <p v-else-if="!workspaces?.length" class="workspace-status copy-muted">
-        No workspaces are available for this account.
-      </p>
-
-      <ul v-else class="workspace-list">
-        <li v-for="workspace in workspaces" :key="workspace.id">
-          <button
-            type="button"
-            class="workspace-card"
-            :style="{ '--workspace-accent': workspace.primaryColor }"
-            :disabled="Boolean(selectingId)"
-            @click="choose(workspace)"
+    <ul v-else class="workspace-list">
+      <li v-for="workspace in workspaces" :key="workspace.id">
+        <button
+          type="button"
+          class="workspace-card"
+          :style="{ '--workspace-accent': workspace.primaryColor }"
+          :disabled="Boolean(selectingId)"
+          @click="choose(workspace)"
+        >
+          <img
+            v-if="workspace.logoUrl"
+            :src="workspace.logoUrl"
+            :alt="workspace.displayName"
+            class="workspace-card__icon"
           >
-            <img
-              v-if="workspace.logoUrl"
-              :src="workspace.logoUrl"
-              :alt="workspace.displayName"
-              class="workspace-card__icon"
-            >
+          <span
+            v-else
+            class="workspace-card__icon workspace-card__icon--fallback"
+          >
+            {{ initials(workspace.displayName) }}
+          </span>
+          <span class="workspace-card__body">
+            <span class="workspace-card__name">
+              {{ workspace.displayName }}
+            </span>
             <span
-              v-else
-              class="workspace-card__icon workspace-card__icon--fallback"
+              v-if="workspace.description"
+              class="workspace-card__description"
             >
-              {{ initials(workspace.displayName) }}
+              {{ workspace.description }}
             </span>
-            <span class="workspace-card__body">
-              <span class="workspace-card__name">
-                {{ workspace.displayName }}
-              </span>
-              <span
-                v-if="workspace.description"
-                class="workspace-card__description"
-              >
-                {{ workspace.description }}
-              </span>
-            </span>
-          </button>
-        </li>
-      </ul>
+          </span>
+        </button>
+      </li>
+    </ul>
 
-      <p v-if="selectError" class="workspace-status--error status-error">
-        {{ selectError }}
-      </p>
-    </main>
-  </div>
+    <p v-if="selectError" class="workspace-status--error status-error">
+      {{ selectError }}
+    </p>
+  </main>
 </template>

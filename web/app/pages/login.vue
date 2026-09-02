@@ -3,6 +3,7 @@ import type { AuthUser } from '#shared/auth'
 
 definePageMeta({
   auth: false,
+  layout: false,
 })
 
 useHead({

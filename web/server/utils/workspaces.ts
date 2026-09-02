@@ -106,6 +106,7 @@ export const toAuthWorkspace = (card: WorkspaceCard): AuthWorkspace => ({
   apiName: card.apiName,
   displayName: card.displayName,
   primaryColor: card.primaryColor,
+  logoUrl: card.logoUrl,
 })
 
 export const setSessionWorkspace = async (event: H3Event, card: WorkspaceCard) => {

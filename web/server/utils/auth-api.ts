@@ -1,4 +1,5 @@
 import type { AuthUser } from '#shared/auth'
+import { isUuid } from './id'
 
 export type LoginTokens = {
   accessToken: string
@@ -49,10 +50,10 @@ export const refreshTokens = async (refreshToken: string): Promise<LoginTokens> 
 
 export const readCurrentUser = async (accessToken: string): Promise<AuthUser> => {
   const body = await $fetch<unknown>(apiUrl('/api/system/users/me'), {
-    query: { fields: 'id,email,fullName' },
+    query: { fields: 'id,email,fullName,avatarId' },
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-  const user = unwrap<AuthUser>(body)
+  const user = unwrap<AuthUser & { avatarId?: string | null }>(body)
   if (!user?.id || !user.email) {
     throw new Error('Could not read the current user')
   }
@@ -60,5 +61,6 @@ export const readCurrentUser = async (accessToken: string): Promise<AuthUser> =>
     id: user.id,
     email: user.email,
     fullName: user.fullName ?? null,
+    avatarUrl: user.avatarId && isUuid(user.avatarId) ? `/api/assets/${user.avatarId}` : null,
   }
 }
