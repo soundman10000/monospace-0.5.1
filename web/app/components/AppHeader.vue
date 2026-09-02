@@ -179,12 +179,38 @@ const changeClient = async () => {
 }
 
 .app-header__menu {
-  @apply invisible absolute top-full right-0 z-30 min-w-52 pt-2 opacity-0 motion-safe:transition-opacity motion-safe:duration-200;
+  @apply invisible pointer-events-none absolute top-full right-0 z-30 min-w-52 pt-2 opacity-0;
+  transform: translateY(0.35rem);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease,
+    visibility 0s linear,
+    pointer-events 0s linear;
+  transition-delay: 0.65s, 0.65s, 0.93s, 0.93s;
 }
 
 .app-header__user:hover .app-header__menu,
 .app-header__user:focus-within .app-header__menu {
-  @apply visible opacity-100;
+  @apply visible pointer-events-auto opacity-100;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-header__menu {
+    transform: none;
+    transition:
+      opacity 0.2s ease,
+      visibility 0s linear,
+      pointer-events 0s linear;
+    transition-delay: 0.65s, 0.85s, 0.85s;
+  }
+
+  .app-header__user:hover .app-header__menu,
+  .app-header__user:focus-within .app-header__menu {
+    transform: none;
+    transition-delay: 0s;
+  }
 }
 
 .app-header__menu-panel {

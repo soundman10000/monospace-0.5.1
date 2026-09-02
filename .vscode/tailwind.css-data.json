@@ -1,0 +1,29 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@apply",
+      "description": "Inline Tailwind utilities into a custom CSS class."
+    },
+    {
+      "name": "@reference",
+      "description": "Load Tailwind theme tokens so @apply works in Vue/SFC styles."
+    },
+    {
+      "name": "@theme",
+      "description": "Define Tailwind v4 design tokens."
+    },
+    {
+      "name": "@utility",
+      "description": "Register a custom Tailwind utility."
+    },
+    {
+      "name": "@source",
+      "description": "Tell Tailwind which files to scan for classes."
+    },
+    {
+      "name": "@plugin",
+      "description": "Load a Tailwind plugin from CSS."
+    }
+  ]
+}

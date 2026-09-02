@@ -18,7 +18,9 @@ const email = ref('')
 const password = ref('')
 const errorMessage = ref('')
 const pending = ref(false)
+const opening = ref(false)
 const hasError = computed(() => Boolean(errorMessage.value))
+const OPEN_MS = 500
 
 const afterLogin = () => {
   const redirect = route.query.redirect
@@ -37,6 +39,17 @@ const clearError = () => {
   errorMessage.value = ''
 }
 
+const prefersReducedMotion = () =>
+  import.meta.client && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const openDoor = async () => {
+  if (prefersReducedMotion()) return
+  opening.value = true
+  await new Promise<void>((resolve) => {
+    window.setTimeout(resolve, OPEN_MS)
+  })
+}
+
 const onSubmit = async () => {
   errorMessage.value = ''
   pending.value = true
@@ -53,9 +66,11 @@ const onSubmit = async () => {
       user: result.user,
       workspace: null,
     }
+    await openDoor()
     await navigateTo(afterLogin())
   } catch {
     errorMessage.value = CREDENTIALS_ERROR
+    opening.value = false
   } finally {
     pending.value = false
   }
@@ -63,7 +78,7 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div class="login">
+  <div class="login" :class="{ 'is-opening': opening }">
     <main class="login-panel">
       <div>
         <img
@@ -129,9 +144,9 @@ const onSubmit = async () => {
             <button
               type="submit"
               class="btn-login"
-              :disabled="pending"
+              :disabled="pending || opening"
             >
-              {{ pending ? 'Logging in…' : 'Login' }}
+              {{ opening ? 'Welcome' : pending ? 'Logging in…' : 'Login' }}
             </button>
           </div>
         </form>
@@ -157,3 +172,44 @@ const onSubmit = async () => {
     </aside>
   </div>
 </template>
+
+<style scoped>
+@reference "../assets/css/main.css";
+
+.login {
+  @apply relative overflow-hidden;
+}
+
+.login-panel {
+  position: relative;
+  z-index: 2;
+  transition:
+    width 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+    max-width 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+    flex-basis 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (min-width: 1024px) {
+  .login.is-opening .login-banner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 50%;
+    min-height: auto;
+  }
+
+  .login.is-opening .login-panel {
+    width: 100%;
+    max-width: 100%;
+    flex: 1 0 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-panel {
+    transition: none;
+  }
+}
+</style>
