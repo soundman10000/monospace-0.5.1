@@ -7,12 +7,22 @@ useHead({
   title: 'Log in',
 })
 
+const CREDENTIALS_ERROR = 'User/pw not correct'
+
 const route = useRoute()
 const auth = useAuth()
 const email = ref('')
 const password = ref('')
 const errorMessage = ref('')
 const pending = ref(false)
+const hasError = computed(() => Boolean(errorMessage.value))
+
+const fieldClass = computed(() => [
+  'mt-2 block w-full rounded-lg border bg-white px-3 py-2.5 text-neutral-800 outline-none transition-colors',
+  hasError.value
+    ? 'border-login-error focus:border-login-error'
+    : 'border-login-border focus:border-login-focus',
+])
 
 const redirectTo = () => {
   const redirect = route.query.redirect
@@ -20,6 +30,10 @@ const redirectTo = () => {
     return redirect
   }
   return '/'
+}
+
+const clearError = () => {
+  errorMessage.value = ''
 }
 
 const onSubmit = async () => {
@@ -38,12 +52,8 @@ const onSubmit = async () => {
       user: result.user,
     }
     await navigateTo(redirectTo())
-  } catch (error) {
-    const message =
-      error && typeof error === 'object' && 'data' in error
-        ? (error.data as { statusMessage?: string })?.statusMessage
-        : null
-    errorMessage.value = message || 'Invalid email or password'
+  } catch {
+    errorMessage.value = CREDENTIALS_ERROR
   } finally {
     pending.value = false
   }
@@ -67,6 +77,15 @@ const onSubmit = async () => {
         </h1>
 
         <form class="mt-8 space-y-6" @submit.prevent="onSubmit">
+          <p
+            v-if="hasError"
+            id="login-error"
+            role="alert"
+            class="text-sm font-medium text-login-error"
+          >
+            {{ errorMessage }}
+          </p>
+
           <div>
             <label for="email" class="block text-sm font-medium text-neutral-700">
               Username
@@ -78,7 +97,10 @@ const onSubmit = async () => {
               name="email"
               autocomplete="username"
               required
-              class="mt-2 block w-full rounded-lg border border-login-border bg-white px-3 py-2.5 text-neutral-800 outline-none transition-colors focus:border-login-focus"
+              :aria-invalid="hasError"
+              :aria-describedby="hasError ? 'login-error' : undefined"
+              :class="fieldClass"
+              @input="clearError"
             >
           </div>
           <div>
@@ -92,13 +114,12 @@ const onSubmit = async () => {
               name="password"
               autocomplete="current-password"
               required
-              class="mt-2 block w-full rounded-lg border border-login-border bg-white px-3 py-2.5 text-neutral-800 outline-none transition-colors focus:border-login-focus"
+              :aria-invalid="hasError"
+              :aria-describedby="hasError ? 'login-error' : undefined"
+              :class="fieldClass"
+              @input="clearError"
             >
           </div>
-
-          <p v-if="errorMessage" class="text-sm font-medium text-red-600">
-            {{ errorMessage }}
-          </p>
 
           <div class="pt-2 sm:flex sm:justify-end">
             <button

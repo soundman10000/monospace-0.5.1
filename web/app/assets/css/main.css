@@ -10,4 +10,5 @@
   --color-login-focus: oklch(0.4929 0.118 242.49);
   --color-login-accent: oklch(0.547 0.132 243.08);
   --color-login-muted: oklch(0.5621 0.014 17.57);
+  --color-login-error: oklch(0.577 0.245 27.325);
 }
