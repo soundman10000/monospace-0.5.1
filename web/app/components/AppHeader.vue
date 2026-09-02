@@ -37,6 +37,35 @@ const initials = computed(() => {
     .join('')
 })
 
+const menuOpen = ref(false)
+let closeTimer: ReturnType<typeof setTimeout> | null = null
+
+const openMenu = () => {
+  if (closeTimer) {
+    clearTimeout(closeTimer)
+    closeTimer = null
+  }
+  menuOpen.value = true
+}
+
+const scheduleCloseMenu = () => {
+  if (closeTimer) clearTimeout(closeTimer)
+  closeTimer = setTimeout(() => {
+    menuOpen.value = false
+    closeTimer = null
+  }, 500)
+}
+
+const onFocusOut = (event: FocusEvent) => {
+  const next = event.relatedTarget
+  if (next instanceof Node && (event.currentTarget as Node).contains(next)) return
+  scheduleCloseMenu()
+}
+
+onBeforeUnmount(() => {
+  if (closeTimer) clearTimeout(closeTimer)
+})
+
 const changeClient = async () => {
   if (changingClient.value || !workspace.value) return
   changingClient.value = true
@@ -82,21 +111,35 @@ const changeClient = async () => {
       />
     </NuxtLink>
 
-    <div class="app-header__user">
+    <div
+      class="app-header__user"
+      :class="{ 'is-open': menuOpen }"
+      @mouseenter="openMenu"
+      @mouseleave="scheduleCloseMenu"
+      @focusin="openMenu"
+      @focusout="onFocusOut"
+    >
       <button
         type="button"
-        class="app-header__avatar"
+        class="app-header__account"
         aria-haspopup="menu"
+        :aria-expanded="menuOpen"
         aria-label="Account menu"
+        @click="openMenu"
       >
-        <img
-          v-if="user?.avatarUrl"
-          :src="user.avatarUrl"
-          :alt="displayName"
-          class="app-header__avatar-image"
-        >
-        <span v-else class="app-header__avatar-fallback">
-          {{ initials }}
+        <span class="app-header__user-name">
+          {{ displayName }}
+        </span>
+        <span class="app-header__avatar">
+          <img
+            v-if="user?.avatarUrl"
+            :src="user.avatarUrl"
+            alt=""
+            class="app-header__avatar-image"
+          >
+          <span v-else class="app-header__avatar-fallback">
+            {{ initials }}
+          </span>
         </span>
       </button>
 
@@ -166,8 +209,26 @@ const changeClient = async () => {
   @apply relative shrink-0;
 }
 
+.app-header__user.is-open::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 13rem;
+  height: calc(100% + 0.75rem);
+}
+
+.app-header__account {
+  @apply relative z-10 flex cursor-pointer items-center gap-2.5 bg-transparent p-0;
+}
+
+.app-header__user-name {
+  @apply font-heading max-w-44 truncate text-sm font-medium tracking-tight text-heading;
+}
+
 .app-header__avatar {
-  @apply flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-pill border border-border-subtle bg-page;
+  @apply flex h-10 w-10 items-center justify-center overflow-hidden rounded-pill border border-border-subtle bg-page;
 }
 
 .app-header__avatar-image {
@@ -179,18 +240,15 @@ const changeClient = async () => {
 }
 
 .app-header__menu {
-  @apply invisible pointer-events-none absolute top-full right-0 z-30 min-w-52 pt-2 opacity-0;
+  @apply invisible pointer-events-none absolute top-full right-0 z-20 min-w-52 pt-3 opacity-0;
   transform: translateY(0.35rem);
   transition:
     opacity 0.28s ease,
     transform 0.28s ease,
-    visibility 0s linear,
-    pointer-events 0s linear;
-  transition-delay: 0.65s, 0.65s, 0.93s, 0.93s;
+    visibility 0s linear 0.28s;
 }
 
-.app-header__user:hover .app-header__menu,
-.app-header__user:focus-within .app-header__menu {
+.app-header__user.is-open .app-header__menu {
   @apply visible pointer-events-auto opacity-100;
   transform: translateY(0);
   transition-delay: 0s;
@@ -199,17 +257,11 @@ const changeClient = async () => {
 @media (prefers-reduced-motion: reduce) {
   .app-header__menu {
     transform: none;
-    transition:
-      opacity 0.2s ease,
-      visibility 0s linear,
-      pointer-events 0s linear;
-    transition-delay: 0.65s, 0.85s, 0.85s;
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
   }
 
-  .app-header__user:hover .app-header__menu,
-  .app-header__user:focus-within .app-header__menu {
+  .app-header__user.is-open .app-header__menu {
     transform: none;
-    transition-delay: 0s;
   }
 }
 
