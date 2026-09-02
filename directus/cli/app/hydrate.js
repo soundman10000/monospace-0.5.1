@@ -5,6 +5,7 @@ import { writeCollectionFile } from "../lib/write-package.js";
 import { runDpc } from "../lib/dpc.js";
 import { collectionName as benefitCollection, toModelBenefit } from "../factories/model-benefit.js";
 import { collectionName as planCollection, toModelPlan } from "../factories/model-plan.js";
+import { buildCoveragePages } from "../factories/coverage-pages.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
@@ -23,6 +24,7 @@ export const hydrate = async (input) => {
       benefitCode: benefitById.get(row.benefit_id)?.code ?? input.benefitCode,
     })
   );
+  const coverage = buildCoveragePages(plans);
 
   const packagePath = path.resolve(ROOT, input.packagePath);
   const result = {
@@ -31,6 +33,7 @@ export const hydrate = async (input) => {
     packagePath,
     benefits,
     plans,
+    coverage,
     wrote: false,
     imported: false,
   };
@@ -41,6 +44,11 @@ export const hydrate = async (input) => {
 
   await writeCollectionFile(packagePath, benefitCollection, benefits);
   await writeCollectionFile(packagePath, planCollection, plans);
+  await writeCollectionFile(packagePath, "block_title", coverage.titles);
+  await writeCollectionFile(packagePath, "block_markdown", coverage.markdowns);
+  await writeCollectionFile(packagePath, "layout_grid_container", coverage.layouts);
+  await writeCollectionFile(packagePath, "layout_grid_container_blocks", coverage.layoutBlocks);
+  await writeCollectionFile(packagePath, "page_plan_info", coverage.pages);
   result.wrote = true;
 
   if (input.skipImport) {

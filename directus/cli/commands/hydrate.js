@@ -147,6 +147,10 @@ const printResult = (result, input) => {
   console.log(`scope           ${input.benefitCode ?? "*"}${input.planCode ? `/${input.planCode}` : ""}`);
   console.log(`model_benefit   ${result.benefits.length}`);
   console.log(`model_plan      ${result.plans.length}`);
+  console.log(`page_plan_info  ${result.coverage?.pages.length ?? 0}`);
+  console.log(`block_title     ${result.coverage?.titles.length ?? 0}`);
+  console.log(`block_markdown  ${result.coverage?.markdowns.length ?? 0}`);
+  console.log(`layouts         ${result.coverage?.layouts.length ?? 0}`);
   result.benefits.forEach((item) => {
     console.log(`  benefit ${item.code}  ${item.id}`);
   });
@@ -157,7 +161,9 @@ const printResult = (result, input) => {
     console.log("dry-run         no files written");
     return;
   }
-  console.log(`wrote           model_benefit.json, model_plan.json`);
+  console.log(
+    "wrote           model_benefit, model_plan, page_plan_info, blocks, layouts"
+  );
   if (result.imported) {
     console.log(`dpc             ${input.merge ? "merge" : "import"}`);
   } else {

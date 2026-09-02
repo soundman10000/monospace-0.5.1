@@ -138,7 +138,7 @@ const choose = async (workspace: WorkspaceCard) => {
 }
 
 .client-select__title {
-  @apply font-heading absolute inset-x-0 top-0 z-10 px-5 py-6 text-2xl font-extrabold leading-tight text-white;
+  @apply font-heading absolute inset-x-0 top-0 z-10 pt-10 pr-5 pb-8 pl-8 text-4xl font-extrabold leading-tight text-white;
   background: linear-gradient(to bottom, rgb(0 0 0 / 0.5), transparent);
 }
 
