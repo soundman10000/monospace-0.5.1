@@ -55,8 +55,8 @@ const onSubmit = async () => {
     <main class="flex min-h-dvh flex-1 flex-col justify-between bg-white px-8 py-10 sm:px-12 lg:max-w-[50%] lg:px-24">
       <div>
         <img
-          src="/dans.png"
-          alt="Dan's Auto Repair"
+          src="/lumina.png"
+          alt="Lumnia"
           class="h-28 w-28 rounded-full object-cover"
         >
       </div>
