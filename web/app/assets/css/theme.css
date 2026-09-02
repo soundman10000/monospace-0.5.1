@@ -1,0 +1,33 @@
+@theme {
+  --font-sans: "Fira Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+
+  --color-page: oklch(0.985 0 0);
+  --color-surface: oklch(1 0 0);
+  --color-heading: oklch(0.3753 0 0);
+  --color-body: oklch(0.371 0 0);
+  --color-ink: oklch(0.269 0 0);
+  --color-muted: oklch(0.5621 0.014 17.57);
+  --color-label: oklch(0.371 0 0);
+  --color-border: oklch(0.5452 0 0);
+  --color-border-subtle: oklch(0.922 0 0);
+  --color-border-hover: oklch(0.869 0 0);
+  --color-focus: oklch(0.4929 0.118 242.49);
+  --color-accent: oklch(0.547 0.132 243.08);
+  --color-button: oklch(0.4386 0 0);
+  --color-button-hover: oklch(0.2972 0 0);
+  --color-danger: oklch(0.577 0.245 27.325);
+
+  --radius-control: 0.5rem;
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+
+  --shadow-card-hover: 0 12px 28px -18px rgb(15 23 42 / 0.28);
+
+  --text-welcome: clamp(2.25rem, 2.5vw, 3.5rem);
+  --text-welcome--line-height: 1.15;
+  --text-display: clamp(2rem, 4vw, 2.75rem);
+  --text-display--line-height: 1.15;
+
+  --border-width-banner: clamp(4px, 1.2vw, 20px);
+}

@@ -1,12 +1,12 @@
 import type { H3Event } from 'h3'
 import { createClient } from '~/generated/monospace'
-import { requireAccessToken } from './session'
+import { getAuthSession, requireAccessToken } from './session'
 
-export const createMonospaceClient = (accessToken: string) => {
+export const createMonospaceClient = (accessToken: string, project: string) => {
   const config = useRuntimeConfig()
   return createClient({
     url: config.monospaceUrl,
-    project: config.public.monospaceProject,
+    project,
     apiKey: accessToken,
   })
 }
@@ -16,5 +16,12 @@ export const getMonospace = async (event: H3Event) => {
   if (!accessToken) {
     throw createError({ statusCode: 401, statusMessage: 'Not authenticated' })
   }
-  return createMonospaceClient(accessToken)
+
+  const session = await getAuthSession(event)
+  const project = session.data.workspace?.apiName
+  if (!project) {
+    throw createError({ statusCode: 409, statusMessage: 'No workspace selected' })
+  }
+
+  return createMonospaceClient(accessToken, project)
 }

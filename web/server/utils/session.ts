@@ -1,6 +1,6 @@
 import { useSession } from 'h3'
 import type { H3Event } from 'h3'
-import type { AuthUser } from '../../app/composables/useAuth'
+import type { AuthUser, AuthWorkspace } from '../../app/composables/useAuth'
 import { refreshTokens, type LoginTokens } from './auth-api'
 
 export type AuthSession = {
@@ -8,6 +8,7 @@ export type AuthSession = {
   refreshToken?: string
   expiresAt?: number
   user?: AuthUser
+  workspace?: AuthWorkspace
 }
 
 const sessionOptions = (event: H3Event) => ({
@@ -35,6 +36,7 @@ export const setAuthSession = async (
     refreshToken: tokens.refreshToken,
     expiresAt: Date.now() + tokens.expires * 1000,
     user,
+    workspace: session.data.workspace,
   })
 }
 

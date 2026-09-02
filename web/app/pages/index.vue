@@ -1,43 +1,38 @@
 <script setup lang="ts">
 const auth = useAuth()
-const pending = ref(false)
+const { logout, pending } = useLogout()
 
 const displayName = computed(
   () => auth.value.user?.fullName || auth.value.user?.email || 'there',
 )
-
-const logout = async () => {
-  pending.value = true
-  try {
-    await $fetch('/api/auth/logout', { method: 'POST' })
-    auth.value = { loggedIn: false, user: null }
-    await navigateTo('/login')
-  } finally {
-    pending.value = false
-  }
-}
 </script>
 
 <template>
-  <main class="flex min-h-screen items-center justify-center bg-slate-50 px-6">
-    <div class="w-full max-w-lg text-center">
-      <p class="text-sm font-medium uppercase tracking-widest text-slate-500">
-        Signed in
+  <main class="page page-center">
+    <div class="home">
+      <p class="eyebrow">
+        {{ auth.workspace?.displayName || 'Signed in' }}
       </p>
-      <h1 class="mt-3 text-4xl font-bold tracking-tight text-slate-900">
+      <h1 class="title title-home">
         Hello, {{ displayName }}
       </h1>
-      <p class="mt-3 text-lg text-slate-600">
+      <p class="lede">
         Your Monospace session is ready to make requests.
       </p>
-      <button
-        type="button"
-        :disabled="pending"
-        class="mt-8 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
-        @click="logout"
-      >
-        {{ pending ? 'Signing out…' : 'Sign out' }}
-      </button>
+      <div class="home-actions">
+        <NuxtLink to="/workspaces" class="btn-secondary">
+          Switch workspace
+        </NuxtLink>
+        <button
+          type="button"
+          class="btn-primary"
+          :disabled="pending"
+          @click="logout"
+        >
+          {{ pending ? 'Signing out…' : 'Sign out' }}
+        </button>
+      </div>
     </div>
   </main>
 </template>
+

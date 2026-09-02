@@ -1,0 +1,176 @@
+@layer components {
+  .page {
+    @apply min-h-dvh bg-page;
+  }
+
+  .page-center {
+    @apply flex items-center justify-center px-6;
+  }
+
+  .page-header {
+    @apply flex items-center justify-end gap-6 px-8 py-6;
+  }
+
+  .page-narrow {
+    @apply mx-auto w-full max-w-xl px-6 pt-4 pb-24;
+  }
+
+  .eyebrow {
+    @apply text-sm font-medium text-muted;
+  }
+
+  .title {
+    @apply font-heading font-extrabold text-heading;
+  }
+
+  .title-welcome {
+    @apply text-welcome capitalize;
+  }
+
+  .title-page {
+    @apply mt-2 text-display;
+  }
+
+  .title-home {
+    @apply mt-3 text-4xl tracking-tight;
+  }
+
+  .lede {
+    @apply mt-3 text-lg text-muted;
+  }
+
+  .copy-muted {
+    @apply text-sm text-muted;
+  }
+
+  .status-error {
+    @apply text-sm font-medium text-danger;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-login {
+    @apply inline-flex cursor-pointer items-center justify-center transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    @apply rounded-control px-4 py-2.5 text-sm;
+  }
+
+  .btn-primary {
+    @apply bg-button font-semibold text-white hover:bg-button-hover;
+  }
+
+  .btn-secondary {
+    @apply border border-border-subtle bg-surface font-medium text-heading hover:border-border-hover;
+  }
+
+  .btn-login {
+    @apply font-heading w-full rounded-pill bg-button px-10 py-3 text-base font-semibold capitalize text-white hover:bg-button-hover sm:w-auto;
+  }
+
+  .btn-quiet {
+    @apply cursor-pointer bg-transparent p-0 text-sm text-muted underline decoration-1 underline-offset-2 hover:text-heading disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .field-label {
+    @apply block text-sm font-medium text-label;
+  }
+
+  .field-input {
+    @apply mt-2 block w-full rounded-control border border-border bg-surface px-3 py-2.5 text-ink outline-none transition-colors focus:border-focus;
+  }
+
+  .field-input.is-error {
+    @apply border-danger focus:border-danger;
+  }
+
+  .login {
+    @apply flex min-h-dvh flex-col bg-page lg:flex-row;
+  }
+
+  .login-panel {
+    @apply flex min-h-dvh flex-1 flex-col justify-between bg-surface px-8 py-10 sm:px-12 lg:max-w-[50%] lg:px-24;
+  }
+
+  .login-brand {
+    @apply h-28 w-28 rounded-pill object-cover;
+  }
+
+  .login-body {
+    @apply mx-auto w-full max-w-md flex-1 py-10 lg:mx-0 lg:flex lg:flex-col lg:justify-center;
+  }
+
+  .login-form {
+    @apply mt-8 flex flex-col gap-6;
+  }
+
+  .login-actions {
+    @apply pt-2 sm:flex sm:justify-end;
+  }
+
+  .login-legal {
+    @apply max-w-md text-xs leading-relaxed text-muted;
+  }
+
+  .login-legal a {
+    @apply underline decoration-1 underline-offset-2;
+  }
+
+  .login-banner {
+    @apply relative min-h-[40vh] flex-1 border-r-banner border-accent bg-[url('/login.jpg')] bg-cover bg-center lg:sticky lg:top-0 lg:min-h-dvh;
+  }
+
+  .login-mark {
+    @apply absolute right-8 bottom-8 w-[180px] sm:w-[250px];
+  }
+
+  .workspace-list {
+    @apply mt-10 flex list-none flex-col gap-3 p-0;
+  }
+
+  .workspace-card {
+    @apply flex w-full cursor-pointer items-center gap-5 rounded-card border border-border-subtle border-r-[5px] border-r-[color:var(--workspace-accent,var(--color-accent))] bg-surface py-5 pr-6 pl-5 text-left transition-colors hover:border-t-border-hover hover:border-b-border-hover hover:border-l-border-hover hover:bg-page hover:shadow-card-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:cursor-wait disabled:opacity-70 motion-safe:transition-[transform,box-shadow,background-color,border-color] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0;
+  }
+
+  .workspace-card__icon {
+    @apply h-14 w-14 shrink-0 rounded-pill object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out;
+  }
+
+  .workspace-card:hover .workspace-card__icon {
+    @apply motion-safe:scale-[1.04];
+  }
+
+  .workspace-card__icon--fallback {
+    @apply font-heading flex items-center justify-center bg-[var(--workspace-accent,var(--color-accent))] text-sm font-semibold text-white;
+  }
+
+  .workspace-card__body {
+    @apply min-w-0 flex-1;
+  }
+
+  .workspace-card__name {
+    @apply font-heading block text-lg font-semibold text-heading;
+  }
+
+  .workspace-card__description {
+    @apply mt-1 line-clamp-2 block text-sm leading-relaxed text-muted;
+  }
+
+  .workspace-status {
+    @apply mt-10;
+  }
+
+  .workspace-status--error {
+    @apply mt-6;
+  }
+
+  .home {
+    @apply w-full max-w-lg text-center;
+  }
+
+  .home-actions {
+    @apply mt-8 flex items-center justify-center gap-4;
+  }
+}

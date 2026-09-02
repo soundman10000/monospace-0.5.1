@@ -3,6 +3,6 @@ export default defineNuxtPlugin(async () => {
   try {
     useAuth().value = await requestFetch('/api/auth/session')
   } catch {
-    useAuth().value = { loggedIn: false, user: null }
+    useAuth().value = emptyAuth()
   }
 })

@@ -1,0 +1,5 @@
+@layer base {
+  html {
+    @apply bg-page font-sans text-body antialiased;
+  }
+}
