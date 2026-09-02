@@ -1,4 +1,4 @@
-import type { AuthUser } from '../../app/composables/useAuth'
+import type { AuthUser } from '#shared/auth'
 
 export type LoginTokens = {
   accessToken: string

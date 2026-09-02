@@ -1,7 +1,8 @@
+import type { AuthUser } from '#shared/auth'
 import { loginWithPassword, readCurrentUser } from '../../utils/auth-api'
 import { setAuthSession } from '../../utils/session'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<{ user: AuthUser }> => {
   const body = await readBody<{ email?: string; password?: string }>(event)
   const email = body?.email?.trim()
   const password = body?.password

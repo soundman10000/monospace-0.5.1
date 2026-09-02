@@ -1,6 +1,6 @@
 import type { H3Event } from 'h3'
-import type { AuthWorkspace, WorkspaceCard } from '../../app/composables/useAuth'
-import { createClient } from '~/generated/monospace'
+import type { AuthWorkspace, WorkspaceCard } from '#shared/auth'
+import { isUuid } from './id'
 import { getAuthSession, requireAccessToken } from './session'
 
 type WorkspaceRecord = {
@@ -12,33 +12,24 @@ type WorkspaceRecord = {
   logoId?: string | null
 }
 
-const WORKSPACE_FIELDS = ['id', 'apiName'] as const
-
-const SETTINGS_FIELDS = [
-  'id',
-  'apiName',
-  'displayName',
-  'description',
-  'primaryColor',
-  'logoId',
-  { logo: { fields: ['id', 'fileName', 'mediaType'] } },
-]
-
-const UUID_RE =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-
 const FALLBACK_COLOR = '#737373'
+const LIST_FIELDS = 'id,apiName'
+const SETTINGS_FIELDS =
+  'id,apiName,displayName,description,primaryColor,logoId,logo.id,logo.fileName,logo.mediaType'
 
 const trimSlash = (url: string) => url.replace(/\/$/, '')
 
-const rewriteSystemPath = (path: string) => path.replace(/^\/items/, '') || '/'
+const unwrap = <T>(value: unknown): T => {
+  if (value && typeof value === 'object' && 'data' in value) {
+    return (value as { data: T }).data
+  }
+  return value as T
+}
 
 const asRecord = (value: unknown): WorkspaceRecord | null => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
   return value as WorkspaceRecord
 }
-
-export const isUuid = (value: string) => UUID_RE.test(value)
 
 export const isBrandColor = (value: string) =>
   /^#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(value)
@@ -46,37 +37,17 @@ export const isBrandColor = (value: string) =>
 const brandColor = (value: string | null | undefined) =>
   value && isBrandColor(value) ? value : FALLBACK_COLOR
 
-const createSystemClient = (accessToken: string) => {
+const systemGet = async <T>(
+  accessToken: string,
+  path: string,
+  query?: Record<string, string>,
+): Promise<T> => {
   const config = useRuntimeConfig()
-  return createClient({
-    url: config.monospaceUrl,
-    project: 'system',
-    apiKey: accessToken,
-    http: ({ url, apiKey }) => {
-      const api = $fetch.create({
-        baseURL: `${trimSlash(url)}/api/system`,
-        headers: { Authorization: `Bearer ${apiKey}` },
-      })
-      return {
-        get: (path, options) =>
-          api(rewriteSystemPath(path), { method: 'GET', query: options?.query }),
-        post: (path, options) =>
-          api(rewriteSystemPath(path), {
-            method: 'POST',
-            body: options?.body,
-            query: options?.query,
-          }),
-        patch: (path, options) =>
-          api(rewriteSystemPath(path), {
-            method: 'PATCH',
-            body: options?.body,
-            query: options?.query,
-          }),
-        delete: (path, options) =>
-          api(rewriteSystemPath(path), { method: 'DELETE', query: options?.query }),
-      }
-    },
+  const body = await $fetch<unknown>(`${trimSlash(String(config.monospaceUrl))}/api${path}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    query,
   })
+  return unwrap<T>(body)
 }
 
 const toCard = (value: unknown): WorkspaceCard | null => {
@@ -93,19 +64,15 @@ const toCard = (value: unknown): WorkspaceCard | null => {
 }
 
 export const listWorkspaceCards = async (accessToken: string): Promise<WorkspaceCard[]> => {
-  const client = createSystemClient(accessToken)
-  const listed = await client.$readMany<WorkspaceRecord>('workspaces', {
-    fields: [...WORKSPACE_FIELDS],
+  const records = await systemGet<WorkspaceRecord[]>(accessToken, '/system/workspaces', {
+    fields: LIST_FIELDS,
   })
-  const workspaces = Array.isArray(listed) ? listed : []
+  const workspaces = Array.isArray(records) ? records : []
 
   const settings = await Promise.all(
     workspaces.map((workspace) => {
-      if (!workspace.id) {
-        return Promise.resolve(null)
-      }
-      return client.$readOne<WorkspaceRecord>('workspaces', {
-        key: workspace.id,
+      if (!workspace.id) return Promise.resolve(null)
+      return systemGet<WorkspaceRecord>(accessToken, `/system/workspaces/${workspace.id}`, {
         fields: SETTINGS_FIELDS,
       })
     }),

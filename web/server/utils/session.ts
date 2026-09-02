@@ -1,6 +1,6 @@
 import { useSession } from 'h3'
 import type { H3Event } from 'h3'
-import type { AuthUser, AuthWorkspace } from '../../app/composables/useAuth'
+import type { AuthUser, AuthWorkspace } from '#shared/auth'
 import { refreshTokens, type LoginTokens } from './auth-api'
 
 export type AuthSession = {

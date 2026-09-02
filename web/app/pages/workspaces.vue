@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { WorkspaceCard } from '../composables/useAuth'
+import type { AuthWorkspace, WorkspaceCard } from '#shared/auth'
 
 definePageMeta({
   workspace: false,
@@ -40,7 +40,7 @@ const choose = async (workspace: WorkspaceCard) => {
   selectError.value = ''
   selectingId.value = workspace.id
   try {
-    const result = await $fetch('/api/workspaces/select', {
+    const result = await $fetch<{ workspace: AuthWorkspace }>('/api/workspaces/select', {
       method: 'POST',
       body: { id: workspace.id },
     })

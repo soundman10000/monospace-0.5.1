@@ -1,7 +1,7 @@
-import { isUuid } from '../../utils/workspaces'
+import { isUuid } from '../../utils/id'
 import { requireAccessToken } from '../../utils/session'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<void> => {
   const accessToken = await requireAccessToken(event)
   if (!accessToken) {
     throw createError({ statusCode: 401, statusMessage: 'Not authenticated' })
@@ -22,7 +22,10 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: response.status, statusMessage: 'Asset not found' })
   }
 
-  setHeader(event, 'content-type', response.headers.get('content-type') || 'application/octet-stream')
   setHeader(event, 'cache-control', 'private, max-age=86400')
-  return Buffer.from(await response.arrayBuffer())
+  await send(
+    event,
+    Buffer.from(await response.arrayBuffer()),
+    response.headers.get('content-type') || 'application/octet-stream',
+  )
 })

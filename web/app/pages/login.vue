@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { AuthUser } from '#shared/auth'
+
 definePageMeta({
   auth: false,
 })
@@ -38,7 +40,7 @@ const onSubmit = async () => {
   errorMessage.value = ''
   pending.value = true
   try {
-    const result = await $fetch('/api/auth/login', {
+    const result = await $fetch<{ user: AuthUser }>('/api/auth/login', {
       method: 'POST',
       body: {
         email: email.value,
