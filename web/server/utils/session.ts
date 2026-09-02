@@ -25,24 +25,41 @@ const sessionOptions = (event: H3Event) => ({
 export const getAuthSession = (event: H3Event) =>
   useSession<AuthSession>(event, sessionOptions(event))
 
+const applyAuthContext = (event: H3Event, data: AuthSession) => {
+  event.context.accessToken = data.accessToken
+  event.context.user = data.user ?? null
+  event.context.workspace = data.workspace ?? null
+}
+
 export const setAuthSession = async (
   event: H3Event,
   tokens: LoginTokens,
   user: AuthUser,
 ) => {
   const session = await getAuthSession(event)
-  await session.update({
+  const next = {
     accessToken: tokens.accessToken,
     refreshToken: tokens.refreshToken,
     expiresAt: Date.now() + tokens.expires * 1000,
     user,
     workspace: session.data.workspace,
-  })
+  }
+  await session.update(next)
+  applyAuthContext(event, next)
 }
 
 export const clearAuthSession = async (event: H3Event) => {
   const session = await getAuthSession(event)
   await session.clear()
+  applyAuthContext(event, {})
+}
+
+export const requireAuth = (event: H3Event = useEvent()) => {
+  const accessToken = event.context.accessToken
+  if (!accessToken) {
+    throw createError({ statusCode: 401, statusMessage: 'Not authenticated' })
+  }
+  return accessToken
 }
 
 export const requireAccessToken = async (event: H3Event) => {
@@ -57,6 +74,7 @@ export const requireAccessToken = async (event: H3Event) => {
 
   if (!data.refreshToken || !data.user) {
     await session.clear()
+    applyAuthContext(event, {})
     return null
   }
 
@@ -66,6 +84,7 @@ export const requireAccessToken = async (event: H3Event) => {
     return tokens.accessToken
   } catch {
     await session.clear()
+    applyAuthContext(event, {})
     return null
   }
 }

@@ -1,7 +1,8 @@
 import type { H3Event } from 'h3'
 import type { AuthWorkspace, WorkspaceCard } from '#shared/auth'
 import { isUuid } from './id'
-import { getAuthSession, requireAccessToken } from './session'
+import { monospaceGet } from './monospace-api'
+import { getAuthSession, requireAuth } from './session'
 
 type WorkspaceRecord = {
   id?: string | null
@@ -17,15 +18,6 @@ const LIST_FIELDS = 'id,apiName'
 const SETTINGS_FIELDS =
   'id,apiName,displayName,description,primaryColor,logoId,logo.id,logo.fileName,logo.mediaType'
 
-const trimSlash = (url: string) => url.replace(/\/$/, '')
-
-const unwrap = <T>(value: unknown): T => {
-  if (value && typeof value === 'object' && 'data' in value) {
-    return (value as { data: T }).data
-  }
-  return value as T
-}
-
 const asRecord = (value: unknown): WorkspaceRecord | null => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
   return value as WorkspaceRecord
@@ -36,19 +28,6 @@ export const isBrandColor = (value: string) =>
 
 const brandColor = (value: string | null | undefined) =>
   value && isBrandColor(value) ? value : FALLBACK_COLOR
-
-const systemGet = async <T>(
-  accessToken: string,
-  path: string,
-  query?: Record<string, string>,
-): Promise<T> => {
-  const config = useRuntimeConfig()
-  const body = await $fetch<unknown>(`${trimSlash(String(config.monospaceUrl))}/api${path}`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-    query,
-  })
-  return unwrap<T>(body)
-}
 
 const toCard = (value: unknown): WorkspaceCard | null => {
   const record = asRecord(value)
@@ -63,8 +42,8 @@ const toCard = (value: unknown): WorkspaceCard | null => {
   }
 }
 
-export const listWorkspaceCards = async (accessToken: string): Promise<WorkspaceCard[]> => {
-  const records = await systemGet<WorkspaceRecord[]>(accessToken, '/system/workspaces', {
+export const listWorkspaceCards = async (): Promise<WorkspaceCard[]> => {
+  const records = await monospaceGet<WorkspaceRecord[]>('/system/workspaces', {
     fields: LIST_FIELDS,
   })
   const workspaces = Array.isArray(records) ? records : []
@@ -72,7 +51,7 @@ export const listWorkspaceCards = async (accessToken: string): Promise<Workspace
   const settings = await Promise.all(
     workspaces.map((workspace) => {
       if (!workspace.id) return Promise.resolve(null)
-      return systemGet<WorkspaceRecord>(accessToken, `/system/workspaces/${workspace.id}`, {
+      return monospaceGet<WorkspaceRecord>(`/system/workspaces/${workspace.id}`, {
         fields: SETTINGS_FIELDS,
       })
     }),
@@ -85,15 +64,12 @@ export const requireWorkspaceCard = async (
   event: H3Event,
   id: string,
 ): Promise<WorkspaceCard> => {
-  const accessToken = await requireAccessToken(event)
-  if (!accessToken) {
-    throw createError({ statusCode: 401, statusMessage: 'Not authenticated' })
-  }
+  requireAuth(event)
   if (!isUuid(id)) {
     throw createError({ statusCode: 400, statusMessage: 'Invalid workspace' })
   }
 
-  const cards = await listWorkspaceCards(accessToken)
+  const cards = await listWorkspaceCards()
   const card = cards.find((item) => item.id === id)
   if (!card) {
     throw createError({ statusCode: 403, statusMessage: 'Workspace is not available' })
@@ -111,7 +87,7 @@ export const toAuthWorkspace = (card: WorkspaceCard): AuthWorkspace => ({
 
 export const setSessionWorkspace = async (event: H3Event, card: WorkspaceCard) => {
   const session = await getAuthSession(event)
-  await session.update({
-    workspace: toAuthWorkspace(card),
-  })
+  const workspace = toAuthWorkspace(card)
+  await session.update({ workspace })
+  event.context.workspace = workspace
 }

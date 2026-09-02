@@ -41,7 +41,7 @@ const onSubmit = async () => {
   errorMessage.value = ''
   pending.value = true
   try {
-    const result = await $fetch<{ user: AuthUser }>('/api/auth/login', {
+    const result = await apiFetch<{ user: AuthUser }>('/api/auth/login', {
       method: 'POST',
       body: {
         email: email.value,

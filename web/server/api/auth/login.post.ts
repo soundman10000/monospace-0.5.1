@@ -13,7 +13,8 @@ export default defineEventHandler(async (event): Promise<{ user: AuthUser }> => 
 
   try {
     const tokens = await loginWithPassword(email, password)
-    const user = await readCurrentUser(tokens.accessToken)
+    event.context.accessToken = tokens.accessToken
+    const user = await readCurrentUser()
     await setAuthSession(event, tokens, user)
     return { user }
   } catch {

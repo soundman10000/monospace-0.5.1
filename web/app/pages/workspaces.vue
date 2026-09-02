@@ -14,8 +14,9 @@ const route = useRoute()
 const selectingId = ref<string | null>(null)
 const selectError = ref('')
 
-const { data: workspaces, pending, error } = await useFetch<WorkspaceCard[]>(
-  '/api/workspaces',
+const { data: workspaces, pending, error } = await useAsyncData(
+  'workspaces',
+  () => apiFetch<WorkspaceCard[]>('/api/workspaces'),
 )
 
 const initials = (name: string) =>
@@ -39,7 +40,7 @@ const choose = async (workspace: WorkspaceCard) => {
   selectError.value = ''
   selectingId.value = workspace.id
   try {
-    const result = await $fetch<{ workspace: AuthWorkspace }>('/api/workspaces/select', {
+    const result = await apiFetch<{ workspace: AuthWorkspace }>('/api/workspaces/select', {
       method: 'POST',
       body: { id: workspace.id },
     })

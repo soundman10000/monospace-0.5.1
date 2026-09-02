@@ -1,8 +1,10 @@
+import type { AuthState } from '#shared/auth'
+
 export default defineNuxtPlugin(async () => {
-  const requestFetch = useRequestFetch()
   try {
-    useAuth().value = await requestFetch('/api/auth/session')
+    useAuth().value = await apiFetch<AuthState>('/api/auth/session')
   } catch {
     useAuth().value = emptyAuth()
   }
 })
+
