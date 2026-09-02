@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;800&display=swap");
 
 @theme {
   --font-sans: "Fira Sans", ui-sans-serif, system-ui, sans-serif;
