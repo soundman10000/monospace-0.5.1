@@ -48,7 +48,11 @@ const { data, pending, error } = await useAsyncData(
 
     <ul v-else class="plan-grid">
       <li v-for="plan in data.plans" :key="plan.id">
-        <article class="plan-card" :style="{ '--plan-color': plan.color }">
+        <NuxtLink
+          :to="`/plans/${plan.id}`"
+          class="plan-card"
+          :style="{ '--plan-color': plan.color }"
+        >
           <header class="plan-card__header">
             <div class="plan-card__icon-wrap" aria-hidden="true">
               <span v-if="plan.icon" class="material-icons plan-card__icon">
@@ -66,31 +70,16 @@ const { data, pending, error } = await useAsyncData(
               {{ plan.description }}
             </p>
             <h3 class="plan-card__feature-heading">Plan highlights</h3>
-            <dl v-if="plan.features.length" class="feature-list">
-              <div v-for="feature in plan.features" :key="feature.code" class="feature-row">
-                <dt>{{ feature.name }}</dt>
-                <dd>
-                  <span
-                    v-if="feature.type === 'boolean'"
-                    class="feature-boolean material-icons"
-                    :class="feature.value ? 'is-true' : 'is-false'"
-                    :aria-label="feature.value ? 'Yes' : 'No'"
-                    role="img"
-                  >{{ feature.value ? 'check_circle' : 'cancel' }}</span>
-                  <template v-else>{{ feature.value }}</template>
-                </dd>
-              </div>
-            </dl>
-            <p v-else class="copy-muted">Plan details are not available yet.</p>
+            <PlanFeatureList :features="plan.features" />
           </div>
-        </article>
+        </NuxtLink>
       </li>
     </ul>
   </div>
 </template>
 
 <style scoped>
-@reference "../assets/css/main.css";
+@reference "../../assets/css/main.css";
 
 .plans-view {
   @apply flex min-h-0 flex-1 flex-col;
@@ -122,7 +111,7 @@ const { data, pending, error } = await useAsyncData(
 }
 
 .plan-card {
-  @apply flex w-full flex-col overflow-hidden rounded-card border border-border-subtle bg-surface shadow-sm;
+  @apply flex w-full flex-col overflow-hidden rounded-card border border-border-subtle bg-surface text-inherit no-underline shadow-sm hover:border-border-hover hover:shadow-card-hover motion-safe:transition-[transform,box-shadow,border-color] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5;
 }
 
 .plan-card__header {
@@ -163,37 +152,5 @@ const { data, pending, error } = await useAsyncData(
 
 .plan-card__feature-heading {
   @apply font-heading mt-4 text-sm font-semibold text-heading;
-}
-
-.feature-list {
-  @apply mt-3 divide-y divide-border-subtle;
-}
-
-.feature-row {
-  @apply grid grid-cols-[minmax(0,1fr)_auto] gap-4 py-2.5 text-sm;
-}
-
-.feature-row dt {
-  @apply text-muted;
-}
-
-.feature-row dd {
-  @apply max-w-48 text-right font-semibold text-heading;
-}
-
-.feature-boolean {
-  @apply inline-flex items-center justify-center text-xl;
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1.25;
-}
-
-.feature-boolean.is-true {
-  color: oklch(0.62 0.12 150);
-}
-
-.feature-boolean.is-false {
-  color: var(--color-danger);
 }
 </style>
