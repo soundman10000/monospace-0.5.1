@@ -130,7 +130,7 @@ const choose = async (workspace: WorkspaceCard) => {
 }
 
 .client-select__media {
-  @apply relative h-[36vh] shrink-0 overflow-hidden bg-ink lg:h-auto lg:min-h-0 lg:w-1/4 lg:self-stretch;
+  @apply relative h-[36vh] shrink-0 overflow-hidden bg-ink lg:h-auto lg:min-h-0 lg:w-1/3 lg:self-stretch;
 }
 
 .client-select__media img {
