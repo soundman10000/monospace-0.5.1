@@ -2,7 +2,29 @@ import type { FetchOptions } from 'ofetch'
 
 type UntypedFetch = (url: string, options?: FetchOptions) => Promise<unknown>
 
-export const apiFetch = <T>(url: string, options?: FetchOptions): Promise<T> => {
+const requestPath = (url: string) => url.split('?')[0]
+
+const redirectUnauthenticatedUser = async (url: string) => {
+  if (!import.meta.client || requestPath(url) === '/api/auth/login') return
+
+  const route = useRoute()
+  if (route.path === '/login') return
+
+  useAuth().value = emptyAuth()
+  await navigateTo({
+    path: '/login',
+    query: { redirect: route.fullPath },
+  })
+}
+
+export const apiFetch = async <T>(url: string, options?: FetchOptions): Promise<T> => {
   const requestFetch = useRequestFetch() as unknown as UntypedFetch
-  return requestFetch(url, options) as Promise<T>
+  try {
+    return await requestFetch(url, options) as T
+  } catch (error) {
+    if ((error as { statusCode?: number }).statusCode === 401) {
+      await redirectUnauthenticatedUser(url)
+    }
+    throw error
+  }
 }
