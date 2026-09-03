@@ -12,7 +12,6 @@ useHead({
 
 const CREDENTIALS_ERROR = 'Username or password is incorrect.'
 
-const route = useRoute()
 const auth = useAuth()
 const email = ref('')
 const password = ref('')
@@ -21,19 +20,6 @@ const pending = ref(false)
 const opening = ref(false)
 const hasError = computed(() => Boolean(errorMessage.value))
 const OPEN_MS = 400
-
-const afterLogin = () => {
-  const redirect = route.query.redirect
-  if (
-    typeof redirect === 'string' &&
-    redirect.startsWith('/') &&
-    !redirect.startsWith('//') &&
-    redirect !== '/clients'
-  ) {
-    return { path: '/clients', query: { redirect } }
-  }
-  return '/clients'
-}
 
 const clearError = () => {
   errorMessage.value = ''
@@ -67,7 +53,7 @@ const onSubmit = async () => {
       workspace: null,
     }
     await openDoor()
-    await navigateTo(afterLogin())
+    await navigateTo('/clients', { replace: true })
   } catch {
     errorMessage.value = CREDENTIALS_ERROR
     opening.value = false

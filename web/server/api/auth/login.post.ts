@@ -15,7 +15,7 @@ export default defineEventHandler(async (event): Promise<{ user: AuthUser }> => 
     const tokens = await loginWithPassword(email, password)
     event.context.accessToken = tokens.accessToken
     const user = await readCurrentUser()
-    await setAuthSession(event, tokens, user)
+    await setAuthSession(event, tokens, user, { workspace: null })
     return { user }
   } catch {
     throw createError({ statusCode: 401, statusMessage: 'Invalid email or password' })

@@ -35,6 +35,7 @@ export const setAuthSession = async (
   event: H3Event,
   tokens: LoginTokens,
   user: AuthUser,
+  extras?: { workspace?: AuthWorkspace | null },
 ) => {
   const session = await getAuthSession(event)
   const next = {
@@ -42,7 +43,9 @@ export const setAuthSession = async (
     refreshToken: tokens.refreshToken,
     expiresAt: Date.now() + tokens.expires * 1000,
     user,
-    workspace: session.data.workspace,
+    workspace: extras && 'workspace' in extras
+      ? extras.workspace ?? null
+      : session.data.workspace,
   }
   await session.update(next)
   applyAuthContext(event, next)

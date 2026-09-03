@@ -7,7 +7,7 @@ export const useLogout = () => {
     try {
       await apiFetch('/api/auth/logout', { method: 'POST' })
       auth.value = emptyAuth()
-      await navigateTo('/login')
+      await navigateTo('/login', { replace: true })
     } finally {
       pending.value = false
     }

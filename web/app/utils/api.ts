@@ -11,10 +11,7 @@ const redirectUnauthenticatedUser = async (url: string) => {
   if (route.path === '/login') return
 
   useAuth().value = emptyAuth()
-  await navigateTo({
-    path: '/login',
-    query: { redirect: route.fullPath },
-  })
+  await navigateTo('/login')
 }
 
 export const apiFetch = async <T>(url: string, options?: FetchOptions): Promise<T> => {
