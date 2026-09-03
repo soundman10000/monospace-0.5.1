@@ -27,6 +27,34 @@
           }
         }
       }
+    },
+    {
+      "kind": "createRelationFieldPair",
+      "data": {
+        "kind": "single",
+        "data": {
+          "relationName": "modelPlan_plan_code",
+          "onDelete": "noAction",
+          "onUpdate": "noAction",
+          "firstField": {
+            "apiName": "plan",
+            "collectionId": "model_plan",
+            "fieldIds": ["code"],
+            "isList": false,
+            "isConstrained": false,
+            "meta": {
+              "displayName": "Plan"
+            }
+          },
+          "secondField": {
+            "apiName": "model_plan",
+            "collectionId": "plan",
+            "fieldIds": ["code"],
+            "isList": true,
+            "isConstrained": false
+          }
+        }
+      }
     }
   ]
 }
