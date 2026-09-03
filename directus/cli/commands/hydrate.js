@@ -20,7 +20,6 @@ const DEFAULT_FORCE = false;
 const DEFAULT_DRY_RUN = false;
 const DEFAULT_SKIP_IMPORT = false;
 const DEFAULT_MERGE = false;
-const DEFAULT_PREFIX_PLAN_CODES = true;
 
 const TARGET_SEPARATOR = "/";
 const SCRIPT_NAME = "hydrate";
@@ -59,7 +58,6 @@ export const toHydrateInput = (argv) => {
     directusUser: argv.user || DEFAULT_DIRECTUS_USER,
     directusPassword: argv.password || DEFAULT_DIRECTUS_PASSWORD,
     packagePath: argv.path || DEFAULT_PACKAGE_PATH,
-    prefixPlanCodes: argv.prefixPlanCodes ?? DEFAULT_PREFIX_PLAN_CODES,
     dryRun: argv.dryRun ?? DEFAULT_DRY_RUN,
     skipImport: argv.skipImport ?? DEFAULT_SKIP_IMPORT,
     merge: argv.merge ?? DEFAULT_MERGE,
@@ -104,11 +102,6 @@ const builder = (cmd) =>
       type: "string",
       default: DEFAULT_PACKAGE_PATH,
       describe: "Folder for model_benefit.json / model_plan.json",
-    })
-    .option("prefix-plan-codes", {
-      type: "boolean",
-      default: DEFAULT_PREFIX_PLAN_CODES,
-      describe: "Prefix Directus plan codes with the benefit code (default on; avoids global unique clashes)",
     })
     .option("merge", {
       type: "boolean",

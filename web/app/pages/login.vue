@@ -10,7 +10,7 @@ useHead({
   title: 'Log in',
 })
 
-const CREDENTIALS_ERROR = 'User/pw not correct'
+const CREDENTIALS_ERROR = 'Username or password is incorrect.'
 
 const route = useRoute()
 const auth = useAuth()

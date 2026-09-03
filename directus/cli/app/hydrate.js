@@ -17,13 +17,7 @@ export const hydrate = async (input) => {
   });
 
   const benefits = catalog.benefits.map(toModelBenefit);
-  const benefitById = new Map(catalog.benefits.map((row) => [row.id, row]));
-  const plans = catalog.plans.map((row) =>
-    toModelPlan(row, {
-      prefixPlanCodes: input.prefixPlanCodes,
-      benefitCode: benefitById.get(row.benefit_id)?.code ?? input.benefitCode,
-    })
-  );
+  const plans = catalog.plans.map(toModelPlan);
   const coverage = buildCoveragePages(plans);
 
   const packagePath = path.resolve(ROOT, input.packagePath);

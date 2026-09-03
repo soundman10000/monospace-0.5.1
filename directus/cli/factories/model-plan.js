@@ -5,11 +5,11 @@ const CODE_MAX = 255;
 const NAME_MAX = 255;
 const COLLECTION = "model_plan";
 
-export const toModelPlan = (row, { prefixPlanCodes, benefitCode }) => {
+export const toModelPlan = (row) => {
   const style = styleForPlan(row);
   return {
     id: row.id,
-    code: clip(prefixPlanCodes ? `${benefitCode}-${row.code}` : row.code, CODE_MAX),
+    code: clip(row.code, CODE_MAX),
     name: clip(row.name, NAME_MAX),
     description: row.description ?? null,
     sort: row.display_order ?? null,
