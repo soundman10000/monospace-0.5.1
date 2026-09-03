@@ -18,7 +18,7 @@ export const hydrate = async (input) => {
 
   const benefits = catalog.benefits.map(toModelBenefit);
   const plans = catalog.plans.map(toModelPlan);
-  const coverage = buildCoveragePages(plans);
+  const coverage = buildCoveragePages(plans, catalog.benefits);
 
   const packagePath = path.resolve(ROOT, input.packagePath);
   const result = {

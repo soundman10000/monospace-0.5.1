@@ -5,13 +5,14 @@
       "data": {
         "kind": "single",
         "data": {
-          "relationName": "modelBenefit_benefit_code",
+          "relationName": "modelBenefit_benefit_id",
+          "replace": true,
           "onDelete": "noAction",
           "onUpdate": "noAction",
           "firstField": {
             "apiName": "benefit",
             "collectionId": "model_benefit",
-            "fieldIds": ["code"],
+            "fieldIds": ["id"],
             "isList": false,
             "isConstrained": false,
             "meta": {
@@ -21,8 +22,8 @@
           "secondField": {
             "apiName": "model_benefit",
             "collectionId": "benefit",
-            "fieldIds": ["code"],
-            "isList": true,
+            "fieldIds": ["id"],
+            "isList": false,
             "isConstrained": false
           }
         }
@@ -33,13 +34,14 @@
       "data": {
         "kind": "single",
         "data": {
-          "relationName": "modelPlan_plan_code",
+          "relationName": "modelPlan_plan_id",
+          "replace": true,
           "onDelete": "noAction",
           "onUpdate": "noAction",
           "firstField": {
             "apiName": "plan",
             "collectionId": "model_plan",
-            "fieldIds": ["code"],
+            "fieldIds": ["id"],
             "isList": false,
             "isConstrained": false,
             "meta": {
@@ -49,8 +51,8 @@
           "secondField": {
             "apiName": "model_plan",
             "collectionId": "plan",
-            "fieldIds": ["code"],
-            "isList": true,
+            "fieldIds": ["id"],
+            "isList": false,
             "isConstrained": false
           }
         }

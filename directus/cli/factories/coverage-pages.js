@@ -77,7 +77,8 @@ const overviewMarkdown = (plan) =>
 const headingFor = (index) =>
   index === 0 ? "What's covered" : index === 2 ? "Limitations" : "More information";
 
-export const buildCoveragePages = (plans) => {
+export const buildCoveragePages = (plans, benefits = []) => {
+  const benefitCodeById = new Map(benefits.map((row) => [row.id, row.code]));
   const titles = [];
   const markdowns = [];
   const documents = [];
@@ -245,7 +246,7 @@ export const buildCoveragePages = (plans) => {
 
   for (const plan of plans) {
     const seed = `coverage:${plan.id}`;
-    const prefix = plan.code;
+    const prefix = slug(`${benefitCodeById.get(plan.benefit) || "plan"}-${plan.code}`);
     const pageTitle = addTitle(
       `${seed}:page-title`,
       `${prefix}-cov-title`,
@@ -269,6 +270,25 @@ export const buildCoveragePages = (plans) => {
       layout: layout.id,
     });
   }
+
+  const assertUniqueCodes = (items, label) => {
+    const seen = new Map();
+    for (const item of items) {
+      const previous = seen.get(item.code);
+      if (previous) {
+        throw new Error(`${label} code "${item.code}" is duplicated`);
+      }
+      seen.set(item.code, item.id);
+    }
+  };
+
+  assertUniqueCodes(titles, "block_title");
+  assertUniqueCodes(markdowns, "block_markdown");
+  assertUniqueCodes(documents, "block_document");
+  assertUniqueCodes(cards, "layout_card_container");
+  assertUniqueCodes(documentContainers, "layout_documents_container");
+  assertUniqueCodes(layouts, "layout_grid_container");
+  assertUniqueCodes(pages, "page_plan_info");
 
   return {
     titles,

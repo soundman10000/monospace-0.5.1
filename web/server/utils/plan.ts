@@ -34,6 +34,7 @@ export type PlanRow = {
   model_plan?: {
     color?: string | null
     icon?: string | null
+    data?: Array<{ color?: string | null; icon?: string | null }>
   } | null
   plan_feature_value?: {
     data?: FeatureValueRow[]
@@ -126,8 +127,11 @@ const toFeature = (row: FeatureValueRow, today: string): OrderedFeature | null =
 
 export const toCard = (row: PlanRow, today: string): PlanCard | null => {
   if (!row.id || !row.code) return null
-  const color = row.model_plan?.color
-  const icon = row.model_plan?.icon?.trim() ?? null
+  const modelPlan = Array.isArray(row.model_plan)
+    ? row.model_plan[0]
+    : row.model_plan?.data?.[0] ?? row.model_plan
+  const color = modelPlan?.color
+  const icon = modelPlan?.icon?.trim() ?? null
   const features = (row.plan_feature_value?.data ?? [])
     .map((value) => toFeature(value, today))
     .filter((feature): feature is OrderedFeature => feature !== null)
