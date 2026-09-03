@@ -7,14 +7,13 @@ const displayName = computed(
   () => auth.value.user?.fullName || auth.value.user?.email || 'there',
 )
 
-const cardsLeaving = ref(false)
+const { leavingId, startLeave } = useLeavingCard()
 
-const openPlans = (benefit: BenefitCard) => {
-  if (cardsLeaving.value) return
-  cardsLeaving.value = true
-  window.setTimeout(() => {
-    navigateTo(`/benefits/${benefit.id}`)
-  }, 300)
+const openPlans = async (benefit: BenefitCard) => {
+  const done = startLeave(benefit.id)
+  if (!done) return
+  await done
+  await navigateTo(`/benefits/${benefit.id}`)
 }
 
 const { data: benefits, pending, error } = await useAsyncData(
@@ -44,11 +43,12 @@ const { data: benefits, pending, error } = await useAsyncData(
     <p v-else-if="!benefits?.length" class="copy-muted home-status">
       No benefits are available for this client.
     </p>
-    <ul v-else class="benefit-list" :class="{ 'is-leaving': cardsLeaving }">
+    <ul v-else class="benefit-list" :class="{ 'is-locked': leavingId }">
       <li v-for="benefit in benefits" :key="benefit.id">
         <button
           type="button"
           class="benefit-card"
+          :class="{ 'is-leaving': leavingId === benefit.id }"
           :style="{ '--benefit-color': benefit.color }"
           @click="openPlans(benefit)"
         >
@@ -81,13 +81,10 @@ const { data: benefits, pending, error } = await useAsyncData(
 .benefit-list {
   @apply mt-8 grid list-none items-stretch gap-4 p-0;
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  transition: opacity 300ms ease, transform 300ms ease;
 }
 
-.benefit-list.is-leaving {
+.benefit-list.is-locked {
   pointer-events: none;
-  opacity: 0.15;
-  transform: translateY(-2rem);
 }
 
 .benefit-list li {
@@ -95,7 +92,14 @@ const { data: benefits, pending, error } = await useAsyncData(
 }
 
 .benefit-card {
-  @apply flex h-full min-h-20 w-full cursor-pointer overflow-hidden rounded-card border border-border-subtle bg-surface text-left transition-colors hover:border-border-hover hover:shadow-card-hover motion-safe:transition-[transform,box-shadow,border-color] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5;
+  @apply flex h-full min-h-20 w-full cursor-pointer overflow-hidden rounded-card border border-border-subtle bg-surface text-left transition-colors hover:border-border-hover hover:shadow-card-hover motion-safe:transition-[transform,opacity,box-shadow,border-color] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5;
+}
+
+.benefit-card.is-leaving,
+.benefit-card.is-leaving:hover,
+.benefit-card.is-leaving:active {
+  opacity: 0.15;
+  transform: translateY(-2rem);
 }
 
 .benefit-card__body {

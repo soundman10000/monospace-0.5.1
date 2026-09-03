@@ -127,7 +127,15 @@
   }
 
   .workspace-card {
-    @apply flex w-full cursor-pointer items-center gap-5 rounded-card border border-border-subtle border-r-[5px] border-r-[color:var(--workspace-accent,var(--color-accent))] bg-surface py-5 pr-6 pl-5 text-left transition-colors hover:border-t-border-hover hover:border-b-border-hover hover:border-l-border-hover hover:bg-page hover:shadow-card-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:cursor-wait disabled:opacity-70 motion-safe:transition-[transform,box-shadow,background-color,border-color] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0;
+    @apply flex w-full cursor-pointer items-center gap-5 rounded-card border border-border-subtle border-r-[5px] border-r-[color:var(--workspace-accent,var(--color-accent))] bg-surface py-5 pr-6 pl-5 text-left transition-colors hover:border-t-border-hover hover:border-b-border-hover hover:border-l-border-hover hover:bg-page hover:shadow-card-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:cursor-wait disabled:opacity-70 motion-safe:transition-[transform,opacity,box-shadow,background-color,border-color] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0;
+  }
+
+  .workspace-card.is-leaving,
+  .workspace-card.is-leaving:hover,
+  .workspace-card.is-leaving:active {
+    pointer-events: none;
+    opacity: 0.15;
+    transform: translateY(-2rem);
   }
 
   .workspace-card__icon {

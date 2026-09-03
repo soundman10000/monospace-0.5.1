@@ -11,7 +11,7 @@ useHead({
 
 const auth = useAuth()
 const route = useRoute()
-const selectingId = ref<string | null>(null)
+const { leavingId, startLeave, cancelLeave } = useLeavingCard()
 const selectError = ref('')
 
 const { data: workspaces, pending, error } = await useAsyncData(
@@ -38,23 +38,25 @@ const afterSelect = () => {
 }
 
 const choose = async (workspace: WorkspaceCard) => {
-  if (selectingId.value) return
+  const done = startLeave(workspace.id)
+  if (!done) return
   selectError.value = ''
-  selectingId.value = workspace.id
   try {
-    const result = await apiFetch<{ workspace: AuthWorkspace }>('/api/workspaces/select', {
-      method: 'POST',
-      body: { id: workspace.id },
-    })
+    const [result] = await Promise.all([
+      apiFetch<{ workspace: AuthWorkspace }>('/api/workspaces/select', {
+        method: 'POST',
+        body: { id: workspace.id },
+      }),
+      done,
+    ])
     auth.value = {
       ...auth.value,
       workspace: result.workspace,
     }
     await navigateTo(afterSelect())
   } catch {
+    cancelLeave()
     selectError.value = 'Could not open that client'
-  } finally {
-    selectingId.value = null
   }
 }
 </script>
@@ -79,13 +81,13 @@ const choose = async (workspace: WorkspaceCard) => {
         No clients are available for this account.
       </p>
 
-      <ul v-else class="workspace-list">
+      <ul v-else class="workspace-list" :class="{ 'is-locked': leavingId }">
         <li v-for="workspace in workspaces" :key="workspace.id">
           <button
             type="button"
             class="workspace-card"
+            :class="{ 'is-leaving': leavingId === workspace.id }"
             :style="{ '--workspace-accent': workspace.primaryColor }"
-            :disabled="Boolean(selectingId)"
             @click="choose(workspace)"
           >
             <img
@@ -149,6 +151,10 @@ const choose = async (workspace: WorkspaceCard) => {
 .client-select__panel .workspace-list {
   @apply mt-0 grid w-full list-none gap-4 p-0;
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+}
+
+.workspace-list.is-locked {
+  pointer-events: none;
 }
 
 .client-select__panel .workspace-card {

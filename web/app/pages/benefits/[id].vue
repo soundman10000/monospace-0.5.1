@@ -14,6 +14,14 @@ const { data, pending, error } = await useAsyncData(
 )
 
 const benefitName = computed(() => data.value?.benefit.name || 'Benefit')
+const { leavingId, startLeave } = useLeavingCard()
+
+const openPlan = async (planId: string) => {
+  const done = startLeave(planId)
+  if (!done) return
+  await done
+  await navigateTo(`/plans/${planId}`)
+}
 
 useHead(() => ({
   title: `${benefitName.value} Plans`,
@@ -46,12 +54,14 @@ useHead(() => ({
       No plans are available for this benefit.
     </p>
 
-    <ul v-else class="plan-grid">
+    <ul v-else class="plan-grid" :class="{ 'is-locked': leavingId }">
       <li v-for="plan in data.plans" :key="plan.id">
-        <NuxtLink
-          :to="`/plans/${plan.id}`"
+        <button
+          type="button"
           class="plan-card"
+          :class="{ 'is-leaving': leavingId === plan.id }"
           :style="{ '--plan-color': plan.color }"
+          @click="openPlan(plan.id)"
         >
           <header class="plan-card__header">
             <div class="plan-card__icon-wrap" aria-hidden="true">
@@ -72,7 +82,7 @@ useHead(() => ({
             <h3 class="plan-card__feature-heading">Plan highlights</h3>
             <PlanFeatureList :features="plan.features" />
           </div>
-        </NuxtLink>
+        </button>
       </li>
     </ul>
   </div>
@@ -106,12 +116,23 @@ useHead(() => ({
   grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
 }
 
+.plan-grid.is-locked {
+  pointer-events: none;
+}
+
 .plan-grid > li {
   @apply flex;
 }
 
 .plan-card {
-  @apply flex w-full flex-col overflow-hidden rounded-card border border-border-subtle bg-surface text-inherit no-underline shadow-sm hover:border-border-hover hover:shadow-card-hover motion-safe:transition-[transform,box-shadow,border-color] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5;
+  @apply flex w-full cursor-pointer flex-col overflow-hidden rounded-card border border-border-subtle bg-surface text-left text-inherit shadow-sm hover:border-border-hover hover:shadow-card-hover motion-safe:transition-[transform,opacity,box-shadow,border-color] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5;
+}
+
+.plan-card.is-leaving,
+.plan-card.is-leaving:hover,
+.plan-card.is-leaving:active {
+  opacity: 0.15;
+  transform: translateY(-2rem);
 }
 
 .plan-card__header {
