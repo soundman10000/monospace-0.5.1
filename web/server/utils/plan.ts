@@ -26,6 +26,11 @@ export type PlanRow = {
   name?: string | null
   description?: string | null
   displayOrder?: number | null
+  benefit?: {
+    id?: string | null
+    code?: string | null
+    name?: string | null
+  } | null
   model_plan?: {
     color?: string | null
     icon?: string | null
@@ -69,6 +74,7 @@ export const PLAN_CARD_FIELDS = [
   'name',
   'description',
   'displayOrder',
+  { benefit: { fields: ['id', 'code', 'name'] } },
   { model_plan: { fields: ['color', 'icon'] } },
   { plan_feature_value: { fields: [...PLAN_FEATURE_FIELDS] } },
 ] as const

@@ -43,14 +43,37 @@ export type CmsMarkdownBlock = {
   text: string
 }
 
+export type CmsDocumentBlock = {
+  collection: 'block_document'
+  id: string
+  code: string
+  description: string | null
+}
+
+export type CmsInnerBlock = CmsTitleBlock | CmsMarkdownBlock | CmsDocumentBlock
+
+export type CmsCardBlock = {
+  collection: 'layout_card_container'
+  id: string
+  blocks: CmsInnerBlock[]
+}
+
+export type CmsDocumentsBlock = {
+  collection: 'layout_documents_container'
+  id: string
+  documents: CmsDocumentBlock[]
+}
+
 export type CmsLayoutBlock = {
   collection: 'layout_grid_container'
   id: string
   layout: string
-  blocks: CmsBlock[]
+  blocks: CmsGridItem[]
 }
 
-export type CmsBlock = CmsTitleBlock | CmsMarkdownBlock | CmsLayoutBlock
+export type CmsGridItem = CmsCardBlock | CmsDocumentsBlock | CmsLayoutBlock | CmsInnerBlock
+
+export type CmsBlock = CmsGridItem
 
 export type PlanCoveragePage = {
   id: string

@@ -40,6 +40,15 @@ export const hydrate = async (input) => {
   await writeCollectionFile(packagePath, planCollection, plans);
   await writeCollectionFile(packagePath, "block_title", coverage.titles);
   await writeCollectionFile(packagePath, "block_markdown", coverage.markdowns);
+  await writeCollectionFile(packagePath, "block_document", coverage.documents);
+  await writeCollectionFile(packagePath, "layout_card_container", coverage.cards);
+  await writeCollectionFile(packagePath, "layout_card_container_blocks", coverage.cardBlocks);
+  await writeCollectionFile(packagePath, "layout_documents_container", coverage.documentContainers);
+  await writeCollectionFile(
+    packagePath,
+    "layout_documents_container_documents",
+    coverage.documentLinks
+  );
   await writeCollectionFile(packagePath, "layout_grid_container", coverage.layouts);
   await writeCollectionFile(packagePath, "layout_grid_container_blocks", coverage.layoutBlocks);
   await writeCollectionFile(packagePath, "page_plan_info", coverage.pages);

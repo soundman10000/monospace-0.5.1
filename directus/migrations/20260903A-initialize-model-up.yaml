@@ -121,6 +121,126 @@ collections:
             translations: null
             unarchive_value: null
             versioning: false
+  - collection: layout_card_container
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: layout_card_container
+            color: null
+            display_template: '{{code}}'
+            group: layouts
+            hidden: false
+            icon: crop_portrait
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 3
+            sort_field: null
+            translations:
+              - language: en-US
+                plural: Card Containers
+                singular: Card Container
+                translation: Card Container
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: layout_card_container
+  - collection: layout_card_container_blocks
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container_blocks
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: layout_card_container_blocks
+            color: null
+            display_template: null
+            group: layout_card_container
+            hidden: true
+            icon: import_export
+            item_duplication_fields: null
+            note: Junction for layout_card_container M2A blocks
+            preview_url: null
+            singleton: false
+            sort: null
+            sort_field: sort
+            translations: null
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: layout_card_container_blocks
+  - collection: layout_documents_container
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: layout_documents_container
+            color: null
+            display_template: '{{code}}'
+            group: layouts
+            hidden: false
+            icon: folder_copy
+            item_duplication_fields: null
+            note: null
+            preview_url: null
+            singleton: false
+            sort: 2
+            sort_field: null
+            translations:
+              - language: en-US
+                plural: Documents Containers
+                singular: Documents Container
+                translation: Documents Container
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: layout_documents_container
+  - collection: layout_documents_container_documents
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container_documents
+          meta:
+            accountability: all
+            archive_app_filter: true
+            archive_field: null
+            archive_value: null
+            collapse: open
+            collection: layout_documents_container_documents
+            color: null
+            display_template: null
+            group: layout_documents_container
+            hidden: true
+            icon: import_export
+            item_duplication_fields: null
+            note: Junction for layout_documents_container M2M documents
+            preview_url: null
+            singleton: false
+            sort: null
+            sort_field: sort
+            translations: null
+            unarchive_value: null
+            versioning: false
+          schema:
+            name: layout_documents_container_documents
   - collection: layout_grid_container
     diff:
       - kind: 'N'
@@ -1448,6 +1568,1041 @@ fields:
             has_auto_increment: false
             foreign_key_table: null
             foreign_key_column: null
+  - collection: layout_card_container
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: id
+          type: uuid
+          meta:
+            collection: layout_card_container
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: layout_card_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_card_container
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: user_created
+          type: uuid
+          meta:
+            collection: layout_card_container
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: layout_card_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: layout_card_container
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: date_created
+          type: timestamp
+          meta:
+            collection: layout_card_container
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: layout_card_container
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_card_container
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: user_updated
+          type: uuid
+          meta:
+            collection: layout_card_container
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: layout_card_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: layout_card_container
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: layout_card_container
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: layout_card_container
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_card_container
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: code
+          type: string
+          meta:
+            collection: layout_card_container
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 6
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: layout_card_container
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_card_container
+    field: blocks
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: blocks
+          type: alias
+          meta:
+            collection: layout_card_container
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{collection}}'
+            field: blocks
+            group: null
+            hidden: false
+            interface: list-m2a
+            note: Page builder blocks for this card (title, markdown, document).
+            options:
+              enableCreate: true
+              enableSelect: true
+            readonly: false
+            required: false
+            searchable: true
+            sort: 7
+            special:
+              - m2a
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+  - collection: layout_card_container_blocks
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container_blocks
+          field: id
+          type: uuid
+          meta:
+            collection: layout_card_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: layout_card_container_blocks
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_card_container_blocks
+    field: layout_card_container_id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container_blocks
+          field: layout_card_container_id
+          type: uuid
+          meta:
+            collection: layout_card_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: layout_card_container_id
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: layout_card_container_id
+            table: layout_card_container_blocks
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: layout_card_container
+            foreign_key_column: id
+  - collection: layout_card_container_blocks
+    field: item
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container_blocks
+          field: item
+          type: string
+          meta:
+            collection: layout_card_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: item
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 3
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: item
+            table: layout_card_container_blocks
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_card_container_blocks
+    field: collection
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container_blocks
+          field: collection
+          type: string
+          meta:
+            collection: layout_card_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: collection
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 4
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: collection
+            table: layout_card_container_blocks
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_card_container_blocks
+    field: sort
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container_blocks
+          field: sort
+          type: integer
+          meta:
+            collection: layout_card_container_blocks
+            conditions: null
+            display: null
+            display_options: null
+            field: sort
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 5
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: sort
+            table: layout_card_container_blocks
+            data_type: integer
+            default_value: null
+            max_length: null
+            numeric_precision: 32
+            numeric_scale: 0
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_documents_container
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: id
+          type: uuid
+          meta:
+            collection: layout_documents_container
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: layout_documents_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_documents_container
+    field: user_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: user_created
+          type: uuid
+          meta:
+            collection: layout_documents_container
+            conditions: null
+            display: user
+            display_options: null
+            field: user_created
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - user-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_created
+            table: layout_documents_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: layout_documents_container
+    field: date_created
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: date_created
+          type: timestamp
+          meta:
+            collection: layout_documents_container
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_created
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - date-created
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_created
+            table: layout_documents_container
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_documents_container
+    field: user_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: user_updated
+          type: uuid
+          meta:
+            collection: layout_documents_container
+            conditions: null
+            display: user
+            display_options: null
+            field: user_updated
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options:
+              template: '{{avatar}} {{first_name}} {{last_name}}'
+            readonly: true
+            required: false
+            searchable: true
+            sort: 4
+            special:
+              - user-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: user_updated
+            table: layout_documents_container
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: directus_users
+            foreign_key_column: id
+  - collection: layout_documents_container
+    field: date_updated
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: date_updated
+          type: timestamp
+          meta:
+            collection: layout_documents_container
+            conditions: null
+            display: datetime
+            display_options:
+              relative: true
+            field: date_updated
+            group: null
+            hidden: true
+            interface: datetime
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 5
+            special:
+              - date-updated
+            translations: null
+            validation: null
+            validation_message: null
+            width: half
+          schema:
+            name: date_updated
+            table: layout_documents_container
+            data_type: timestamp with time zone
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_documents_container
+    field: code
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: code
+          type: string
+          meta:
+            collection: layout_documents_container
+            conditions: null
+            display: formatted-value
+            display_options: null
+            field: code
+            group: null
+            hidden: false
+            interface: input
+            note: null
+            options:
+              slug: true
+              trim: true
+            readonly: false
+            required: true
+            searchable: true
+            sort: 6
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: code
+            table: layout_documents_container
+            data_type: character varying
+            default_value: null
+            max_length: 255
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: true
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_documents_container
+    field: documents
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: documents
+          type: alias
+          meta:
+            collection: layout_documents_container
+            conditions: null
+            display: related-values
+            display_options:
+              template: '{{block_document_id.code}}'
+            field: documents
+            group: null
+            hidden: false
+            interface: list-m2m
+            note: null
+            options:
+              template: '{{block_document_id.code}}'
+            readonly: false
+            required: false
+            searchable: true
+            sort: 7
+            special:
+              - m2m
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+  - collection: layout_documents_container_documents
+    field: id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container_documents
+          field: id
+          type: uuid
+          meta:
+            collection: layout_documents_container_documents
+            conditions: null
+            display: null
+            display_options: null
+            field: id
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: true
+            required: false
+            searchable: true
+            sort: 1
+            special:
+              - uuid
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: id
+            table: layout_documents_container_documents
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: false
+            is_unique: true
+            is_indexed: false
+            is_primary_key: true
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
+  - collection: layout_documents_container_documents
+    field: layout_documents_container_id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container_documents
+          field: layout_documents_container_id
+          type: uuid
+          meta:
+            collection: layout_documents_container_documents
+            conditions: null
+            display: null
+            display_options: null
+            field: layout_documents_container_id
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 2
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: layout_documents_container_id
+            table: layout_documents_container_documents
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: layout_documents_container
+            foreign_key_column: id
+  - collection: layout_documents_container_documents
+    field: block_document_id
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container_documents
+          field: block_document_id
+          type: uuid
+          meta:
+            collection: layout_documents_container_documents
+            conditions: null
+            display: null
+            display_options: null
+            field: block_document_id
+            group: null
+            hidden: true
+            interface: select-dropdown-m2o
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 3
+            special:
+              - m2o
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: block_document_id
+            table: layout_documents_container_documents
+            data_type: uuid
+            default_value: null
+            max_length: null
+            numeric_precision: null
+            numeric_scale: null
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: block_document
+            foreign_key_column: id
+  - collection: layout_documents_container_documents
+    field: sort
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container_documents
+          field: sort
+          type: integer
+          meta:
+            collection: layout_documents_container_documents
+            conditions: null
+            display: null
+            display_options: null
+            field: sort
+            group: null
+            hidden: true
+            interface: input
+            note: null
+            options: null
+            readonly: false
+            required: false
+            searchable: true
+            sort: 4
+            special: null
+            translations: null
+            validation: null
+            validation_message: null
+            width: full
+          schema:
+            name: sort
+            table: layout_documents_container_documents
+            data_type: integer
+            default_value: null
+            max_length: null
+            numeric_precision: 32
+            numeric_scale: 0
+            is_nullable: true
+            is_unique: false
+            is_indexed: false
+            is_primary_key: false
+            is_generated: false
+            generation_expression: null
+            has_auto_increment: false
+            foreign_key_table: null
+            foreign_key_column: null
   - collection: layout_grid_container
     field: id
     diff:
@@ -1825,8 +2980,9 @@ fields:
             hidden: false
             interface: list-m2a
             note: >-
-              Mapped in order (left to right, top to bottom). Extra blocks past
-              the layout size are not rendered.
+              Mapped in order (left to right, top to bottom). Cells are card
+              containers, documents containers, or nested grids. Extra blocks
+              past the layout size are not rendered.
             options:
               enableCreate: true
               enableSelect: true
@@ -3862,6 +5018,217 @@ relations:
             constraint_name: block_title_user_updated_foreign
             on_update: NO ACTION
             on_delete: NO ACTION
+  - collection: layout_card_container
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: layout_card_container
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: layout_card_container
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: layout_card_container_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: layout_card_container
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: layout_card_container
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: layout_card_container
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: layout_card_container_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: layout_card_container_blocks
+    field: item
+    related_collection: null
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container_blocks
+          field: item
+          related_collection: null
+          meta:
+            junction_field: layout_card_container_id
+            many_collection: layout_card_container_blocks
+            many_field: item
+            one_allowed_collections:
+              - block_title
+              - block_markdown
+              - block_document
+            one_collection: null
+            one_collection_field: collection
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+  - collection: layout_card_container_blocks
+    field: layout_card_container_id
+    related_collection: layout_card_container
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_card_container_blocks
+          field: layout_card_container_id
+          related_collection: layout_card_container
+          meta:
+            junction_field: item
+            many_collection: layout_card_container_blocks
+            many_field: layout_card_container_id
+            one_allowed_collections: null
+            one_collection: layout_card_container
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: blocks
+            sort_field: sort
+          schema:
+            table: layout_card_container_blocks
+            column: layout_card_container_id
+            foreign_key_table: layout_card_container
+            foreign_key_column: id
+            constraint_name: layout_card_container_blocks_layout_card_c__581b83b7_foreign
+            on_update: NO ACTION
+            on_delete: CASCADE
+  - collection: layout_documents_container
+    field: user_created
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: user_created
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: layout_documents_container
+            many_field: user_created
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: layout_documents_container
+            column: user_created
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: layout_documents_container_user_created_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: layout_documents_container
+    field: user_updated
+    related_collection: directus_users
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container
+          field: user_updated
+          related_collection: directus_users
+          meta:
+            junction_field: null
+            many_collection: layout_documents_container
+            many_field: user_updated
+            one_allowed_collections: null
+            one_collection: directus_users
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: layout_documents_container
+            column: user_updated
+            foreign_key_table: directus_users
+            foreign_key_column: id
+            constraint_name: layout_documents_container_user_updated_foreign
+            on_update: NO ACTION
+            on_delete: NO ACTION
+  - collection: layout_documents_container_documents
+    field: layout_documents_container_id
+    related_collection: layout_documents_container
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container_documents
+          field: layout_documents_container_id
+          related_collection: layout_documents_container
+          meta:
+            junction_field: block_document_id
+            many_collection: layout_documents_container_documents
+            many_field: layout_documents_container_id
+            one_allowed_collections: null
+            one_collection: layout_documents_container
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: documents
+            sort_field: sort
+          schema:
+            table: layout_documents_container_documents
+            column: layout_documents_container_id
+            foreign_key_table: layout_documents_container
+            foreign_key_column: id
+            constraint_name: layout_documents_container_documents_layou__7d7dbe57_foreign
+            on_update: NO ACTION
+            on_delete: CASCADE
+  - collection: layout_documents_container_documents
+    field: block_document_id
+    related_collection: block_document
+    diff:
+      - kind: 'N'
+        rhs:
+          collection: layout_documents_container_documents
+          field: block_document_id
+          related_collection: block_document
+          meta:
+            junction_field: layout_documents_container_id
+            many_collection: layout_documents_container_documents
+            many_field: block_document_id
+            one_allowed_collections: null
+            one_collection: block_document
+            one_collection_field: null
+            one_deselect_action: nullify
+            one_field: null
+            sort_field: null
+          schema:
+            table: layout_documents_container_documents
+            column: block_document_id
+            foreign_key_table: block_document
+            foreign_key_column: id
+            constraint_name: layout_documents_container_documents_block__15415dc1_foreign
+            on_update: NO ACTION
+            on_delete: CASCADE
   - collection: layout_grid_container
     field: user_created
     related_collection: directus_users
@@ -3930,9 +5297,8 @@ relations:
             many_collection: layout_grid_container_blocks
             many_field: item
             one_allowed_collections:
-              - block_title
-              - block_markdown
-              - block_document
+              - layout_card_container
+              - layout_documents_container
               - layout_grid_container
             one_collection: null
             one_collection_field: collection

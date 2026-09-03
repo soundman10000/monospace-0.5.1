@@ -143,6 +143,9 @@ const printResult = (result, input) => {
   console.log(`page_plan_info  ${result.coverage?.pages.length ?? 0}`);
   console.log(`block_title     ${result.coverage?.titles.length ?? 0}`);
   console.log(`block_markdown  ${result.coverage?.markdowns.length ?? 0}`);
+  console.log(`block_document  ${result.coverage?.documents.length ?? 0}`);
+  console.log(`cards           ${result.coverage?.cards.length ?? 0}`);
+  console.log(`doc containers  ${result.coverage?.documentContainers.length ?? 0}`);
   console.log(`layouts         ${result.coverage?.layouts.length ?? 0}`);
   result.benefits.forEach((item) => {
     console.log(`  benefit ${item.code}  ${item.id}`);
@@ -155,7 +158,7 @@ const printResult = (result, input) => {
     return;
   }
   console.log(
-    "wrote           model_benefit, model_plan, page_plan_info, blocks, layouts"
+    "wrote           model_benefit, model_plan, page_plan_info, cards, documents, blocks, layouts"
   );
   if (result.imported) {
     console.log(`dpc             ${input.merge ? "merge" : "import"}`);

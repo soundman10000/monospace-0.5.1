@@ -5,15 +5,7 @@ import { getMonospace } from '../../utils/monospace'
 import { PLAN_CARD_FIELDS, toCard, todayUtc, type PlanRow } from '../../utils/plan'
 import { requireAuth } from '../../utils/session'
 
-type DetailRow = PlanRow & {
-  benefit?: {
-    id?: string | null
-    code?: string | null
-    name?: string | null
-  } | null
-}
-
-const toBenefit = (row: DetailRow, fallbackCode: string): PlanBenefit | null => {
+const toBenefit = (row: PlanRow, fallbackCode: string): PlanBenefit | null => {
   const id = row.benefit?.id
   const code = row.benefit?.code?.trim() || fallbackCode
   if (!id || !code) return null
@@ -32,11 +24,8 @@ export default defineEventHandler(async (event): Promise<PlanDetail> => {
   }
 
   const client = getMonospace()
-  const row = await client.$readFirst<DetailRow>('plan', {
-    fields: [
-      ...PLAN_CARD_FIELDS,
-      { benefit: { fields: ['id', 'code', 'name'] } },
-    ],
+  const row = await client.$readFirst<PlanRow>('plan', {
+    fields: [...PLAN_CARD_FIELDS],
     filter: { id: { _eq: id } },
   })
   const card = row ? toCard(row, todayUtc()) : null

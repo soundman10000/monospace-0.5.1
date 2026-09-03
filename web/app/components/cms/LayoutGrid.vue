@@ -25,6 +25,14 @@ const columns = computed(() => {
         :block="child"
         nested
       />
+      <CmsCard
+        v-else-if="child.collection === 'layout_card_container'"
+        :block="child"
+      />
+      <CmsDocuments
+        v-else-if="child.collection === 'layout_documents_container'"
+        :block="child"
+      />
       <div v-else class="cms-layout__cell">
         <CmsBlockTitle
           v-if="child.collection === 'block_title'"
@@ -32,6 +40,10 @@ const columns = computed(() => {
         />
         <CmsBlockMarkdown
           v-else-if="child.collection === 'block_markdown'"
+          :block="child"
+        />
+        <CmsBlockDocument
+          v-else-if="child.collection === 'block_document'"
           :block="child"
         />
       </div>
@@ -61,7 +73,9 @@ const columns = computed(() => {
   @apply min-w-0 rounded-card border border-border-subtle bg-surface p-4;
 }
 
-.cms-layout--nested > .cms-layout__cell {
+.cms-layout--nested > .cms-layout__cell,
+.cms-layout--nested :deep(.cms-card),
+.cms-layout--nested :deep(.cms-documents) {
   @apply h-full;
 }
 </style>
