@@ -1,8 +1,12 @@
-export type PlanFeature = {
+type PlanFeatureBase = {
   code: string
   name: string
-  value: string
 }
+
+export type PlanFeature = PlanFeatureBase & (
+  | { type: 'boolean', value: boolean }
+  | { type: 'date' | 'text', value: string }
+)
 
 export type PlanCard = {
   id: string

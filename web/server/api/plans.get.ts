@@ -40,13 +40,26 @@ type OrderedFeature = PlanFeature & { order: number }
 
 const FALLBACK_COLOR = '#737373'
 const ICON_RE = /^[a-z0-9_]+$/i
+const DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+})
 
 const featureValue = (row: FeatureValueRow) => {
   if (row.displayValue) return row.displayValue
-  if (row.booleanValue != null) return row.booleanValue ? 'Yes' : 'No'
   const value =
-    row.stringValue ?? row.dateValue ?? row.integerValue ?? row.numberValue ?? row.linkValue
+    row.stringValue ?? row.integerValue ?? row.numberValue ?? row.linkValue
   return value == null ? null : String(value)
+}
+
+const formatDate = (value: string) => {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(value)
+  if (!match) return value
+  const [, year, month, day] = match
+  const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)))
+  return Number.isNaN(date.getTime()) ? value : DATE_FORMATTER.format(date)
 }
 
 const toFeature = (row: FeatureValueRow, today: string): OrderedFeature | null => {
@@ -61,14 +74,19 @@ const toFeature = (row: FeatureValueRow, today: string): OrderedFeature | null =
     return null
   }
 
-  const value = featureValue(row)
-  if (!value) return null
-  return {
+  const details = {
     code: feature.code || feature.name,
     name: feature.name,
-    value,
     order: feature.displayOrder ?? 0,
   }
+  if (row.booleanValue != null) {
+    return { ...details, type: 'boolean', value: row.booleanValue }
+  }
+  if (row.dateValue) {
+    return { ...details, type: 'date', value: formatDate(row.dateValue) }
+  }
+  const value = featureValue(row)
+  return value ? { ...details, type: 'text', value } : null
 }
 
 const toCard = (row: PlanRow, today: string): PlanCard | null => {

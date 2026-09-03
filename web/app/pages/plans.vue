@@ -69,7 +69,16 @@ const { data, pending, error } = await useAsyncData(
             <dl v-if="plan.features.length" class="feature-list">
               <div v-for="feature in plan.features" :key="feature.code" class="feature-row">
                 <dt>{{ feature.name }}</dt>
-                <dd>{{ feature.value }}</dd>
+                <dd>
+                  <span
+                    v-if="feature.type === 'boolean'"
+                    class="feature-boolean material-icons"
+                    :class="feature.value ? 'is-true' : 'is-false'"
+                    :aria-label="feature.value ? 'Yes' : 'No'"
+                    role="img"
+                  >{{ feature.value ? 'check_circle' : 'cancel' }}</span>
+                  <template v-else>{{ feature.value }}</template>
+                </dd>
               </div>
             </dl>
             <p v-else class="copy-muted">Plan details are not available yet.</p>
@@ -170,5 +179,21 @@ const { data, pending, error } = await useAsyncData(
 
 .feature-row dd {
   @apply max-w-48 text-right font-semibold text-heading;
+}
+
+.feature-boolean {
+  @apply inline-flex items-center justify-center text-xl;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.25;
+}
+
+.feature-boolean.is-true {
+  color: oklch(0.62 0.12 150);
+}
+
+.feature-boolean.is-false {
+  color: var(--color-danger);
 }
 </style>

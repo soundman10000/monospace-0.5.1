@@ -258,6 +258,7 @@ services:
       PORT: "3000"
       NUXT_TELEMETRY_DISABLED: "1"
       CHOKIDAR_USEPOLLING: "true"
+      NODE_EXTRA_CA_CERTS: "/web/certs/netskope-ca.pem"
       NUXT_MONOSPACE_URL: "http://monospace:8100"
       NUXT_PUBLIC_MONOSPACE_PROJECT: "dans-auto"
       NUXT_SESSION_PASSWORD: "local-web-session-secret-do-not-use-32"
