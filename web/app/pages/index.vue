@@ -92,7 +92,6 @@ const { data: benefits, pending, error } = await useAsyncData(
 .benefit-list {
   @apply mt-8 grid list-none items-stretch gap-4 p-0;
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  grid-auto-rows: 1fr;
 }
 
 .benefit-list li {
@@ -116,10 +115,7 @@ const { data: benefits, pending, error } = await useAsyncData(
 }
 
 .benefit-card__swatch {
-  @apply flex shrink-0 items-center justify-center self-stretch;
-  aspect-ratio: 1 / 1;
-  height: 100%;
-  width: auto;
+  @apply flex w-20 shrink-0 items-center justify-center self-stretch;
   background: var(--benefit-color, var(--color-accent));
 }
 
@@ -130,4 +126,3 @@ const { data: benefits, pending, error } = await useAsyncData(
   font-style: normal;
 }
 </style>
-
