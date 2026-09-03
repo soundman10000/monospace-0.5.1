@@ -3,6 +3,7 @@ import type { CmsLayoutBlock } from '#shared/plan'
 
 const props = defineProps<{
   block: CmsLayoutBlock
+  nested?: boolean
 }>()
 
 const columns = computed(() => {
@@ -15,26 +16,26 @@ const columns = computed(() => {
 <template>
   <div
     class="cms-layout"
+    :class="{ 'cms-layout--nested': nested }"
     :style="{ '--layout-cols': String(columns) }"
   >
-    <div
-      v-for="child in block.blocks"
-      :key="child.id"
-      class="cms-layout__cell"
-    >
-      <CmsBlockTitle
-        v-if="child.collection === 'block_title'"
-        :block="child"
-      />
-      <CmsBlockMarkdown
-        v-else-if="child.collection === 'block_markdown'"
-        :block="child"
-      />
+    <template v-for="child in block.blocks" :key="child.id">
       <CmsLayoutGrid
-        v-else-if="child.collection === 'layout_grid_container'"
+        v-if="child.collection === 'layout_grid_container'"
         :block="child"
+        nested
       />
-    </div>
+      <div v-else class="cms-layout__cell">
+        <CmsBlockTitle
+          v-if="child.collection === 'block_title'"
+          :block="child"
+        />
+        <CmsBlockMarkdown
+          v-else-if="child.collection === 'block_markdown'"
+          :block="child"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -44,6 +45,10 @@ const columns = computed(() => {
 .cms-layout {
   @apply grid gap-4;
   grid-template-columns: 1fr;
+}
+
+.cms-layout--nested {
+  @apply min-h-0 min-w-0 self-stretch;
 }
 
 @media (min-width: 640px) {
@@ -56,11 +61,7 @@ const columns = computed(() => {
   @apply min-w-0 rounded-card border border-border-subtle bg-surface p-4;
 }
 
-.cms-layout .cms-layout {
-  @apply mt-0;
-}
-
-.cms-layout .cms-layout__cell {
-  @apply bg-page;
+.cms-layout--nested > .cms-layout__cell {
+  @apply h-full;
 }
 </style>
