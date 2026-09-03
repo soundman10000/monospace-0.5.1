@@ -57,12 +57,12 @@ useHead(() => ({
               v-if="data.coverage?.title"
               :block="data.coverage.title"
             />
-            <h1 v-else class="title title-home">{{ data.name }}</h1>
+            <h1 v-else class="plan-page__fallback-title">{{ data.name }}</h1>
             <CmsBlockMarkdown
               v-if="data.coverage?.description"
               :block="data.coverage.description"
             />
-            <p v-else-if="data.description" class="lede">
+            <p v-else-if="data.description" class="plan-page__fallback-copy">
               {{ data.description }}
             </p>
           </div>
@@ -94,7 +94,7 @@ useHead(() => ({
 @reference "../../assets/css/main.css";
 
 .plan-view {
-  @apply flex min-h-0 flex-1 flex-col;
+  @apply flex flex-col pb-24;
 }
 
 .breadcrumbs {
@@ -106,7 +106,7 @@ useHead(() => ({
 }
 
 .plan-page {
-  @apply mt-8 flex flex-col gap-8;
+  @apply mt-8 mb-8 flex flex-col gap-8;
 }
 
 .plan-page__masthead {
@@ -114,27 +114,33 @@ useHead(() => ({
 }
 
 .plan-page__icon-wrap {
-  @apply flex min-h-20 w-full shrink-0 items-center justify-center sm:w-24;
+  @apply flex min-h-14 w-full shrink-0 items-center justify-center sm:w-16;
   background: var(--plan-color, var(--color-accent));
 }
 
 .plan-page__icon {
-  @apply text-4xl leading-none text-white;
+  @apply text-3xl leading-none text-white;
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
 }
 
 .plan-page__intro {
-  @apply flex min-w-0 flex-1 flex-col justify-center px-5 py-5;
+  @apply flex min-w-0 flex-1 flex-col justify-center px-4 py-3;
 }
 
-.plan-page__intro :deep(.cms-title--h1) {
-  @apply mt-2;
+.plan-page__intro :deep(.cms-title--h1),
+.plan-page__fallback-title {
+  @apply font-heading mt-0.5 text-xl font-semibold leading-snug tracking-tight text-heading;
 }
 
-.plan-page__intro :deep(.cms-markdown) {
-  @apply mt-3 text-base text-muted;
+.plan-page__intro :deep(.cms-markdown),
+.plan-page__fallback-copy {
+  @apply mt-1 text-sm leading-normal text-muted;
+}
+
+.plan-page__intro :deep(.cms-markdown p + p) {
+  @apply mt-1.5;
 }
 
 .plan-page__section-title {
