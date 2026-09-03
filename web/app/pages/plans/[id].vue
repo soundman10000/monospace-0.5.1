@@ -14,11 +14,8 @@ const { data, pending, error } = await useAsyncData(
 )
 
 const benefitName = computed(() => data.value?.benefit.name || 'Benefit')
-const benefitCode = computed(() => data.value?.benefit.code || '')
 const plansHref = computed(() =>
-  benefitCode.value
-    ? { path: '/plans', query: { benefit: benefitCode.value } }
-    : '/plans',
+  data.value?.benefit.id ? `/benefits/${data.value.benefit.id}` : '/',
 )
 
 useHead(() => ({

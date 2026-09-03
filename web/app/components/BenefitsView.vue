@@ -13,7 +13,7 @@ const openPlans = (benefit: BenefitCard) => {
   if (cardsLeaving.value) return
   cardsLeaving.value = true
   window.setTimeout(() => {
-    navigateTo({ path: '/plans', query: { benefit: benefit.code } })
+    navigateTo(`/benefits/${benefit.id}`)
   }, 300)
 }
 

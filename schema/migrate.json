@@ -6,7 +6,6 @@
         "kind": "single",
         "data": {
           "relationName": "modelBenefit_benefit_id",
-          "replace": true,
           "onDelete": "noAction",
           "onUpdate": "noAction",
           "firstField": {
@@ -35,7 +34,6 @@
         "kind": "single",
         "data": {
           "relationName": "modelPlan_plan_id",
-          "replace": true,
           "onDelete": "noAction",
           "onUpdate": "noAction",
           "firstField": {

@@ -19,15 +19,15 @@ export type PlanCard = {
   features: PlanFeature[]
 }
 
-export type PlansResult = {
-  benefitCode: string
-  plans: PlanCard[]
-}
-
 export type PlanBenefit = {
   id: string
   code: string
   name: string
+}
+
+export type PlansResult = {
+  benefit: PlanBenefit
+  plans: PlanCard[]
 }
 
 export type CmsTitleBlock = {

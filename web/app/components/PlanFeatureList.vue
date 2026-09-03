@@ -25,7 +25,7 @@ withDefaults(defineProps<{
           :class="feature.value ? 'is-true' : 'is-false'"
           :aria-label="feature.value ? 'Yes' : 'No'"
           role="img"
-        >{{ feature.value ? 'check_circle' : 'cancel' }}</span>
+        >{{ feature.value ? 'check' : 'close' }}</span>
         <template v-else>{{ feature.value }}</template>
       </dd>
     </div>
@@ -57,18 +57,19 @@ withDefaults(defineProps<{
 }
 
 .feature-boolean {
-  @apply inline-flex items-center justify-center text-xl;
+  @apply inline-flex size-6 items-center justify-center rounded-full text-[1.05rem] leading-none;
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  line-height: 1.25;
 }
 
 .feature-boolean.is-true {
-  color: oklch(0.62 0.12 150);
+  background: oklch(0.95 0.04 155);
+  color: oklch(0.48 0.12 155);
 }
 
 .feature-boolean.is-false {
+  background: oklch(0.96 0.02 25);
   color: var(--color-danger);
 }
 </style>

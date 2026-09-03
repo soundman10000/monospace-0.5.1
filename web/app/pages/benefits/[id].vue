@@ -6,18 +6,18 @@ definePageMeta({
 })
 
 const route = useRoute()
-const benefitCode = typeof route.query.benefit === 'string' ? route.query.benefit : ''
-const benefitName = benefitCode
-  .replace(/[-_]+/g, ' ')
-  .toLowerCase()
-  .replace(/\b\w/g, (letter) => letter.toUpperCase()) || 'Benefit'
-
-useHead({ title: `${benefitName} Plans` })
+const benefitId = computed(() => String(route.params.id || ''))
 
 const { data, pending, error } = await useAsyncData(
-  `plans-${benefitCode}`,
-  () => apiFetch<PlansResult>('/api/plans', { query: { benefit: benefitCode } }),
+  () => `benefit-${benefitId.value}`,
+  () => apiFetch<PlansResult>(`/api/benefits/${benefitId.value}`),
 )
+
+const benefitName = computed(() => data.value?.benefit.name || 'Benefit')
+
+useHead(() => ({
+  title: `${benefitName.value} Plans`,
+}))
 </script>
 
 <template>
