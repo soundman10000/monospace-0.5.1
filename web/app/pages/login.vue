@@ -19,7 +19,7 @@ const errorMessage = ref('')
 const pending = ref(false)
 const opening = ref(false)
 const hasError = computed(() => Boolean(errorMessage.value))
-const OPEN_MS = 400
+const OPEN_MS = 220
 
 const clearError = () => {
   errorMessage.value = ''
@@ -170,9 +170,9 @@ const onSubmit = async () => {
   position: relative;
   z-index: 2;
   transition:
-    width 0.5s cubic-bezier(0.65, 0, 0.35, 1),
-    max-width 0.5s cubic-bezier(0.65, 0, 0.35, 1),
-    flex-basis 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    width 0.22s cubic-bezier(0.65, 0, 0.35, 1),
+    max-width 0.22s cubic-bezier(0.65, 0, 0.35, 1),
+    flex-basis 0.22s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @media (min-width: 1024px) {
