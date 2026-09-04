@@ -132,7 +132,7 @@ const choose = async (workspace: WorkspaceCard) => {
 }
 
 .client-select__media {
-  @apply relative h-[36vh] shrink-0 overflow-hidden bg-ink lg:h-auto lg:min-h-0 lg:w-1/3 lg:self-stretch;
+  @apply relative h-[100px] shrink-0 overflow-hidden bg-ink lg:h-auto lg:min-h-0 lg:w-1/3 lg:self-stretch;
 }
 
 .client-select__media img {
@@ -140,12 +140,12 @@ const choose = async (workspace: WorkspaceCard) => {
 }
 
 .client-select__title {
-  @apply font-heading absolute inset-x-0 top-0 z-10 pt-10 pr-5 pb-8 pl-8 text-4xl font-extrabold leading-tight text-white;
+  @apply font-heading absolute inset-x-0 top-0 z-10 px-5 py-4 text-xl font-extrabold leading-tight text-white lg:pt-10 lg:pr-5 lg:pb-8 lg:pl-8 lg:text-4xl;
   background: linear-gradient(to bottom, rgb(0 0 0 / 0.5), transparent);
 }
 
 .client-select__panel {
-  @apply flex min-h-0 flex-1 flex-col justify-start overflow-y-auto px-6 py-6 sm:px-8 lg:px-10;
+  @apply flex min-h-0 flex-1 flex-col justify-start overflow-y-auto px-9 py-9 sm:px-12 lg:px-16;
 }
 
 .client-select__panel .workspace-list {

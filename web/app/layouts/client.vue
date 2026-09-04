@@ -8,7 +8,10 @@ const bannerSrc = '/api/media/dans-client'
     <AppHeader />
     <main class="client-layout">
       <section class="client-layout__content">
-        <slot />
+        <div class="client-layout__scroll">
+          <slot />
+        </div>
+        <AppFooter />
       </section>
 
       <aside
@@ -29,11 +32,19 @@ const bannerSrc = '/api/media/dans-client'
 }
 
 .client-layout__content {
-  @apply flex min-h-0 flex-1 flex-col justify-start overflow-y-auto px-8 py-6 sm:px-12 lg:px-16;
+  @apply flex min-h-0 flex-1 flex-col overflow-hidden pt-4;
+}
+
+.client-layout__scroll {
+  @apply min-h-0 flex-1 overflow-y-auto px-12 sm:px-18 lg:px-24;
+}
+
+.client-layout__content :deep(.app-footer) {
+  @apply px-12 sm:px-18 lg:px-24;
 }
 
 .client-layout__banner {
-  @apply relative min-h-[36vh] w-full overflow-hidden border-r-banner border-accent lg:min-h-0 lg:w-1/3 lg:flex-none lg:self-stretch;
+  @apply relative h-[100px] w-full shrink-0 overflow-hidden border-r-banner border-accent lg:h-auto lg:min-h-0 lg:w-1/3 lg:flex-none lg:self-stretch;
 }
 
 .client-layout__image {

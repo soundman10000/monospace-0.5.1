@@ -30,7 +30,7 @@ useHead(() => ({
 
 <template>
   <div class="plans-view">
-    <nav aria-label="Breadcrumb">
+    <nav class="breadcrumbs-nav" aria-label="Breadcrumb">
       <ol class="breadcrumbs">
         <li><NuxtLink to="/">Benefits</NuxtLink></li>
         <li aria-hidden="true">/</li>
@@ -95,6 +95,10 @@ useHead(() => ({
   @apply flex min-h-0 flex-1 flex-col;
 }
 
+.breadcrumbs-nav {
+  @apply sticky top-0 z-10 bg-page pb-1;
+}
+
 .breadcrumbs {
   @apply flex list-none items-center gap-2 p-0 text-sm text-muted;
 }
@@ -104,7 +108,7 @@ useHead(() => ({
 }
 
 .plans-heading {
-  @apply mt-8 max-w-3xl;
+  @apply mt-4 max-w-3xl;
 }
 
 .plans-status {

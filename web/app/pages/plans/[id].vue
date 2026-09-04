@@ -29,7 +29,7 @@ useHead(() => ({
     <p v-else-if="error" class="status-error">Could not load this plan</p>
 
     <template v-else-if="data">
-      <nav aria-label="Breadcrumb">
+      <nav class="breadcrumbs-nav" aria-label="Breadcrumb">
         <ol class="breadcrumbs">
           <li><NuxtLink to="/">Benefits</NuxtLink></li>
           <li aria-hidden="true">/</li>
@@ -94,6 +94,10 @@ useHead(() => ({
   @apply flex flex-col pb-24;
 }
 
+.breadcrumbs-nav {
+  @apply sticky top-0 z-10 bg-page pb-1;
+}
+
 .breadcrumbs {
   @apply flex list-none flex-wrap items-center gap-2 p-0 text-sm text-muted;
 }
@@ -103,7 +107,7 @@ useHead(() => ({
 }
 
 .plan-page {
-  @apply mt-8 mb-8 flex flex-col gap-8;
+  @apply mt-4 mb-8 flex flex-col gap-8;
 }
 
 .plan-page__masthead {
