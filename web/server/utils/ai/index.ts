@@ -5,6 +5,7 @@ import { createXaiChatProvider } from './xai'
 
 export type { ChatProvider, ChatProviderOptions, ChatStreamHandlers, ChatTool, ChatToolCall } from './provider'
 export { openMcpClient } from './mcp'
+export { createCmsTools } from './cms-tools'
 
 const MAX_MESSAGES = 40
 const MAX_CONTENT_LENGTH = 8000
@@ -67,7 +68,7 @@ export const buildSystemPrompt = (input: {
   const lines = [
     DEFAULT_SYSTEM_PROMPT,
     'Help the signed-in employee understand their benefits, plans, and coverage.',
-    'Do not invent plan names, prices, or eligibility. If you lack data, say so.',
+    'Do not invent plan names, prices, eligibility, or card copy. If a tool returns nothing, say so.',
   ]
 
   if (input.user) {
@@ -80,25 +81,23 @@ export const buildSystemPrompt = (input: {
   }
 
   if (input.context) {
-    const parts = [`Current page path: ${input.context.path}`]
-    if (input.context.title) parts.push(`title: ${input.context.title}`)
-    lines.push(parts.join(', ') + '.')
+    const parts = [`The employee is currently at ${input.context.path}`]
+    if (input.context.title) parts.push(`(${input.context.title})`)
+    lines.push(`${parts.join(' ')}. That path is only orientation. Do not assume page content from it.`)
     const params = input.context.params
-    if (params) {
-      if (params.id && input.context.path.startsWith('/plans/')) {
-        lines.push(`The employee is viewing plan id ${params.id}.`)
-      } else if (params.id && input.context.path.startsWith('/benefits/')) {
-        lines.push(`The employee is viewing benefit id ${params.id}.`)
-      }
+    if (params?.id && input.context.path.startsWith('/plans/')) {
+      lines.push(`Current plan id: ${params.id}.`)
+    } else if (params?.id && input.context.path.startsWith('/benefits/')) {
+      lines.push(`Current benefit id: ${params.id}.`)
     }
   }
 
   if (input.toolsAvailable) {
     lines.push(
-      'You have Monospace MCP tools for this workspace: read_schema, list_items, and read_data_sources.',
-      'Use them to look up live records. Typical collections include benefit, plan, and related coverage tables.',
-      'Call read_schema when you need collection or field names, then list_items with those fields.',
-      'Keep list_items limits small. Never create, update, delete, or migrate data.',
+      'Do not quote from the webpage. Load data with tools.',
+      'For benefit and plan catalog rows (names, codes, features), use MCP: read_schema then list_items. Fields are strings only; follow ids across calls.',
+      'For coverage page copy and cards, use the CMS tools: read_cms_schema, list_coverage_pages, read_plan_coverage. MCP list_items cannot return that nest.',
+      'read_plan_coverage is the way to quote card titles and body text. Keep list_items limits small. Never create, update, delete, or migrate data.',
     )
   }
 

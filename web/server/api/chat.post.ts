@@ -1,6 +1,7 @@
 import type { ChatRequest, ChatStreamEvent } from '#shared/chat'
 import {
   buildSystemPrompt,
+  createCmsTools,
   getChatProvider,
   openMcpClient,
   parseChatContext,
@@ -39,7 +40,7 @@ export default defineEventHandler(async (event) => {
   event.node.req.once('aborted', () => abort.abort())
 
   let tools: ChatTool[] = []
-  let executeTool: ((call: ChatToolCall) => Promise<string>) | undefined
+  const runTool = new Map<string, (call: ChatToolCall) => Promise<string>>()
 
   if (workspace?.apiName) {
     try {
@@ -49,11 +50,25 @@ export default defineEventHandler(async (event) => {
         accessToken,
         signal: abort.signal,
       })
-      tools = await mcp.listTools()
-      executeTool = (call) => mcp.callTool(call)
+      for (const tool of await mcp.listTools()) {
+        tools.push(tool)
+        runTool.set(tool.name, (call) => mcp.callTool(call))
+      }
     } catch {
-      tools = []
-      executeTool = undefined
+      // Chat still works without MCP.
+    }
+
+    try {
+      const cms = createCmsTools({
+        planId: context?.path.startsWith('/plans/') ? context.params?.id : undefined,
+        benefitId: context?.path.startsWith('/benefits/') ? context.params?.id : undefined,
+      })
+      for (const tool of cms.tools) {
+        tools.push(tool)
+        runTool.set(tool.name, cms.execute)
+      }
+    } catch {
+      // Chat still works without CMS tools.
     }
   }
 
@@ -77,7 +92,13 @@ export default defineEventHandler(async (event) => {
           toolsAvailable: tools.length > 0,
         }),
         tools,
-        executeTool,
+        executeTool: runTool.size
+          ? async (call) => {
+              const execute = runTool.get(call.name)
+              if (!execute) return JSON.stringify({ error: `Unknown tool ${call.name}` })
+              return execute(call)
+            }
+          : undefined,
       })
       await send({ type: 'done' })
     } catch (error) {
