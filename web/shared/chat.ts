@@ -5,8 +5,15 @@ export type ChatMessage = {
   content: string
 }
 
+export type ChatPageContext = {
+  path: string
+  title?: string
+  params?: Record<string, string>
+}
+
 export type ChatRequest = {
   messages: ChatMessage[]
+  context?: ChatPageContext
 }
 
 export type ChatStreamDelta = {

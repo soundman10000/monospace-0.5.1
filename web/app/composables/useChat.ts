@@ -1,4 +1,4 @@
-import type { ChatMessage, ChatRequest, ChatStreamEvent } from '#shared/chat'
+import type { ChatMessage, ChatPageContext, ChatRequest, ChatStreamEvent } from '#shared/chat'
 
 let abortController: AbortController | null = null
 const introTimers: ReturnType<typeof setTimeout>[] = []
@@ -184,11 +184,23 @@ export const useChat = () => {
     ]
     streaming.value = true
 
+    const route = useRoute()
+    const params: Record<string, string> = {}
+    for (const [key, value] of Object.entries(route.params)) {
+      const text = Array.isArray(value) ? value[0] : value
+      if (typeof text === 'string' && text) params[key] = text
+    }
+    const context: ChatPageContext = {
+      path: route.path,
+      title: import.meta.client ? document.title : undefined,
+      params: Object.keys(params).length ? params : undefined,
+    }
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ messages: outgoing } satisfies ChatRequest),
+        body: JSON.stringify({ messages: outgoing, context } satisfies ChatRequest),
         credentials: 'include',
         signal,
       })

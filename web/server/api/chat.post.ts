@@ -1,5 +1,13 @@
 import type { ChatRequest, ChatStreamEvent } from '#shared/chat'
-import { getChatProvider, parseChatMessages } from '../utils/ai'
+import {
+  buildSystemPrompt,
+  getChatProvider,
+  openMcpClient,
+  parseChatContext,
+  parseChatMessages,
+  type ChatTool,
+  type ChatToolCall,
+} from '../utils/ai'
 import { requireAuth } from '../utils/session'
 
 const publicChatError = (error: unknown): string => {
@@ -18,14 +26,38 @@ const publicChatError = (error: unknown): string => {
 }
 
 export default defineEventHandler(async (event) => {
-  requireAuth(event)
+  const accessToken = requireAuth(event)
   const body = await readBody<ChatRequest>(event)
   const messages = parseChatMessages(body)
+  const context = parseChatContext(body)
+  const workspace = event.context.workspace ?? null
+  const user = event.context.user ?? null
   const provider = getChatProvider()
   provider.assertConfigured()
 
-  const eventStream = createEventStream(event)
   const abort = new AbortController()
+  event.node.req.once('aborted', () => abort.abort())
+
+  let tools: ChatTool[] = []
+  let executeTool: ((call: ChatToolCall) => Promise<string>) | undefined
+
+  if (workspace?.apiName) {
+    try {
+      const mcp = await openMcpClient({
+        baseUrl: String(useRuntimeConfig(event).monospaceUrl),
+        workspace: workspace.apiName,
+        accessToken,
+        signal: abort.signal,
+      })
+      tools = await mcp.listTools()
+      executeTool = (call) => mcp.callTool(call)
+    } catch {
+      tools = []
+      executeTool = undefined
+    }
+  }
+
+  const eventStream = createEventStream(event)
   eventStream.onClosed(() => abort.abort())
 
   const send = async (payload: ChatStreamEvent) => {
@@ -38,6 +70,14 @@ export default defineEventHandler(async (event) => {
       await provider.streamChat(messages, {
         signal: abort.signal,
         onDelta: (text) => send({ type: 'delta', text }),
+        systemPrompt: buildSystemPrompt({
+          user,
+          workspace,
+          context,
+          toolsAvailable: tools.length > 0,
+        }),
+        tools,
+        executeTool,
       })
       await send({ type: 'done' })
     } catch (error) {

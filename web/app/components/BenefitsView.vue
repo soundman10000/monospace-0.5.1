@@ -7,6 +7,12 @@ const displayName = computed(
   () => auth.value.user?.fullName || auth.value.user?.email || 'there',
 )
 
+useHead(() => ({
+  title: auth.value.workspace?.displayName
+    ? `${auth.value.workspace.displayName} benefits`
+    : 'Benefits',
+}))
+
 const { leavingId, startLeave } = useLeavingCard()
 
 const openPlans = async (benefit: BenefitCard) => {
