@@ -262,6 +262,9 @@ services:
       NUXT_MONOSPACE_URL: "http://monospace:8100"
       NUXT_PUBLIC_MONOSPACE_PROJECT: "dans-auto"
       NUXT_SESSION_PASSWORD: "local-web-session-secret-do-not-use-32"
+      NUXT_AI_PROVIDER: xai
+      NUXT_XAI_API_KEY: ${DIRECTUS_AI_XAI_API_KEY:-}
+      NUXT_XAI_MODEL: grok-4.6
     depends_on:
       monospace:
         condition: service_started

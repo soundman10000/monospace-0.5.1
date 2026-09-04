@@ -19,6 +19,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     monospaceUrl: 'http://localhost:8100',
     sessionPassword: 'local-web-session-secret-do-not-use-32',
+    aiProvider: 'xai',
+    xaiApiKey: '',
+    xaiModel: 'grok-4.6',
     public: {
       monospaceProject: 'dans-auto',
     },
