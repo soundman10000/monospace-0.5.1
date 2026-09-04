@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { markdownToHtml } from '~/utils/markdown'
+
 const { open, messages, draft, streaming, error, closeDrawer, newChat, send } = useChat()
 
 const scroller = ref<HTMLElement | null>(null)
@@ -102,9 +104,14 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onWindowKeydown))
           >
             <div class="chat-drawer__bubble">
               <p
-                v-if="message.content"
+                v-if="message.role === 'user' && message.content"
                 class="chat-drawer__text"
               >{{ message.content }}</p>
+              <div
+                v-else-if="message.role === 'assistant' && message.content"
+                class="chat-drawer__markdown"
+                v-html="markdownToHtml(message.content, { breaks: true })"
+              />
               <p
                 v-else-if="thinking && index === messages.length - 1"
                 class="chat-drawer__thinking"
@@ -235,6 +242,99 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onWindowKeydown))
 
 .chat-drawer__text {
   @apply m-0 whitespace-pre-wrap break-words;
+}
+
+.chat-drawer__markdown {
+  @apply text-sm leading-relaxed break-words;
+}
+
+.chat-drawer__markdown :deep(p),
+.chat-drawer__markdown :deep(ul),
+.chat-drawer__markdown :deep(ol),
+.chat-drawer__markdown :deep(h1),
+.chat-drawer__markdown :deep(h2),
+.chat-drawer__markdown :deep(h3) {
+  @apply m-0;
+}
+
+.chat-drawer__markdown :deep(p + p),
+.chat-drawer__markdown :deep(p + ul),
+.chat-drawer__markdown :deep(p + ol),
+.chat-drawer__markdown :deep(ul + p),
+.chat-drawer__markdown :deep(ol + p),
+.chat-drawer__markdown :deep(h1 + p),
+.chat-drawer__markdown :deep(h2 + p),
+.chat-drawer__markdown :deep(h3 + p),
+.chat-drawer__markdown :deep(p + h2),
+.chat-drawer__markdown :deep(p + h3),
+.chat-drawer__markdown :deep(ul + h2),
+.chat-drawer__markdown :deep(ol + h2) {
+  @apply mt-2;
+}
+
+.chat-drawer__markdown :deep(ul),
+.chat-drawer__markdown :deep(ol) {
+  @apply space-y-1 pl-5;
+}
+
+.chat-drawer__markdown :deep(ul) {
+  @apply list-disc;
+}
+
+.chat-drawer__markdown :deep(ol) {
+  @apply list-decimal;
+}
+
+.chat-drawer__markdown :deep(h1),
+.chat-drawer__markdown :deep(h2),
+.chat-drawer__markdown :deep(h3) {
+  @apply font-heading font-semibold text-heading;
+}
+
+.chat-drawer__markdown :deep(h1) {
+  @apply text-base;
+}
+
+.chat-drawer__markdown :deep(h2),
+.chat-drawer__markdown :deep(h3) {
+  @apply text-sm;
+}
+
+.chat-drawer__markdown :deep(strong) {
+  @apply font-semibold text-heading;
+}
+
+.chat-drawer__markdown :deep(a) {
+  @apply text-heading underline decoration-1 underline-offset-2;
+}
+
+.chat-drawer__markdown :deep(code) {
+  @apply rounded-control bg-surface px-1 py-0.5 font-mono text-[0.8em];
+}
+
+.chat-drawer__markdown :deep(pre) {
+  @apply my-2 overflow-x-auto rounded-control bg-surface p-2;
+}
+
+.chat-drawer__markdown :deep(pre code) {
+  @apply bg-transparent p-0;
+}
+
+.chat-drawer__markdown :deep(blockquote) {
+  @apply my-2 border-l-2 border-border-subtle pl-3 text-muted;
+}
+
+.chat-drawer__markdown :deep(table) {
+  @apply my-2 w-full border-collapse text-left;
+}
+
+.chat-drawer__markdown :deep(th),
+.chat-drawer__markdown :deep(td) {
+  @apply border-b border-border-subtle px-2 py-1 align-top;
+}
+
+.chat-drawer__markdown :deep(hr) {
+  @apply my-3 border-border-subtle;
 }
 
 .chat-drawer__thinking {

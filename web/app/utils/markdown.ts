@@ -1,3 +1,5 @@
+import { Marked, type Tokens } from 'marked'
+
 const escapeHtml = (value: string) =>
   value
     .replaceAll('&', '&amp;')
@@ -5,24 +7,35 @@ const escapeHtml = (value: string) =>
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
 
-const withInline = (value: string) =>
-  escapeHtml(value).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+const isSafeHref = (href: string) => /^(https?:|mailto:)/i.test(href.trim())
 
-const isListItem = (line: string) => /^[-*]\s+/.test(line)
+const renderer = {
+  html() {
+    return ''
+  },
+  link({ href, title, text }: Tokens.Link) {
+    if (!href || !isSafeHref(href)) return text
+    const titleAttr = title ? ` title="${escapeHtml(title)}"` : ''
+    return `<a href="${escapeHtml(href)}"${titleAttr} target="_blank" rel="noreferrer">${text}</a>`
+  },
+  image({ text }: Tokens.Image) {
+    return escapeHtml(text || '')
+  },
+}
 
-export const markdownToHtml = (source: string) => {
-  const blocks = source.replaceAll('\r\n', '\n').trim().split(/\n{2,}/)
-  return blocks
-    .map((block) => {
-      const lines = block.split('\n').map((line) => line.trimEnd())
-      if (lines.length && lines.every((line) => !line || isListItem(line))) {
-        const items = lines
-          .filter(isListItem)
-          .map((line) => `<li>${withInline(line.replace(/^[-*]\s+/, ''))}</li>`)
-          .join('')
-        return items ? `<ul>${items}</ul>` : ''
-      }
-      return `<p>${lines.map((line) => withInline(line)).join('<br>')}</p>`
-    })
-    .join('')
+const chatMarked = new Marked({
+  gfm: true,
+  breaks: true,
+  renderer,
+})
+
+const pageMarked = new Marked({
+  gfm: true,
+  breaks: false,
+  renderer,
+})
+
+export const markdownToHtml = (source: string, options?: { breaks?: boolean }) => {
+  const parser = options?.breaks ? chatMarked : pageMarked
+  return parser.parse(source, { async: false }) as string
 }
