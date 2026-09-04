@@ -64,12 +64,12 @@ withDefaults(defineProps<{
 }
 
 .feature-boolean.is-true {
-  background: oklch(0.95 0.04 155);
-  color: oklch(0.48 0.12 155);
+  background: var(--feature-true-bg);
+  color: var(--feature-true-fg);
 }
 
 .feature-boolean.is-false {
-  background: oklch(0.96 0.02 25);
+  background: var(--feature-false-bg);
   color: var(--color-danger);
 }
 </style>

@@ -1,6 +1,7 @@
 import { useSession } from 'h3'
 import type { H3Event } from 'h3'
 import type { AuthUser, AuthWorkspace } from '#shared/auth'
+import { isThemeName, type ThemeName } from '#shared/theme'
 import { refreshTokens, type LoginTokens } from './auth-api'
 
 export type AuthSession = {
@@ -9,6 +10,7 @@ export type AuthSession = {
   expiresAt?: number
   user?: AuthUser
   workspace?: AuthWorkspace
+  theme?: ThemeName
 }
 
 const sessionOptions = (event: H3Event) => ({
@@ -25,10 +27,14 @@ const sessionOptions = (event: H3Event) => ({
 export const getAuthSession = (event: H3Event) =>
   useSession<AuthSession>(event, sessionOptions(event))
 
+export const sessionTheme = (data: AuthSession): ThemeName =>
+  isThemeName(data.theme) ? data.theme : 'light'
+
 const applyAuthContext = (event: H3Event, data: AuthSession) => {
   event.context.accessToken = data.accessToken
   event.context.user = data.user ?? null
   event.context.workspace = data.workspace ?? null
+  event.context.theme = sessionTheme(data)
 }
 
 export const setAuthSession = async (
@@ -46,6 +52,7 @@ export const setAuthSession = async (
     workspace: extras && 'workspace' in extras
       ? extras.workspace ?? null
       : session.data.workspace,
+    theme: sessionTheme(session.data),
   }
   await session.update(next)
   applyAuthContext(event, next)
@@ -53,8 +60,16 @@ export const setAuthSession = async (
 
 export const clearAuthSession = async (event: H3Event) => {
   const session = await getAuthSession(event)
+  const theme = sessionTheme(session.data)
   await session.clear()
-  applyAuthContext(event, {})
+  await session.update({ theme })
+  applyAuthContext(event, { theme })
+}
+
+export const setSessionTheme = async (event: H3Event, theme: ThemeName) => {
+  const session = await getAuthSession(event)
+  await session.update({ theme })
+  event.context.theme = theme
 }
 
 export const requireAuth = (event: H3Event = useEvent()) => {
@@ -76,8 +91,7 @@ export const requireAccessToken = async (event: H3Event) => {
   }
 
   if (!data.refreshToken || !data.user) {
-    await session.clear()
-    applyAuthContext(event, {})
+    await clearAuthSession(event)
     return null
   }
 
@@ -86,8 +100,7 @@ export const requireAccessToken = async (event: H3Event) => {
     await setAuthSession(event, tokens, data.user)
     return tokens.accessToken
   } catch {
-    await session.clear()
-    applyAuthContext(event, {})
+    await clearAuthSession(event)
     return null
   }
 }

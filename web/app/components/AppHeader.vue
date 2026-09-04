@@ -4,6 +4,7 @@ const INSIGHT_NAME = 'Lumina Insights'
 
 const auth = useAuth()
 const { logout, pending } = useLogout()
+const { dark, toggleTheme } = useThemeToggle()
 const changingClient = ref(false)
 
 const workspace = computed(() => auth.value.workspace)
@@ -154,6 +155,16 @@ const changeClient = async () => {
             </p>
           </div>
           <button
+            type="button"
+            class="app-header__menu-item app-header__theme"
+            role="menuitemcheckbox"
+            :aria-checked="dark"
+            @click="toggleTheme"
+          >
+            <span>Dark theme</span>
+            <span class="theme-switch" aria-hidden="true" />
+          </button>
+          <button
             v-if="workspace"
             type="button"
             class="app-header__menu-item"
@@ -215,7 +226,7 @@ const changeClient = async () => {
   top: 0;
   right: 0;
   z-index: 1;
-  width: 13rem;
+  width: 14rem;
   height: calc(100% + 0.75rem);
 }
 
@@ -240,7 +251,7 @@ const changeClient = async () => {
 }
 
 .app-header__menu {
-  @apply invisible pointer-events-none absolute top-full right-0 z-20 min-w-52 pt-3 opacity-0;
+  @apply invisible pointer-events-none absolute top-full right-0 z-20 min-w-56 pt-3 opacity-0;
   transform: translateY(0.35rem);
   transition:
     opacity 0.28s ease,
@@ -283,5 +294,34 @@ const changeClient = async () => {
 
 .app-header__menu-item {
   @apply flex w-full cursor-pointer rounded-control px-3 py-2 text-left text-sm text-heading no-underline hover:bg-page disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.app-header__theme {
+  @apply items-center justify-between gap-3;
+}
+
+.theme-switch {
+  @apply relative h-5 w-9 shrink-0 rounded-pill bg-border-subtle;
+}
+
+.theme-switch::after {
+  content: '';
+  @apply absolute top-0.5 left-0.5 h-4 w-4 rounded-pill;
+  background: white;
+  transition: transform 0.2s ease;
+}
+
+.app-header__theme[aria-checked='true'] .theme-switch {
+  @apply bg-accent;
+}
+
+.app-header__theme[aria-checked='true'] .theme-switch::after {
+  transform: translateX(1rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch::after {
+    transition: none;
+  }
 }
 </style>
