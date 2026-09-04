@@ -11,7 +11,6 @@ const bannerSrc = '/api/media/dans-client'
         <div class="client-layout__scroll">
           <slot />
         </div>
-        <AppFooter />
       </section>
 
       <aside
@@ -21,6 +20,8 @@ const bannerSrc = '/api/media/dans-client'
         <img :src="bannerSrc" alt="" class="client-layout__image">
         <BannerQuotes />
       </aside>
+
+      <AppFooter class="client-layout__footer" />
     </main>
   </div>
 </template>
@@ -29,7 +30,7 @@ const bannerSrc = '/api/media/dans-client'
 @reference "../assets/css/main.css";
 
 .client-layout {
-  @apply flex min-h-0 flex-1 flex-col overflow-hidden lg:flex-row;
+  @apply flex min-h-0 flex-1 flex-col overflow-hidden;
 }
 
 .client-layout__content {
@@ -40,12 +41,42 @@ const bannerSrc = '/api/media/dans-client'
   @apply min-h-0 flex-1 overflow-y-auto px-12 sm:px-18 lg:px-24;
 }
 
-.client-layout__content :deep(.app-footer) {
+.client-layout__footer {
+  @apply shrink-0;
+}
+
+.client-layout :deep(.app-footer) {
   @apply px-12 sm:px-18 lg:px-24;
 }
 
 .client-layout__banner {
-  @apply relative h-[100px] w-full shrink-0 overflow-hidden border-r-banner border-accent lg:h-auto lg:min-h-0 lg:w-1/3 lg:flex-none lg:self-stretch;
+  @apply relative h-[100px] w-full shrink-0 overflow-hidden border-r-banner border-accent;
+}
+
+@media (min-width: 1024px) {
+  .client-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 33.333%);
+    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'content banner'
+      'footer banner';
+  }
+
+  .client-layout__content {
+    grid-area: content;
+  }
+
+  .client-layout__banner {
+    grid-area: banner;
+    height: auto;
+    min-height: 0;
+    align-self: stretch;
+  }
+
+  .client-layout__footer {
+    grid-area: footer;
+  }
 }
 
 .client-layout__image {

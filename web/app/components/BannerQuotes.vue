@@ -100,7 +100,10 @@ onBeforeUnmount(() => {
 }
 
 .banner-quote {
-  @apply font-heading absolute z-10 max-w-[86%] px-10 py-9 text-white;
+  @apply font-heading absolute z-10 max-w-[90%] px-5 py-3 text-center text-white lg:max-w-[86%] lg:px-10 lg:py-9 lg:text-left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.9s ease;
 }
@@ -123,34 +126,44 @@ onBeforeUnmount(() => {
   opacity: 1;
 }
 
-.banner-quote--upper {
-  top: 8%;
-}
-
-.banner-quote--lower {
-  bottom: 8%;
-}
-
-.banner-quote.is-left {
-  left: 2%;
-  right: auto;
-}
-
-.banner-quote.is-right {
-  right: 2%;
-  left: auto;
-}
-
 .banner-quote__text {
-  @apply m-0 text-2xl font-light leading-snug tracking-tight italic;
+  @apply m-0 text-sm font-light leading-snug tracking-tight italic lg:text-2xl;
   text-shadow:
     0 1px 2px rgb(0 0 0 / 0.55),
     0 8px 18px rgb(0 0 0 / 0.45);
 }
 
 .banner-quote__by {
-  @apply mt-3 text-sm font-normal not-italic tracking-wide text-white/85;
+  @apply mt-1 text-[0.65rem] font-normal not-italic tracking-wide text-white/85 lg:mt-3 lg:text-sm;
   text-shadow: 0 1px 2px rgb(0 0 0 / 0.55);
+}
+
+@media (min-width: 1024px) {
+  .banner-quote {
+    top: auto;
+    left: auto;
+    transform: none;
+  }
+
+  .banner-quote--upper {
+    top: 8%;
+    bottom: auto;
+  }
+
+  .banner-quote--lower {
+    top: auto;
+    bottom: 8%;
+  }
+
+  .banner-quote.is-left {
+    left: 2%;
+    right: auto;
+  }
+
+  .banner-quote.is-right {
+    right: 2%;
+    left: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
