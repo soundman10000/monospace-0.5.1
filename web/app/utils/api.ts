@@ -10,6 +10,7 @@ const redirectUnauthenticatedUser = async (url: string) => {
   const route = useRoute()
   if (route.path === '/login') return
 
+  useChat().reset({ close: true })
   useAuth().value = emptyAuth()
   await navigateTo('/login')
 }

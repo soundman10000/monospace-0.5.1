@@ -13,6 +13,8 @@ useHead({
 const CREDENTIALS_ERROR = 'Username or password is incorrect.'
 
 const auth = useAuth()
+const { reset } = useChat()
+reset({ close: true })
 const email = ref('')
 const password = ref('')
 const errorMessage = ref('')
@@ -47,6 +49,7 @@ const onSubmit = async () => {
         password: password.value,
       },
     })
+    reset({ close: true })
     auth.value = {
       loggedIn: true,
       user: result.user,
