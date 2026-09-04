@@ -16,6 +16,7 @@
   --color-accent: oklch(0.547 0.132 243.08);
   --color-button: oklch(0.4386 0 0);
   --color-button-hover: oklch(0.2972 0 0);
+  --color-on-button: oklch(1 0 0);
   --color-danger: oklch(0.577 0.245 27.325);
 
   --radius-control: 0.5rem;
@@ -53,8 +54,9 @@ html.dark {
   --color-border-hover: oklch(0.42 0 0);
   --color-focus: oklch(0.62 0.12 242.49);
   --color-accent: oklch(0.65 0.12 243.08);
-  --color-button: oklch(0.86 0 0);
-  --color-button-hover: oklch(0.92 0 0);
+  --color-button: oklch(0.92 0 0);
+  --color-button-hover: oklch(1 0 0);
+  --color-on-button: oklch(0.2 0 0);
   --color-danger: oklch(0.7 0.18 25);
   --shadow-card-hover: 0 12px 28px -18px rgb(0 0 0 / 0.7);
   --feature-true-bg: oklch(0.3 0.05 155);

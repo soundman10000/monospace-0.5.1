@@ -19,6 +19,7 @@ const bannerSrc = '/api/media/dans-client'
         :style="{ borderColor: auth.workspace?.primaryColor || undefined }"
       >
         <img :src="bannerSrc" alt="" class="client-layout__image">
+        <BannerQuotes />
       </aside>
     </main>
   </div>
@@ -48,6 +49,6 @@ const bannerSrc = '/api/media/dans-client'
 }
 
 .client-layout__image {
-  @apply absolute inset-0 h-full w-full object-cover;
+  @apply absolute inset-0 z-0 h-full w-full object-cover;
 }
 </style>

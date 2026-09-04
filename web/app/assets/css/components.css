@@ -55,7 +55,7 @@
   }
 
   .btn-primary {
-    @apply bg-button font-semibold text-white hover:bg-button-hover dark:text-ink;
+    @apply bg-button font-semibold text-on-button hover:bg-button-hover;
   }
 
   .btn-secondary {
@@ -63,7 +63,7 @@
   }
 
   .btn-login {
-    @apply font-heading w-full rounded-pill bg-button px-10 py-3 text-base font-semibold capitalize text-white hover:bg-button-hover dark:text-ink sm:w-auto;
+    @apply font-heading w-full rounded-pill bg-button px-10 py-3 text-base font-semibold capitalize text-on-button hover:bg-button-hover sm:w-auto;
   }
 
   .btn-quiet {
