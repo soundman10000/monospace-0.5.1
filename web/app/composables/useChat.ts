@@ -1,6 +1,7 @@
 import type { ChatMessage, ChatRequest, ChatStreamEvent } from '#shared/chat'
 
 let abortController: AbortController | null = null
+const introTimers: ReturnType<typeof setTimeout>[] = []
 
 const isAbortError = (error: unknown) =>
   (error instanceof DOMException && error.name === 'AbortError')
@@ -24,17 +25,76 @@ export const useChat = () => {
   const draft = useState('chat-draft', () => '')
   const streaming = useState('chat-streaming', () => false)
   const error = useState<string | null>('chat-error', () => null)
+  const introVisible = useState('chat-intro', () => false)
+  const introLeaving = useState('chat-intro-leaving', () => false)
+  const introDismissed = useState('chat-intro-dismissed', () => false)
+
+  const clearIntroTimers = () => {
+    while (introTimers.length) {
+      const timer = introTimers.pop()
+      if (timer) clearTimeout(timer)
+    }
+  }
+
+  const scheduleIntro = (delay: number, fn: () => void) => {
+    introTimers.push(setTimeout(fn, delay))
+  }
+
+  const dismissIntro = () => {
+    clearIntroTimers()
+    introVisible.value = false
+    introLeaving.value = false
+    introDismissed.value = true
+  }
+
+  const offerIntro = () => {
+    if (!import.meta.client || introDismissed.value || open.value || introVisible.value) return
+    if (introTimers.length) return
+    scheduleIntro(900, () => {
+      if (open.value || introDismissed.value) return
+      introVisible.value = true
+      introLeaving.value = false
+      scheduleIntro(2200, () => {
+        if (open.value || introDismissed.value) return
+        introLeaving.value = true
+        scheduleIntro(450, () => {
+          if (introDismissed.value) return
+          dismissIntro()
+        })
+      })
+    })
+  }
 
   const toggle = () => {
+    if (!open.value) dismissIntro()
     open.value = !open.value
   }
 
   const openDrawer = () => {
+    dismissIntro()
     open.value = true
   }
 
   const closeDrawer = () => {
     open.value = false
+  }
+
+  const reset = (options?: { close?: boolean }) => {
+    abortController?.abort()
+    abortController = null
+    clearIntroTimers()
+    messages.value = []
+    draft.value = ''
+    error.value = null
+    streaming.value = false
+    introVisible.value = false
+    introLeaving.value = false
+    introDismissed.value = false
+    if (options?.close) open.value = false
+  }
+
+  const newChat = () => {
+    reset()
   }
 
   const dropEmptyAssistant = () => {
@@ -134,7 +194,7 @@ export const useChat = () => {
       })
 
       if (res.status === 401) {
-        dropEmptyAssistant()
+        reset({ close: true })
         await redirectUnauthenticated()
         return
       }
@@ -168,9 +228,15 @@ export const useChat = () => {
     draft,
     streaming,
     error,
+    introVisible,
+    introLeaving,
     toggle,
     openDrawer,
     closeDrawer,
+    reset,
+    newChat,
     send,
+    offerIntro,
+    dismissIntro,
   }
 }

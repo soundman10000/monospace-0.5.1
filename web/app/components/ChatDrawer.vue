@@ -1,10 +1,24 @@
 <script setup lang="ts">
-const { open, messages, draft, streaming, error, closeDrawer, send } = useChat()
+const { open, messages, draft, streaming, error, closeDrawer, newChat, send } = useChat()
 
 const scroller = ref<HTMLElement | null>(null)
 const input = ref<HTMLTextAreaElement | null>(null)
 
 const canSend = computed(() => !streaming.value && draft.value.trim().length > 0)
+
+const canStartNewChat = computed(() =>
+  messages.value.length > 0
+  || draft.value.length > 0
+  || Boolean(error.value)
+  || streaming.value,
+)
+
+const startNewChat = async () => {
+  if (!canStartNewChat.value) return
+  newChat()
+  await nextTick()
+  input.value?.focus()
+}
 
 const thinking = computed(() => {
   if (!streaming.value) return false
@@ -55,14 +69,24 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onWindowKeydown))
         <h2 class="chat-drawer__title">
           Assistant
         </h2>
-        <button
-          type="button"
-          class="chat-drawer__close"
-          aria-label="Close assistant"
-          @click="closeDrawer"
-        >
-          <span class="material-icons" aria-hidden="true">close</span>
-        </button>
+        <div class="chat-drawer__actions">
+          <button
+            type="button"
+            class="chat-drawer__new"
+            :disabled="!canStartNewChat"
+            @click="startNewChat"
+          >
+            New chat
+          </button>
+          <button
+            type="button"
+            class="chat-drawer__close"
+            aria-label="Close assistant"
+            @click="closeDrawer"
+          >
+            <span class="material-icons" aria-hidden="true">close</span>
+          </button>
+        </div>
       </header>
 
       <div ref="scroller" class="chat-drawer__body">
@@ -123,7 +147,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onWindowKeydown))
 
 .chat-drawer {
   position: fixed;
-  top: 0;
+  top: var(--app-header-height);
   right: 0;
   bottom: 0;
   z-index: 40;
@@ -155,6 +179,14 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onWindowKeydown))
 
 .chat-drawer__title {
   @apply font-heading m-0 text-base font-semibold tracking-tight text-heading;
+}
+
+.chat-drawer__actions {
+  @apply flex shrink-0 items-center gap-1;
+}
+
+.chat-drawer__new {
+  @apply cursor-pointer rounded-control border-0 bg-transparent px-2.5 py-1.5 text-sm font-medium text-heading hover:bg-page disabled:cursor-not-allowed disabled:opacity-40;
 }
 
 .chat-drawer__close {

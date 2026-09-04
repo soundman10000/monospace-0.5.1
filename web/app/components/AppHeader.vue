@@ -193,7 +193,7 @@ const changeClient = async () => {
 @reference "../assets/css/main.css";
 
 .app-header {
-  @apply relative z-30 flex shrink-0 items-center justify-between gap-6 border-b border-border-subtle bg-surface px-6 py-4 sm:px-8;
+  @apply relative z-50 flex shrink-0 items-center justify-between gap-6 border-b border-border-subtle bg-surface px-6 py-4 sm:px-8;
 }
 
 .app-header__brand {
